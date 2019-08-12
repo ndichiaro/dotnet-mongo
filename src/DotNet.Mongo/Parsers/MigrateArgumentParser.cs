@@ -17,22 +17,22 @@ namespace DotNet.Mongo.Parsers
         /// </summary>
         /// <param name="args">command line arguments</param>
         /// <returns>An object representation the migration</returns>
-        public MigrationOptions Parse(string[] args)
+        public MigrationOptions Parse(List<string> args)
         {
             var options = new MigrationOptions();
-            var argList = args.ToList();
+            //var argList = args.ToList();
 
-            for (int i = 0; i < argList.Count; i++)
+            for (int i = 0; i < args.Count; i++)
             {
-                var arg = argList[i];
+                var arg = args[i];
                 switch (arg.ToLower())
                 {
                     case "-i":
                     case "--uri":
                         var parser = ArgumentParserFactory.GetInstance<UriOptions>();
 
-                        var value = GetValueArg(argList, arg);
-                        options.Uri = parser.Parse(new[] { value });
+                        var value = GetValueArg(args, arg);
+                        options.Uri = parser.Parse(new List<string> { value });
                         break;
                     case "up":
                         options.Operation = MigrationOperation.Up;
@@ -42,14 +42,12 @@ namespace DotNet.Mongo.Parsers
                         break;
                     case "create":
                         options.Operation = MigrationOperation.Create;
-                        options.MigrationName = GetValueArg(argList, arg);
+                        options.MigrationName = GetValueArg(args, arg);
                         break;
                     case "status":
                         options.Operation = MigrationOperation.Status;
                         break;
                     default:
-                        // ignore mongodb connection string
-                        if (arg.Contains("mongodb://")) continue;
                         throw new NotSupportedException($"{arg} is an invalid migrate option.");
                 }
             }

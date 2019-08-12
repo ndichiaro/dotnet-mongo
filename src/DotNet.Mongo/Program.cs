@@ -11,18 +11,21 @@ namespace DotNet.Mongo
         static void Main(string[] args)
         {
             // to do print out usage
-            if (args.Length == 0) Console.WriteLine("Please you a command.");
+            if (args.Length == 0) Console.WriteLine("Run dotnet mongo --help for usage information.");
 
-            foreach (var arg in args)
+            var argList = args.ToList();
+            for (int i = 0; i < argList.Count; i++)
             {
+                var arg = argList[i];
                 switch (arg)
                 {
                     case "-m":
                     case "--migrate":
                         var parser = ArgumentParserFactory.GetInstance<MigrationOptions>();
 
-                        var remainingArgs = args.Skip(1).ToArray();
-                        var options = parser.Parse(remainingArgs);
+                        // pull out arg as we pass the remaining arguments down the list
+                        argList.RemoveAll(x => x == arg);
+                        var options = parser.Parse(argList);
 
                         var isValid = options.Validate();
                         if (!isValid) Console.WriteLine("Run dotnet mongo --help for usage information.");
@@ -37,6 +40,7 @@ namespace DotNet.Mongo
 
         #if DEBUG
             Console.WriteLine("Press any key to continue...");
+            Console.ReadLine();
         #endif
         }
     }

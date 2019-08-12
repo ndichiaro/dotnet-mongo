@@ -1,4 +1,5 @@
 ﻿using DotNet.Mongo.Migrate.Options;
+using System.Collections.Generic;
 
 namespace DotNet.Mongo.Parsers
 {
@@ -12,7 +13,7 @@ namespace DotNet.Mongo.Parsers
         /// </summary>
         /// <param name="args">command line arguments</param>
         /// <returns>An object representation the uri</returns>
-        public UriOptions Parse(string[] args)
+        public UriOptions Parse(List<string> args)
         {
             return new UriOptions(args[0]);
         }
