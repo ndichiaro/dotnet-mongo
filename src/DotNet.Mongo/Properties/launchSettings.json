@@ -2,7 +2,7 @@
   "profiles": {
     "DotNet.Mongo": {
       "commandName": "Project",
-      "commandLineArgs": "--migrate create InitialCreation"
+      "commandLineArgs": "--migrate up --uri mongodb://localhost:27017/testDb"
     }
   }
 }

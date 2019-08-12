@@ -15,7 +15,10 @@ namespace DotNet.Mongo.Parsers
         /// <returns>An object representation the uri</returns>
         public UriOptions Parse(List<string> args)
         {
-            return new UriOptions(args[0]);
+            return new UriOptions
+            {
+                ConnectionString = args[0]
+            };
         }
     }
 }

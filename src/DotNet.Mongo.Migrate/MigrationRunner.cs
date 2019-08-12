@@ -4,8 +4,15 @@ using System;
 
 namespace DotNet.Mongo.Migrate
 {
+    /// <summary>
+    /// A runner class that manages executing the migration
+    /// </summary>
     public static class MigrationRunner
     {
+        /// <summary>
+        /// Executes the migration
+        /// </summary>
+        /// <param name="options">Migration options</param>
         public static void Run(MigrationOptions options)
         {
             IMigrationOperation migrationOperation;
@@ -15,7 +22,7 @@ namespace DotNet.Mongo.Migrate
                 case MigrationOperation.None:
                     throw new NotSupportedException($"{options.Operation} is not a supported operation.");
                 case MigrationOperation.Up:
-                    migrationOperation = null;
+                    migrationOperation = new UpMigrationOperation(options.Uri.ConnectionString);
                     break;
                 case MigrationOperation.Down:
                     migrationOperation = null;

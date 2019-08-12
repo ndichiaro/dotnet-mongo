@@ -5,8 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MongoDB.Driver" Version="2.8.1" />
     <PackageReference Include="System.CodeDom" Version="4.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DotNet.Mongo.Core\DotNet.Mongo.Core.csproj" />
   </ItemGroup>
 
   <ItemGroup>
