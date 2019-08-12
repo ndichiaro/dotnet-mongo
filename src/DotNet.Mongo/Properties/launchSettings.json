@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "DotNet.Mongo": {
+      "commandName": "Project",
+      "commandLineArgs": "--migrate create InitialCreation"
+    }
+  }
+}
