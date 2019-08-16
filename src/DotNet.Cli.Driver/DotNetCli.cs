@@ -1,12 +1,13 @@
-﻿using DotNet.Cli.Driver.Types;
+﻿using DotNet.Cli.Driver.Commands;
+using DotNet.Cli.Driver.Types;
 
-namespace DotNet.Cli.Driver.Commands
+namespace DotNet.Cli.Driver
 {
-    public class DotNetCommand
+    public class DotNetCLI
     {
         private readonly string _workingDirectory;
 
-        public DotNetCommand(string workingDirectory)
+        public DotNetCLI(string workingDirectory)
         {
             _workingDirectory = workingDirectory;
         }

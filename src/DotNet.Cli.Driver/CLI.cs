@@ -2,11 +2,19 @@
 
 namespace DotNet.Cli.Driver
 {
+    /// <summary>
+    /// Represents a command line interface 
+    /// </summary>
     public static class CLI
     {
-        public static DotNetCommand DotNet(string workingDirectory)
+        /// <summary>
+        /// The dotnet cli tool
+        /// </summary>
+        /// <param name="workingDirectory">The working directory for the cli</param>
+        /// <returns></returns>
+        public static DotNetCLI DotNet(string workingDirectory)
         {
-            return new DotNetCommand(workingDirectory);
+            return new DotNetCLI(workingDirectory);
         }
     }
 }
