@@ -13,7 +13,7 @@ namespace DotNet.Mongo.Migrate
         /// Executes the migration
         /// </summary>
         /// <param name="options">Migration options</param>
-        public static void Run(MigrationOptions options)
+        public static string Run(MigrationOptions options)
         {
             IMigrationOperation migrationOperation;
 
@@ -37,7 +37,7 @@ namespace DotNet.Mongo.Migrate
                     throw new NotSupportedException($"{options.Operation} is not a supported operation.");
             }
 
-            migrationOperation.Execute();
+            return migrationOperation.Execute();
         }
     }
 }

@@ -26,7 +26,7 @@ namespace DotNet.Mongo.Migrate.Operations
         /// <returns></returns>
         public string Execute()
         {
-            var className = $"{DateTime.Now.ToString("yyyyMMddHHmmssf")}_{_migrationName}";
+            var className = $"{_migrationName}_{DateTime.Now.ToString("yyyyMMddHHmmssf")}";
             var migrationTemplate = new MigrationTemplate(className);
             var classContent = migrationTemplate.TransformText();
 

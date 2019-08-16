@@ -30,7 +30,8 @@ namespace DotNet.Mongo
                         var isValid = options.Validate();
                         if (!isValid) Console.WriteLine("Run dotnet mongo --help for usage information.");
 
-                        MigrationRunner.Run(options);
+                        var migrationResult = MigrationRunner.Run(options);
+                        Console.WriteLine(migrationResult);
                         break;
                     default:
                         Console.WriteLine("Run dotnet mongo --help for usage information.");

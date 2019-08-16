@@ -11,11 +11,11 @@ namespace DotNet.Mongo.Migrate
         /// Upgrades a MongoDB database
         /// </summary>
         /// <param name="database">The MongoDB database instance</param>
-        void Up(IMongoDatabase database);
+        bool Up(IMongoDatabase database);
         /// <summary>
         /// Downgrades a MongoDB database
         /// </summary>
         /// <param name="database">The MongoDB database instance</param>
-        void Down(IMongoDatabase database);
+        bool Down(IMongoDatabase database);
     }
 }
