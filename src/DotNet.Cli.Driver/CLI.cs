@@ -8,7 +8,7 @@ namespace DotNet.Cli.Driver
     public static class CLI
     {
         /// <summary>
-        /// The dotnet cli tool
+        /// Creates the dotnet cli tool
         /// </summary>
         /// <param name="workingDirectory">The working directory for the cli</param>
         /// <returns></returns>
