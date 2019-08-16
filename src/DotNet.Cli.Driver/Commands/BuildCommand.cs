@@ -12,8 +12,6 @@ namespace DotNet.Cli.Driver.Commands
         internal BuildCommand(BuildConfiguration configuration)
         {
             _configuration = configuration;
-
-            Terminal.Execute("dotnet --version");
         }
 
         public void Create()
