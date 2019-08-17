@@ -32,6 +32,12 @@ namespace DotNet.Cli.Driver
 
             var terminalResults = Terminal.Execute(_workingDirectory, _command);
 
+            var isSuccessful = terminalResults.Code == 0;
+            results.IsSuccessful = isSuccessful;
+
+            if (isSuccessful) results.Message = terminalResults.StdOut;
+            else results.Message = terminalResults.StdErr;
+
             return results;
         }
     }
