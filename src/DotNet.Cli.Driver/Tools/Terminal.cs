@@ -7,7 +7,7 @@ namespace DotNet.Cli.Driver.Tools
 {
     internal static class Terminal
     {
-        internal static string File
+        private static string File
         {
             get
             {
@@ -16,7 +16,7 @@ namespace DotNet.Cli.Driver.Tools
             }
         }
 
-        internal static string FormatCommand(string command)
+        private static string FormatCommand(string command)
         {
             if (OS.Current == OSPlatform.Windows)
                 return $"/c \"{command}\"";
@@ -24,7 +24,7 @@ namespace DotNet.Cli.Driver.Tools
             return $"-c \"{command}\"";
         }
 
-        internal static CommandResponse Execute(string command)
+        internal static CommandResponse Execute(string workingDirectory, string command)
         {
             var result = new CommandResponse();
             var stderr = new StringBuilder();
@@ -37,12 +37,12 @@ namespace DotNet.Cli.Driver.Tools
                 UseShellExecute = false,
                 RedirectStandardOutput = true,
                 RedirectStandardError = true,
-                CreateNoWindow = true
+                CreateNoWindow = true,
+                WorkingDirectory = workingDirectory
             };
 
             using (var process = Process.Start(startInfo))
             {
-
                 while (!process.StandardOutput.EndOfStream)
                 {
                     var line = process.StandardOutput.ReadLine();

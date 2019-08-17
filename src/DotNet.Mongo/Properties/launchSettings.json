@@ -2,7 +2,8 @@
   "profiles": {
     "DotNet.Mongo": {
       "commandName": "Project",
-      "commandLineArgs": "--migrate up --uri mongodb://localhost:27017/testDb"
+      "commandLineArgs": "--migrate up --uri mongodb://localhost:27017/testDb",
+      "workingDirectory": "C:\\Repositories\\ndichiaro\\dotnet-mongo\\src\\DotNet.Mongo.Migrate"
     }
   }
 }

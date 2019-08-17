@@ -1,6 +1,8 @@
 ﻿using DotNet.Mongo.Migrate.Operations;
 using DotNet.Mongo.Migrate.Options;
 using System;
+using System.IO;
+using System.Reflection;
 
 namespace DotNet.Mongo.Migrate
 {
@@ -13,16 +15,19 @@ namespace DotNet.Mongo.Migrate
         /// Executes the migration
         /// </summary>
         /// <param name="options">Migration options</param>
+        /// <exception cref="NotSupportedException">Unsupported Migration Options</exception>
         public static string Run(MigrationOptions options)
         {
             IMigrationOperation migrationOperation;
 
+            var executingLocation = Assembly.GetExecutingAssembly().Location;
+            
             switch (options.Operation)
             {
                 case MigrationOperation.None:
                     throw new NotSupportedException($"{options.Operation} is not a supported operation.");
                 case MigrationOperation.Up:
-                    migrationOperation = new UpMigrationOperation(options.Uri.ConnectionString);
+                    migrationOperation = new UpMigrationOperation(options.Uri.ConnectionString, options.ProjectFile);
                     break;
                 case MigrationOperation.Down:
                     migrationOperation = null;

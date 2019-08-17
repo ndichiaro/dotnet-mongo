@@ -1,5 +1,7 @@
-﻿using DotNet.Cli.Driver.Commands;
-using DotNet.Cli.Driver.Types;
+﻿using System;
+using DotNet.Cli.Driver.Commands;
+using DotNet.Cli.Driver.Configuration;
+using DotNet.Cli.Driver.Options;
 
 namespace DotNet.Cli.Driver
 {
@@ -8,6 +10,11 @@ namespace DotNet.Cli.Driver
     /// </summary>
     public class DotNetCLI
     {
+        /// <summary>
+        /// The base command for the dotnet cli
+        /// </summary>
+        private const string Command = "dotnet";
+
         /// <summary>
         /// The working directory for the cli
         /// </summary>
@@ -26,13 +33,12 @@ namespace DotNet.Cli.Driver
         /// Creates the dotnet build command
         /// </summary>
         /// <param name="configuration">Defines the build configuration {Debug|Release}</param>
-        /// <returns></returns>
-        public BuildCommand Build(BuildConfiguration configuration)
+        /// <returns>a dotnet build command</returns>
+        public BuildCommand Build(Func<object, BuildCommandOptions> options)
         {
-            return new BuildCommand(configuration)
-            {
-                WorkingDirectory = _workingDirectory
-            };
+            var commandOptions = options(new BuildCommandOptions());
+
+            return new BuildCommand(commandOptions.BuildConfiguration, _workingDirectory, Command);
         }
     }
 }

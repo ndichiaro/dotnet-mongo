@@ -1,4 +1,6 @@
-﻿using DotNet.Cli.Driver.Commands;
+﻿using System;
+using DotNet.Cli.Driver.Commands;
+using DotNet.Cli.Driver.Options;
 
 namespace DotNet.Cli.Driver
 {
@@ -10,10 +12,11 @@ namespace DotNet.Cli.Driver
         /// <summary>
         /// Creates the dotnet cli tool
         /// </summary>
-        /// <param name="workingDirectory">The working directory for the cli</param>
-        /// <returns></returns>
-        public static DotNetCLI DotNet(string workingDirectory)
+        /// <param name="options">dotnet cli options</param>
+        /// <returns>a dotnet cli instance</returns>
+        public static DotNetCLI DotNet(Func<DotNetCliOptions, string> options)
         {
+            var workingDirectory = options(new DotNetCliOptions());
             return new DotNetCLI(workingDirectory);
         }
     }
