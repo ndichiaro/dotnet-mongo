@@ -1,5 +1,4 @@
 ﻿<#@ template language="C#" #>
-
 using DotNet.Mongo.Migrate;
 using MongoDB.Driver;
 
@@ -11,19 +10,19 @@ namespace Migrations
 	public class <#= _className #> : IMigration
     {
 		/// <summary>
-        /// Upgrades a MongoDB database
+        /// Downgrades a MongoDB database
         /// </summary>
         /// <param name="database">The MongoDB database instance</param>
-        public bool Up(IMongoDatabase database)
+        public bool Down(IMongoDatabase database)
 		{
 			throw new System.NotImplementedException();
 		}
 
 		/// <summary>
-        /// Downgrades a MongoDB database
+        /// Upgrades a MongoDB database
         /// </summary>
         /// <param name="database">The MongoDB database instance</param>
-        public bool Down(IMongoDatabase database)
+        public bool Up(IMongoDatabase database)
 		{
 			throw new System.NotImplementedException();
 		}

@@ -30,7 +30,7 @@ namespace DotNet.Mongo.Migrate
                     migrationOperation = new UpMigrationOperation(options.Uri.ConnectionString, options.ProjectFile);
                     break;
                 case MigrationOperation.Down:
-                    migrationOperation = null;
+                    migrationOperation = new DownMigrationOperation(options.Uri.ConnectionString, options.ProjectFile);
                     break;
                 case MigrationOperation.Status:
                     migrationOperation = null;

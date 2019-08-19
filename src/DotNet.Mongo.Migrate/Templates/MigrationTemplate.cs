@@ -25,11 +25,11 @@ namespace DotNet.Mongo.Migrate.Templates
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write("\r\nusing DotNet.Mongo.Migrate;\r\nusing MongoDB.Driver;\r\n\r\n/// <summary>\r\n/// This c" +
-                    "lass was generation to create a custom MongoDB database migration\r\n/// </summary" +
-                    ">\r\nnamespace Migrations\r\n{\r\n\tpublic class ");
+            this.Write("using DotNet.Mongo.Migrate;\r\nusing MongoDB.Driver;\r\n\r\n/// <summary>\r\n/// This cla" +
+                    "ss was generation to create a custom MongoDB database migration\r\n/// </summary>\r" +
+                    "\nnamespace Migrations\r\n{\r\n\tpublic class ");
             
-            #line 11 "C:\Repositories\ndichiaro\dotnet-mongo\src\DotNet.Mongo.Migrate\Templates\MigrationTemplate.tt"
+            #line 10 "C:\Repositories\ndichiaro\dotnet-mongo\src\DotNet.Mongo.Migrate\Templates\MigrationTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(_className));
             
             #line default
@@ -37,19 +37,19 @@ namespace DotNet.Mongo.Migrate.Templates
             this.Write(@" : IMigration
     {
 		/// <summary>
-        /// Upgrades a MongoDB database
+        /// Downgrades a MongoDB database
         /// </summary>
         /// <param name=""database"">The MongoDB database instance</param>
-        public bool Up(IMongoDatabase database)
+        public bool Down(IMongoDatabase database)
 		{
 			throw new System.NotImplementedException();
 		}
 
 		/// <summary>
-        /// Downgrades a MongoDB database
+        /// Upgrades a MongoDB database
         /// </summary>
         /// <param name=""database"">The MongoDB database instance</param>
-        public bool Down(IMongoDatabase database)
+        public bool Up(IMongoDatabase database)
 		{
 			throw new System.NotImplementedException();
 		}
