@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\DotNet.Cli.Driver\DotNet.Cli.Driver.csproj" />
     <ProjectReference Include="..\DotNet.Mongo.Core\DotNet.Mongo.Core.csproj" />
   </ItemGroup>
 

@@ -42,6 +42,11 @@ namespace DotNet.Mongo.Core
         #endregion
 
         #region Public Methods
+        public virtual long Delete(FilterDefinition<TEntityType> filterDefinition)
+        {
+            var result = Collection.DeleteOne(filterDefinition);
+            return result.DeletedCount;
+        }
 
         /// <summary>
         /// Inserts a document to a collection

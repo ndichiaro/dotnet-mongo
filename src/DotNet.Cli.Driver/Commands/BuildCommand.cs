@@ -1,22 +1,29 @@
-﻿using DotNet.Cli.Driver.Tools;
-using DotNet.Cli.Driver.Types;
+﻿using DotNet.Cli.Driver.Configuration;
+using System;
 
 namespace DotNet.Cli.Driver.Commands
 {
-    public class BuildCommand : ICommand
+    /// <summary>
+    /// The dotnet build command
+    /// </summary>
+    public class BuildCommand : Command
     {
         private readonly BuildConfiguration _configuration;
 
-        public string WorkingDirectory { get; set; }
-
-        internal BuildCommand(BuildConfiguration configuration)
+        public BuildCommand(BuildConfiguration configuration, string workingDirectory, string baseCommand) 
+            : base(workingDirectory, baseCommand)
         {
             _configuration = configuration;
         }
 
-        public void Create()
+        /// <summary>
+        /// Creates the dotnet build command
+        /// </summary>
+        /// <exception cref="ArgumentNullException" />
+        public override CommandRunner Create()
         {
-            throw new System.NotImplementedException();
+            if (string.IsNullOrEmpty(BaseCommand)) throw new ArgumentNullException("A base command must be provided to use the build command");
+            return new CommandRunner(WorkingDirectory, $"{BaseCommand} build");
         }
     }
 }

@@ -2,6 +2,7 @@
 using DotNet.Mongo.Migrate.Options;
 using DotNet.Mongo.Parsers;
 using System;
+using System.IO;
 using System.Linq;
 
 namespace DotNet.Mongo
@@ -12,6 +13,11 @@ namespace DotNet.Mongo
         {
             // to do print out usage
             if (args.Length == 0) Console.WriteLine("Run dotnet mongo --help for usage information.");
+
+            var executingLocation = Directory.GetCurrentDirectory();
+            var projectFile = Directory.GetFiles(executingLocation, "*.csproj");
+
+            if (projectFile.Length == 0) throw new FileNotFoundException("Project file not found in current directory.");
 
             var argList = args.ToList();
             for (int i = 0; i < argList.Count; i++)
@@ -29,6 +35,8 @@ namespace DotNet.Mongo
 
                         var isValid = options.Validate();
                         if (!isValid) Console.WriteLine("Run dotnet mongo --help for usage information.");
+
+                        options.ProjectFile = projectFile[0];
 
                         var migrationResult = MigrationRunner.Run(options);
                         Console.WriteLine(migrationResult);

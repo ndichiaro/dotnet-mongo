@@ -1,41 +1,35 @@
 ﻿using DotNet.Cli.Driver;
+using DotNet.Cli.Driver.Configuration;
+using DotNet.Cli.Driver.Options;
 using DotNet.Mongo.Core;
 using DotNet.Mongo.Migrate.Collections;
-using DotNet.Cli.Driver.Configuration;
-using MongoDB.Driver;
-using System.IO;
-using System.Linq;
-using DotNet.Cli.Driver.Options;
-using System.Reflection;
-using DotNet.Cli.Driver.Tools;
-using System.Collections.Generic;
-using System;
-using DotNet.Mongo.Migrate.Models;
 using DotNet.Mongo.Migrate.Extensions;
+using System;
+using System.IO;
 
 namespace DotNet.Mongo.Migrate.Operations
 {
     /// <summary>
-    /// A migration operation for upgrading a database instance
+    /// A migration operation for downgrading a database instance
     /// </summary>
-    public class UpMigrationOperation : IMigrationOperation
+    public class DownMigrationOperation : IMigrationOperation
     {
         private readonly string _connectionString;
         private readonly string _projectFile;
 
         /// <summary>
-        /// Creates an UpMigrationOperation instance.
+        /// Creates an DownMigrationOperation instance.
         /// </summary>
         /// <param name="connectionString">The MongoDB database connection string</param>
         /// <param name="projectFile">The absolute path the the project file that migrations are stored</param>
-        public UpMigrationOperation(string connectionString, string projectFile)
+        public DownMigrationOperation(string connectionString, string projectFile)
         {
             _connectionString = connectionString;
             _projectFile = projectFile;
         }
 
         /// <summary>
-        /// Executes the migration's up function to upgrade the database
+        /// Executes the migration's down function to downgrade the database
         /// based on it's current changelog
         /// </summary>
         /// <returns></returns>
@@ -55,41 +49,29 @@ namespace DotNet.Mongo.Migrate.Operations
             var runner = CLI.DotNet(x => x.WorkingDirectory = workingDirectory)
                                .Build(x => new BuildCommandOptions
                                {
+
                                    BuildConfiguration = BuildConfiguration.Debug
                                })
                                .Create();
-            // run command
+            // run cli command
             var results = runner.Run();
 
             if (!results.IsSuccessful) return $"{fileInfo.Name} failed to build with the following errors: {results.Message}";
 
-            var migrations = MigrationExtensions.GetMigrationTypes(fileInfo);
-            if (migrations.Count == 0) return "No migration files found in project.";
+            var migration = MigrationExtensions.GetMigration(latestChange.FileName, fileInfo);
+            if (migration == null) return $"Unable to locate migration {latestChange.FileName}";
 
-            var remainingMigrations = migrations.GetRange(0, migrations.Count);
+            var instance = Activator.CreateInstance(migration);
+            var isMigrated = (bool)migration.GetMethod("Down")
+                                    .Invoke(instance, new[] { dbContext.Db });
 
-            // grab the latest changes if any migrations were previously executed
-            if(latestChange != null)
-                remainingMigrations = migrations.GetRemainingMigrations(latestChange.FileName);
+            if (!isMigrated)
+                return $"Error: {migration.Name} was not migrated successfully.";
 
-            foreach (var migration in remainingMigrations)
-            {
-                var instance = Activator.CreateInstance(migration);
-                var isMigrated = (bool)migration.GetMethod("Up")
-                                        .Invoke(instance, new[] { dbContext.Db });
+            var deleteResult = changeLogCollection.Delete(latestChange);
 
-                if (!isMigrated)
-                    return $"Error: {migration.Name} was not migrated successfully.";
-
-                changeLogCollection.Insert(new ChangeLog
-                {
-                    AppliedAt = DateTime.Now,
-                    FileName = migration.Name
-                });
-                return $"Migrated: {migration.Name}";
-            }
-
-            return "Unable to location migrations to be executed. Verify that a Migrations directory exists in your project.";
+            if (deleteResult == 0) return $"Error: {migration.Name} was not downgraded"; 
+            return $"Migrated: {migration.Name}";
         }
     }
 }

@@ -23,6 +23,11 @@ namespace DotNet.Mongo.Migrate.Options
         public string MigrationName { get; set; }
 
         /// <summary>
+        /// The absolute path of the project file
+        /// </summary>
+        public string ProjectFile { get; set; }
+
+        /// <summary>
         /// Ensures the options are valid
         /// </summary>
         /// <returns>A bool indicate whether the options are valid</returns>
