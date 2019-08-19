@@ -12,7 +12,7 @@ namespace DotNet.Mongo.Migrate.Operations
     /// <summary>
     /// A migration operation for downgrading a database instance
     /// </summary>
-    public class DownMigrationOperation : IMigrationOperation
+    internal class DownMigrationOperation : IMigrationOperation
     {
         private readonly string _connectionString;
         private readonly string _projectFile;

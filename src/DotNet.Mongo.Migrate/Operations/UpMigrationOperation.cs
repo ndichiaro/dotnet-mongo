@@ -18,7 +18,7 @@ namespace DotNet.Mongo.Migrate.Operations
     /// <summary>
     /// A migration operation for upgrading a database instance
     /// </summary>
-    public class UpMigrationOperation : IMigrationOperation
+    internal class UpMigrationOperation : IMigrationOperation
     {
         private readonly string _connectionString;
         private readonly string _projectFile;

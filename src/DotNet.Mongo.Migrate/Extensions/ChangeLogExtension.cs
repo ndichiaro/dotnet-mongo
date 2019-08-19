@@ -1,5 +1,4 @@
-﻿using DotNet.Mongo.Core;
-using DotNet.Mongo.Migrate.Collections;
+﻿using DotNet.Mongo.Migrate.Collections;
 using DotNet.Mongo.Migrate.Models;
 using System.Linq;
 
@@ -15,7 +14,7 @@ namespace DotNet.Mongo.Migrate.Extensions
         /// </summary>
         /// <param name="dbContext"></param>
         /// <returns>The latest migration executed</returns>
-        internal static ChangeLog GetLatestChange(this ChangeLogCollection collection)
+        public static ChangeLog GetLatestChange(this ChangeLogCollection collection)
         {
             var changeLog = collection.All().ToList();
             return changeLog.OrderByDescending(x => x.AppliedAt).FirstOrDefault();

@@ -25,9 +25,9 @@ namespace DotNet.Mongo.Migrate.Templates
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write("using DotNet.Mongo.Migrate;\r\nusing MongoDB.Driver;\r\n\r\n/// <summary>\r\n/// This cla" +
-                    "ss was generation to create a custom MongoDB database migration\r\n/// </summary>\r" +
-                    "\nnamespace Migrations\r\n{\r\n\tpublic class ");
+            this.Write("using DotNet.Mongo.Core;\r\nusing MongoDB.Driver;\r\n\r\n/// <summary>\r\n/// This class " +
+                    "was generation to create a custom MongoDB database migration\r\n/// </summary>\r\nna" +
+                    "mespace Migrations\r\n{\r\n\tpublic class ");
             
             #line 10 "C:\Repositories\ndichiaro\dotnet-mongo\src\DotNet.Mongo.Migrate\Templates\MigrationTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(_className));

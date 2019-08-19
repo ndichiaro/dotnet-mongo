@@ -3,7 +3,7 @@
     /// <summary>
     /// Represents a migration operation to be executed for MongoDB migration
     /// </summary>
-    public interface IMigrationOperation
+    internal interface IMigrationOperation
     {
         /// <summary>
         /// Executes the migration operation
