@@ -1,6 +1,6 @@
 ﻿using MongoDB.Driver;
 
-namespace DotNet.Mongo.Migrate
+namespace DotNet.Mongo.Core
 {
     /// <summary>
     /// Represents a MongoDB migration

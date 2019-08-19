@@ -1,7 +1,6 @@
 ﻿using DotNet.Mongo.Migrate.Operations;
 using DotNet.Mongo.Migrate.Options;
 using System;
-using System.IO;
 using System.Reflection;
 
 namespace DotNet.Mongo.Migrate

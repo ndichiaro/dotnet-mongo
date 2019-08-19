@@ -19,7 +19,7 @@ namespace DotNet.Mongo.Migrate.Extensions
         /// <param name="migration">The name of the migration</param>
         /// <param name="fileInfo">The project file directory</param>
         /// <returns></returns>
-        internal static Type GetMigration(string migration, FileInfo fileInfo)
+        public static Type GetMigration(string migration, FileInfo fileInfo)
         {
             return GetMigrationTypes(fileInfo).FirstOrDefault(x => x.Name == migration);
         }
@@ -29,7 +29,7 @@ namespace DotNet.Mongo.Migrate.Extensions
         /// </summary>
         /// <param name="fileInfo">The project file directory</param>
         /// <returns>A list of migration types</returns>
-        internal static List<Type> GetMigrationTypes(FileInfo fileInfo)
+        public static List<Type> GetMigrationTypes(FileInfo fileInfo)
         {
             // get project framework
             var csProjectFile = CsProjectFileReader.Read(fileInfo.FullName);
@@ -58,7 +58,7 @@ namespace DotNet.Mongo.Migrate.Extensions
         /// </summary>
         /// <param name="migrations">List of all migrations</param>
         /// <returns>A filter list of migrations</returns>
-        internal static List<Type> GetRemainingMigrations(this List<Type> migrations, string latestChange)
+        public static List<Type> GetRemainingMigrations(this List<Type> migrations, string latestChange)
         {
             var latestChangeType = migrations.FirstOrDefault(x => x.Name == latestChange);
             // latestChange migration file was not found

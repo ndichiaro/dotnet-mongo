@@ -1,9 +1,7 @@
-﻿using DotNet.Mongo.Migrate;
-using DotNet.Mongo.Migrate.Operations;
+﻿using DotNet.Mongo.Migrate.Operations;
 using DotNet.Mongo.Migrate.Options;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace DotNet.Mongo.Parsers
 {

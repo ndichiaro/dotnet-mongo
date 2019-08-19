@@ -1,5 +1,5 @@
 ﻿<#@ template language="C#" #>
-using DotNet.Mongo.Migrate;
+using DotNet.Mongo.Core;
 using MongoDB.Driver;
 
 /// <summary>

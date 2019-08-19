@@ -7,7 +7,7 @@ namespace DotNet.Mongo.Migrate.Operations
     /// <summary>
     /// A migration operation for creating a new migration
     /// </summary>
-    public class CreateMigrationOperation : IMigrationOperation
+    internal class CreateMigrationOperation : IMigrationOperation
     {
         private readonly string _migrationName;
 

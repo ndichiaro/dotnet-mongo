@@ -1,5 +1,4 @@
-﻿using System;
-using DotNet.Mongo.Core;
+﻿using DotNet.Mongo.Core;
 using DotNet.Mongo.Migrate.Models;
 using MongoDB.Driver;
 
@@ -9,8 +8,12 @@ namespace DotNet.Mongo.Migrate.Collections
     /// Manages the interaction for the changeLog MongoDB
     /// collection
     /// </summary>
-    public class ChangeLogCollection : MongoDbCollection<ChangeLog>
+    internal class ChangeLogCollection : MongoDbCollection<ChangeLog>
     {
+        /// <summary>
+        /// Creates an instance of ChangeLogCollection
+        /// </summary>
+        /// <param name="context">MongoDB database context</param>
         public ChangeLogCollection(IMongoDbContext context) : base(context)
         {
         }
@@ -20,7 +23,7 @@ namespace DotNet.Mongo.Migrate.Collections
         /// </summary>
         /// <param name="changeLog">The change log to be deleted</param>
         /// <returns></returns>
-        internal long Delete(ChangeLog changeLog)
+        public long Delete(ChangeLog changeLog)
         {
             var filterDefinition = Builders<ChangeLog>.Filter.Eq(x => x.Id, changeLog.Id);
             return Delete(filterDefinition);
