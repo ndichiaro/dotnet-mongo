@@ -13,11 +13,11 @@ namespace DotNet.Mongo.Parsers
         /// </summary>
         /// <param name="args">command line arguments</param>
         /// <returns>An object representation the uri</returns>
-        public UriOptions Parse(List<string> args)
+        public UriOptions Parse(Queue<string> args)
         {
             return new UriOptions
             {
-                ConnectionString = args[0]
+                ConnectionString = args.Dequeue()
             };
         }
     }
