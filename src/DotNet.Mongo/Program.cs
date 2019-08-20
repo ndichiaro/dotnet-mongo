@@ -2,8 +2,8 @@
 using DotNet.Mongo.Migrate.Options;
 using DotNet.Mongo.Parsers;
 using System;
+using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 
 namespace DotNet.Mongo
 {
@@ -18,11 +18,14 @@ namespace DotNet.Mongo
             var projectFile = Directory.GetFiles(executingLocation, "*.csproj");
 
             if (projectFile.Length == 0) throw new FileNotFoundException("Project file not found in current directory.");
+            
+            // queue up args 
+            var argList = new Queue<string>(args);
 
-            var argList = args.ToList();
-            for (int i = 0; i < argList.Count; i++)
+            do
             {
-                var arg = argList[i];
+                var arg = argList.Dequeue();
+
                 switch (arg)
                 {
                     case "-m":
@@ -30,7 +33,6 @@ namespace DotNet.Mongo
                         var parser = ArgumentParserFactory.GetInstance<MigrationOptions>();
 
                         // pull out arg as we pass the remaining arguments down the list
-                        argList.RemoveAll(x => x == arg);
                         var options = parser.Parse(argList);
 
                         var isValid = options.Validate();
@@ -42,10 +44,11 @@ namespace DotNet.Mongo
                         Console.WriteLine(migrationResult);
                         break;
                     default:
-                        Console.WriteLine("Run dotnet mongo --help for usage information.");
+                        Console.WriteLine($"{arg} is an invalid argument. Run dotnet mongo --help for usage information.");
                         break;
                 }
             }
+            while (argList.Count != 0);
 
         #if DEBUG
             Console.WriteLine("Press any key to continue...");

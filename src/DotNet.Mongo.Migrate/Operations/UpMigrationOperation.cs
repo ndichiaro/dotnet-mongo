@@ -2,16 +2,12 @@
 using DotNet.Mongo.Core;
 using DotNet.Mongo.Migrate.Collections;
 using DotNet.Cli.Driver.Configuration;
-using MongoDB.Driver;
 using System.IO;
-using System.Linq;
 using DotNet.Cli.Driver.Options;
-using System.Reflection;
-using DotNet.Cli.Driver.Tools;
-using System.Collections.Generic;
 using System;
 using DotNet.Mongo.Migrate.Models;
 using DotNet.Mongo.Migrate.Extensions;
+using System.Text;
 
 namespace DotNet.Mongo.Migrate.Operations
 {
@@ -61,10 +57,10 @@ namespace DotNet.Mongo.Migrate.Operations
             // run command
             var results = runner.Run();
 
-            if (!results.IsSuccessful) return $"{fileInfo.Name} failed to build with the following errors: {results.Message}";
+            if (!results.IsSuccessful) return $"Error: {fileInfo.Name} failed to build with the following errors: {results.Message}";
 
             var migrations = MigrationExtensions.GetMigrationTypes(fileInfo);
-            if (migrations.Count == 0) return "No migration files found in project.";
+            if (migrations.Count == 0) return "Error: No migration files found in project";
 
             var remainingMigrations = migrations.GetRange(0, migrations.Count);
 
@@ -72,6 +68,10 @@ namespace DotNet.Mongo.Migrate.Operations
             if(latestChange != null)
                 remainingMigrations = migrations.GetRemainingMigrations(latestChange.FileName);
 
+            if (remainingMigrations.Count == 0) return "The database is already up to date";
+            
+            // string build result for multiple migrations
+            var migrationResult = new StringBuilder();
             foreach (var migration in remainingMigrations)
             {
                 var instance = Activator.CreateInstance(migration);
@@ -79,17 +79,19 @@ namespace DotNet.Mongo.Migrate.Operations
                                         .Invoke(instance, new[] { dbContext.Db });
 
                 if (!isMigrated)
-                    return $"Error: {migration.Name} was not migrated successfully.";
+                    return $"Error: {migration.Name} was not migrated successfully";
 
                 changeLogCollection.Insert(new ChangeLog
                 {
                     AppliedAt = DateTime.Now,
                     FileName = migration.Name
                 });
-                return $"Migrated: {migration.Name}";
+                migrationResult.AppendLine($"Migrated: {migration.Name}");
             }
 
-            return "Unable to location migrations to be executed. Verify that a Migrations directory exists in your project.";
+            if (migrationResult.Length > 0) return migrationResult.ToString();
+
+            return "Error: Unable to location migrations to be executed. Verify that a Migrations directory exists in your project";
         }
     }
 }
