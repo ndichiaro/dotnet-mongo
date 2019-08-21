@@ -1,4 +1,7 @@
-﻿using DotNet.Mongo.Migrate;
+﻿using ConsoleTables;
+using DotNet.Mongo.Extensions;
+using DotNet.Mongo.Migrate;
+using DotNet.Mongo.Migrate.Operations;
 using DotNet.Mongo.Migrate.Options;
 using DotNet.Mongo.Parsers;
 using System;
@@ -41,7 +44,16 @@ namespace DotNet.Mongo
                         options.ProjectFile = projectFile[0];
 
                         var migrationResult = MigrationRunner.Run(options);
-                        Console.WriteLine(migrationResult);
+                        
+                        if(migrationResult.Operation == MigrationOperation.Status)
+                        {
+                            var table = migrationResult.Result.BuildConsoleTable();
+                            table.Write(Format.Alternative);
+                        }
+                        else
+                        {
+                            Console.WriteLine(migrationResult.Result);
+                        }
                         break;
                     default:
                         Console.WriteLine($"{arg} is an invalid argument. Run dotnet mongo --help for usage information.");

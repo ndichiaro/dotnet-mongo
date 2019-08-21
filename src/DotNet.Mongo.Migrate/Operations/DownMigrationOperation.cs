@@ -40,7 +40,9 @@ namespace DotNet.Mongo.Migrate.Operations
             
             // check changelog for the latest migration run
             var changeLogCollection = new ChangeLogCollection(dbContext);
-            var latestChange = changeLogCollection.GetLatestChange();
+
+            var changeLog = changeLogCollection.All();
+            var latestChange = changeLog.GetLatestChange();
 
             if (latestChange == null) return "No changes to downgrade";
 

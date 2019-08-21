@@ -15,12 +15,10 @@ namespace DotNet.Mongo.Migrate
         /// </summary>
         /// <param name="options">Migration options</param>
         /// <exception cref="NotSupportedException">Unsupported Migration Options</exception>
-        public static string Run(MigrationOptions options)
+        public static MigrationResult Run(MigrationOptions options)
         {
             IMigrationOperation migrationOperation;
 
-            var executingLocation = Assembly.GetExecutingAssembly().Location;
-            
             switch (options.Operation)
             {
                 case MigrationOperation.None:
@@ -32,7 +30,7 @@ namespace DotNet.Mongo.Migrate
                     migrationOperation = new DownMigrationOperation(options.Uri.ConnectionString, options.ProjectFile);
                     break;
                 case MigrationOperation.Status:
-                    migrationOperation = null;
+                    migrationOperation = new StatusMigrationOperation(options.Uri.ConnectionString, options.ProjectFile); ;
                     break;
                 case MigrationOperation.Create:
                     migrationOperation = new CreateMigrationOperation(options.MigrationName);
@@ -41,7 +39,12 @@ namespace DotNet.Mongo.Migrate
                     throw new NotSupportedException($"{options.Operation} is not a supported operation.");
             }
 
-            return migrationOperation.Execute();
+            var result = migrationOperation.Execute();
+            return new MigrationResult
+            {
+                Operation = options.Operation,
+                Result = result
+        };
         }
     }
 }
