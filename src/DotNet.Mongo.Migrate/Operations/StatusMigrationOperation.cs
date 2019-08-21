@@ -1,45 +1,43 @@
 ﻿using DotNet.Cli.Driver;
+using DotNet.Cli.Driver.Configuration;
+using DotNet.Cli.Driver.Options;
 using DotNet.Mongo.Core;
 using DotNet.Mongo.Migrate.Collections;
-using DotNet.Cli.Driver.Configuration;
-using System.IO;
-using DotNet.Cli.Driver.Options;
-using System;
-using DotNet.Mongo.Migrate.Models;
 using DotNet.Mongo.Migrate.Extensions;
+using System.IO;
+using System.Linq;
 using System.Text;
 
 namespace DotNet.Mongo.Migrate.Operations
 {
     /// <summary>
-    /// A migration operation for upgrading a database instance
+    /// A migration operation for the status of a database
     /// </summary>
-    internal class UpMigrationOperation : IMigrationOperation
+    public class StatusMigrationOperation : IMigrationOperation
     {
         private readonly string _connectionString;
         private readonly string _projectFile;
 
         /// <summary>
-        /// Creates an UpMigrationOperation instance.
+        /// Creates an StatusMigrationOperation instance.
         /// </summary>
         /// <param name="connectionString">The MongoDB database connection string</param>
         /// <param name="projectFile">The absolute path the the project file that migrations are stored</param>
-        public UpMigrationOperation(string connectionString, string projectFile)
+        public StatusMigrationOperation(string connectionString, string projectFile)
         {
             _connectionString = connectionString;
             _projectFile = projectFile;
         }
 
         /// <summary>
-        /// Executes the migration's up function to upgrade the database
-        /// based on it's current changelog
+        /// Shows the status of the database migrations
         /// </summary>
-        /// <returns></returns>
+        /// <returns>A csv indicating the database status</returns>
         public string Execute()
         {
             var fileInfo = new FileInfo(_projectFile);
             var dbContext = new MongoDbContext(_connectionString);
-            
+
             // check changelog for the latest migration run
             var changeLogCollection = new ChangeLogCollection(dbContext);
 
@@ -67,33 +65,27 @@ namespace DotNet.Mongo.Migrate.Operations
             var remainingMigrations = migrations.GetRange(0, migrations.Count);
 
             // grab the latest changes if any migrations were previously executed
-            if(latestChange != null)
+            if (latestChange != null)
                 remainingMigrations = migrations.GetRemainingMigrations(latestChange.FileName);
 
-            if (remainingMigrations.Count == 0) return "The database is already up to date";
-            
-            // string build result for multiple migrations
-            var migrationResult = new StringBuilder();
-            foreach (var migration in remainingMigrations)
+            var migrationStatus = new StringBuilder();
+            // add headers to migration status
+            migrationStatus.AppendLine("Migration,Applied At");
+            // loop through executed migrations by data applied
+            foreach (var change in changeLog.OrderBy(x => x.AppliedAt))
             {
-                var instance = Activator.CreateInstance(migration);
-                var isMigrated = (bool)migration.GetMethod("Up")
-                                        .Invoke(instance, new[] { dbContext.Db });
-
-                if (!isMigrated)
-                    return $"Error: {migration.Name} was not migrated successfully";
-
-                changeLogCollection.Insert(new ChangeLog
-                {
-                    AppliedAt = DateTime.Now,
-                    FileName = migration.Name
-                });
-                migrationResult.AppendLine($"Migrated: {migration.Name}");
+                migrationStatus.AppendLine($"{change.FileName},{change.AppliedAt.ToString("MM/dd/yyyy h:mm tt")}");
             }
 
-            if (migrationResult.Length > 0) return migrationResult.ToString();
+            // return status if there are no remaining migrations
+            if (remainingMigrations == null) return migrationStatus.ToString();
 
-            return "Error: Unable to location migrations to be executed. Verify that a Migrations directory exists in your project";
+            // loop through all pending migrations
+            foreach (var migration in remainingMigrations)
+            {
+                migrationStatus.AppendLine($"{migration.Name},PENDING");
+            }
+            return migrationStatus.ToString();
         }
     }
 }

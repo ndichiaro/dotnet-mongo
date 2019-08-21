@@ -40,7 +40,11 @@ namespace DotNet.Mongo.Migrate.Operations
             
             // check changelog for the latest migration run
             var changeLogCollection = new ChangeLogCollection(dbContext);
-            var latestChange = changeLogCollection.GetLatestChange();
+
+            var changeLog = changeLogCollection.All();
+            var latestChange = changeLog.GetLatestChange();
+
+            if (latestChange == null) return "No changes to downgrade";
 
             // get all classes in a namespace from project assembly
             var workingDirectory = fileInfo.Directory.FullName;
@@ -56,22 +60,22 @@ namespace DotNet.Mongo.Migrate.Operations
             // run cli command
             var results = runner.Run();
 
-            if (!results.IsSuccessful) return $"{fileInfo.Name} failed to build with the following errors: {results.Message}";
+            if (!results.IsSuccessful) return $"Error: {fileInfo.Name} failed to build with the following errors: {results.Message}";
 
             var migration = MigrationExtensions.GetMigration(latestChange.FileName, fileInfo);
-            if (migration == null) return $"Unable to locate migration {latestChange.FileName}";
+            if (migration == null) return $"Error: Unable to locate migration {latestChange.FileName}";
 
             var instance = Activator.CreateInstance(migration);
             var isMigrated = (bool)migration.GetMethod("Down")
                                     .Invoke(instance, new[] { dbContext.Db });
 
             if (!isMigrated)
-                return $"Error: {migration.Name} was not migrated successfully.";
+                return $"Error: {migration.Name} was not migrated successfully";
 
             var deleteResult = changeLogCollection.Delete(latestChange);
 
             if (deleteResult == 0) return $"Error: {migration.Name} was not downgraded"; 
-            return $"Migrated: {migration.Name}";
+            return $"Downgraded: {migration.Name}";
         }
     }
 }
