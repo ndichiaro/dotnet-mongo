@@ -1,4 +1,5 @@
 ﻿using ConsoleTables;
+using DotNet.Mongo.Core.Builders;
 using DotNet.Mongo.Extensions;
 using DotNet.Mongo.Migrate;
 using DotNet.Mongo.Migrate.Operations;
@@ -14,6 +15,8 @@ namespace DotNet.Mongo
     {
         static void Main(string[] args)
         {
+            var contextBuilder = new MongoDbContextBuilder();
+
             // to do print out usage
             if (args.Length == 0) Console.WriteLine("Run dotnet mongo --help for usage information.");
 
@@ -43,7 +46,7 @@ namespace DotNet.Mongo
 
                         options.ProjectFile = projectFile[0];
 
-                        var migrationResult = MigrationRunner.Run(options);
+                        var migrationResult = MigrationRunner.Run(options, contextBuilder);
                         
                         if(migrationResult.Operation == MigrationOperation.Status)
                         {

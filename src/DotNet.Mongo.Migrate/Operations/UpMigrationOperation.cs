@@ -16,17 +16,17 @@ namespace DotNet.Mongo.Migrate.Operations
     /// </summary>
     internal class UpMigrationOperation : IMigrationOperation
     {
-        private readonly string _connectionString;
+        private readonly IMongoDbContext _mongoDbContext;
         private readonly string _projectFile;
 
         /// <summary>
         /// Creates an UpMigrationOperation instance.
         /// </summary>
-        /// <param name="connectionString">The MongoDB database connection string</param>
+        /// <param name="mongoDbContext">The MongoDB database connection</param>
         /// <param name="projectFile">The absolute path the the project file that migrations are stored</param>
-        public UpMigrationOperation(string connectionString, string projectFile)
+        public UpMigrationOperation(IMongoDbContext mongoDbContext, string projectFile)
         {
-            _connectionString = connectionString;
+            _mongoDbContext = mongoDbContext;
             _projectFile = projectFile;
         }
 
@@ -38,10 +38,9 @@ namespace DotNet.Mongo.Migrate.Operations
         public string Execute()
         {
             var fileInfo = new FileInfo(_projectFile);
-            var dbContext = new MongoDbContext(_connectionString);
             
             // check changelog for the latest migration run
-            var changeLogCollection = new ChangeLogCollection(dbContext);
+            var changeLogCollection = new ChangeLogCollection(_mongoDbContext);
 
             var changeLog = changeLogCollection.All();
             var latestChange = changeLog.GetLatestChange();
@@ -78,7 +77,7 @@ namespace DotNet.Mongo.Migrate.Operations
             {
                 var instance = Activator.CreateInstance(migration);
                 var isMigrated = (bool)migration.GetMethod("Up")
-                                        .Invoke(instance, new[] { dbContext.Db });
+                                        .Invoke(instance, new[] { _mongoDbContext.Db });
 
                 if (!isMigrated)
                     return $"Error: {migration.Name} was not migrated successfully";

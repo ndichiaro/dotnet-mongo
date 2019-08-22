@@ -13,6 +13,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNet.Mongo.Core", "src\Do
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNet.Cli.Driver", "src\DotNet.Cli.Driver\DotNet.Cli.Driver.csproj", "{D7B615BB-58CA-465D-8100-0B21FEC66CCD}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{406327C4-8D8D-450D-8ECC-95FDDA4C8BB5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNet.Mongo.Core.Test", "tests\DotNet.Mongo.Core.Test\DotNet.Mongo.Core.Test.csproj", "{A6A6850C-E4ED-41AD-BE11-3418F51923AD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -71,6 +75,18 @@ Global
 		{D7B615BB-58CA-465D-8100-0B21FEC66CCD}.Release|x64.Build.0 = Release|Any CPU
 		{D7B615BB-58CA-465D-8100-0B21FEC66CCD}.Release|x86.ActiveCfg = Release|Any CPU
 		{D7B615BB-58CA-465D-8100-0B21FEC66CCD}.Release|x86.Build.0 = Release|Any CPU
+		{A6A6850C-E4ED-41AD-BE11-3418F51923AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6A6850C-E4ED-41AD-BE11-3418F51923AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6A6850C-E4ED-41AD-BE11-3418F51923AD}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{A6A6850C-E4ED-41AD-BE11-3418F51923AD}.Debug|x64.Build.0 = Debug|Any CPU
+		{A6A6850C-E4ED-41AD-BE11-3418F51923AD}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{A6A6850C-E4ED-41AD-BE11-3418F51923AD}.Debug|x86.Build.0 = Debug|Any CPU
+		{A6A6850C-E4ED-41AD-BE11-3418F51923AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6A6850C-E4ED-41AD-BE11-3418F51923AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A6A6850C-E4ED-41AD-BE11-3418F51923AD}.Release|x64.ActiveCfg = Release|Any CPU
+		{A6A6850C-E4ED-41AD-BE11-3418F51923AD}.Release|x64.Build.0 = Release|Any CPU
+		{A6A6850C-E4ED-41AD-BE11-3418F51923AD}.Release|x86.ActiveCfg = Release|Any CPU
+		{A6A6850C-E4ED-41AD-BE11-3418F51923AD}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -80,6 +96,7 @@ Global
 		{5EBCECAB-5418-4AA4-A9F5-22A8825AAA66} = {F34A058E-AA44-47B1-B3CD-E576442F1710}
 		{59294C95-C8F3-4516-9940-7CAE7C6E6CAD} = {F34A058E-AA44-47B1-B3CD-E576442F1710}
 		{D7B615BB-58CA-465D-8100-0B21FEC66CCD} = {F34A058E-AA44-47B1-B3CD-E576442F1710}
+		{A6A6850C-E4ED-41AD-BE11-3418F51923AD} = {406327C4-8D8D-450D-8ECC-95FDDA4C8BB5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FA94093C-46B8-4BAA-BF4B-61B8939037AF}

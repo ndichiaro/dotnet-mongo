@@ -8,26 +8,27 @@ namespace DotNet.Mongo.Core
     public class MongoDbContext : IMongoDbContext
     {
         #region Private Variables
-        private static IMongoClient _client;
-        private readonly MongoUrl _url;
+        private readonly IMongoClient _client;
+        private readonly string _databaseName;
         #endregion
 
         #region Properties
         /// <summary>
         /// A MongoDB database instance
         /// </summary>
-        public IMongoDatabase Db => _client.GetDatabase(_url.DatabaseName);
+        public IMongoDatabase Db => _client.GetDatabase(_databaseName);
         #endregion
 
         #region Constructors
         /// <summary>
         /// Creates an instance of MongoDbContext
         /// </summary>
-        /// <param name="connectionString">The MongoDB database connection string</param>
-        public MongoDbContext(string connectionString)
+        /// <param name="client">An instance of a mongo client</param>
+        /// <param name="databaseName">The name of the database to connection to</param>
+        public MongoDbContext(IMongoClient client, string databaseName)
         {
-            _url = new MongoUrl(connectionString);
-            _client = new MongoClient(_url.Url);
+            _client = client;
+            _databaseName = databaseName;
         }
         #endregion
     }

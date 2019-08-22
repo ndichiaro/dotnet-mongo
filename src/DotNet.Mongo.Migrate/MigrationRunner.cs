@@ -1,5 +1,8 @@
-﻿using DotNet.Mongo.Migrate.Operations;
+﻿using DotNet.Mongo.Core;
+using DotNet.Mongo.Core.Builders;
+using DotNet.Mongo.Migrate.Operations;
 using DotNet.Mongo.Migrate.Options;
+using MongoDB.Driver;
 using System;
 using System.Reflection;
 
@@ -15,22 +18,23 @@ namespace DotNet.Mongo.Migrate
         /// </summary>
         /// <param name="options">Migration options</param>
         /// <exception cref="NotSupportedException">Unsupported Migration Options</exception>
-        public static MigrationResult Run(MigrationOptions options)
+        public static MigrationResult Run(MigrationOptions options, IMongoDbContextBuilder contextBuilder)
         {
             IMigrationOperation migrationOperation;
+            IMongoDbContext dbContext = contextBuilder.Build(options.Uri.ConnectionString);
 
             switch (options.Operation)
             {
                 case MigrationOperation.None:
                     throw new NotSupportedException($"{options.Operation} is not a supported operation.");
                 case MigrationOperation.Up:
-                    migrationOperation = new UpMigrationOperation(options.Uri.ConnectionString, options.ProjectFile);
+                    migrationOperation = new UpMigrationOperation(dbContext, options.ProjectFile);
                     break;
                 case MigrationOperation.Down:
-                    migrationOperation = new DownMigrationOperation(options.Uri.ConnectionString, options.ProjectFile);
+                    migrationOperation = new DownMigrationOperation(dbContext, options.ProjectFile);
                     break;
                 case MigrationOperation.Status:
-                    migrationOperation = new StatusMigrationOperation(options.Uri.ConnectionString, options.ProjectFile); ;
+                    migrationOperation = new StatusMigrationOperation(dbContext, options.ProjectFile); ;
                     break;
                 case MigrationOperation.Create:
                     migrationOperation = new CreateMigrationOperation(options.MigrationName);
