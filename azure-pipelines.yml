@@ -18,5 +18,9 @@ steps:
 - task: DotNetCoreCLI@2
   inputs:
     command: test
-    projects: '**/tests/*.Test/*.csproj'
-    arguments: '--configuration $(buildConfiguration)'
+    projects: '**/test/*.Test/*.csproj'
+    arguments: '--configuration $(buildConfiguration) --collect "Code coverage"'
+- task: PublishCodeCoverageResults@1
+  inputs:
+    codeCoverageTool: 'JaCoCo'
+    summaryFileLocation: '$(System.DefaultWorkingDirectory)/coverage.xml'
