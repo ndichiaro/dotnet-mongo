@@ -2,9 +2,7 @@
 using DotNet.Mongo.Core.Builders;
 using DotNet.Mongo.Migrate.Operations;
 using DotNet.Mongo.Migrate.Options;
-using MongoDB.Driver;
 using System;
-using System.Reflection;
 
 namespace DotNet.Mongo.Migrate
 {
