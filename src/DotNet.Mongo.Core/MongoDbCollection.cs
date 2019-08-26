@@ -33,9 +33,7 @@ namespace DotNet.Mongo.Core
             get
             {
                 var typeName = typeof(TEntityType).Name;
-                var txtInfo = new CultureInfo("en-us", false).TextInfo;
-                var titleCase = txtInfo.ToTitleCase(typeName);
-                return char.ToLower(titleCase[0]) + titleCase.Substring(1);
+                return char.ToLowerInvariant(typeName[0]) + typeName.Substring(1);
             }
         }
         protected IMongoCollection<TEntityType> Collection => _context.Db.GetCollection<TEntityType>(CollectionName);
