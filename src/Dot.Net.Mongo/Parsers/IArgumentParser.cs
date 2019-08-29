@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace DotNet.Mongo.Parsers
+namespace Dot.Net.Mongo.Parsers
 {
     /// <summary>
     /// Represents a command line argument parser

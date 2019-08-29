@@ -1,7 +1,7 @@
 ﻿using System;
 using DotNet.Mongo.Migrate.Options;
 
-namespace DotNet.Mongo.Parsers
+namespace Dot.Net.Mongo.Parsers
 {
     /// <summary>
     /// A factory for getting an instance of IArgumentParser

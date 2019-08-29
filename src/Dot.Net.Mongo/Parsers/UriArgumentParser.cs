@@ -1,7 +1,7 @@
 ﻿using DotNet.Mongo.Migrate.Options;
 using System.Collections.Generic;
 
-namespace DotNet.Mongo.Parsers
+namespace Dot.Net.Mongo.Parsers
 {
     /// <summary>
     /// A parser for the command line arguments for uri options

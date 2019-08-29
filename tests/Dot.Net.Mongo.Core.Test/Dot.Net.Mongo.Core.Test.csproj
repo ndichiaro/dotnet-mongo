@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\DotNet.Mongo.Core\DotNet.Mongo.Core.csproj" />
+    <ProjectReference Include="..\..\src\Dot.Net.Mongo.Core\Dot.Net.Mongo.Core.csproj" />
   </ItemGroup>
 
 </Project>

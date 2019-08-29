@@ -2,7 +2,7 @@
 using System;
 using System.Linq;
 
-namespace DotNet.Mongo.Extensions
+namespace Dot.Net.Mongo.Extensions
 {
     /// <summary>
     /// Provides additional string functionality
