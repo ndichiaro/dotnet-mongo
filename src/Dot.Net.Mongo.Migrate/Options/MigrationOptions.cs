@@ -1,6 +1,6 @@
-﻿using DotNet.Mongo.Migrate.Operations;
+﻿using Dot.Net.Mongo.Migrate.Operations;
 
-namespace DotNet.Mongo.Migrate.Options
+namespace Dot.Net.Mongo.Migrate.Options
 {
     /// <summary>
     /// Options used for configuring the migration runner

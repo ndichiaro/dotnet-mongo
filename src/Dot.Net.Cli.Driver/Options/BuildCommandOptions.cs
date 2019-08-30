@@ -1,6 +1,6 @@
-﻿using DotNet.Cli.Driver.Configuration;
+﻿using Dot.Net.Cli.Driver.Configuration;
 
-namespace DotNet.Cli.Driver.Options
+namespace Dot.Net.Cli.Driver.Options
 {
     /// <summary>
     /// Options for the dotnet build command

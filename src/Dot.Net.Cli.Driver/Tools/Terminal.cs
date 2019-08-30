@@ -1,9 +1,9 @@
-﻿using DotNet.Cli.Driver.Platform;
+﻿using Dot.Net.Cli.Driver.Platform;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace DotNet.Cli.Driver.Tools
+namespace Dot.Net.Cli.Driver.Tools
 {
     internal static class Terminal
     {

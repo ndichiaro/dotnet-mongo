@@ -1,5 +1,5 @@
 ﻿using System;
-using DotNet.Mongo.Migrate.Options;
+using Dot.Net.Mongo.Migrate.Options;
 
 namespace Dot.Net.Mongo.Parsers
 {

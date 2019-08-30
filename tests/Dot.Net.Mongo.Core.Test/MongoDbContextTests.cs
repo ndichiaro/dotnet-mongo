@@ -2,7 +2,7 @@ using MongoDB.Driver;
 using NSubstitute;
 using Xunit;
 
-namespace DotNet.Mongo.Core.Test
+namespace Dot.Net.Mongo.Core.Test
 {
     /// <summary>
     /// A suite of unit tests to validate the functionality of 

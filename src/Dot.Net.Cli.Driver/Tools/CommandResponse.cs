@@ -1,4 +1,4 @@
-﻿namespace DotNet.Cli.Driver.Tools
+﻿namespace Dot.Net.Cli.Driver.Tools
 {
     internal class CommandResponse
     {

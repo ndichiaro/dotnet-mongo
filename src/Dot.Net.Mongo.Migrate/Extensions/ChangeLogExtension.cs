@@ -1,9 +1,9 @@
-﻿using DotNet.Mongo.Migrate.Collections;
-using DotNet.Mongo.Migrate.Models;
+﻿using Dot.Net.Mongo.Migrate.Collections;
+using Dot.Net.Mongo.Migrate.Models;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace DotNet.Mongo.Migrate.Extensions
+namespace Dot.Net.Mongo.Migrate.Extensions
 {
     /// <summary>
     /// Provides additional change log functionality

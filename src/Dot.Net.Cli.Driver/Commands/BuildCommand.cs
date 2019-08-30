@@ -1,7 +1,7 @@
-﻿using DotNet.Cli.Driver.Configuration;
+﻿using Dot.Net.Cli.Driver.Configuration;
 using System;
 
-namespace DotNet.Cli.Driver.Commands
+namespace Dot.Net.Cli.Driver.Commands
 {
     /// <summary>
     /// The dotnet build command

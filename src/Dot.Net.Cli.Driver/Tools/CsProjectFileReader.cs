@@ -1,7 +1,7 @@
-﻿using DotNet.Cli.Driver.Results;
+﻿using Dot.Net.Cli.Driver.Results;
 using System.Xml;
 
-namespace DotNet.Cli.Driver.Tools
+namespace Dot.Net.Cli.Driver.Tools
 {
     /// <summary>
     /// Reads a C# project file

@@ -1,8 +1,8 @@
-﻿using DotNet.Mongo.Migrate.Templates;
+﻿using Dot.Net.Mongo.Migrate.Templates;
 using System;
 using System.IO;
 
-namespace DotNet.Mongo.Migrate.Operations
+namespace Dot.Net.Mongo.Migrate.Operations
 {
     /// <summary>
     /// A migration operation for creating a new migration

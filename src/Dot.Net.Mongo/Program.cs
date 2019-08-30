@@ -1,15 +1,15 @@
 ﻿using ConsoleTables;
-using DotNet.Mongo.Core.Builders;
-using DotNet.Mongo.Extensions;
-using DotNet.Mongo.Migrate;
-using DotNet.Mongo.Migrate.Operations;
-using DotNet.Mongo.Migrate.Options;
-using DotNet.Mongo.Parsers;
+using Dot.Net.Mongo.Core.Builders;
+using Dot.Net.Mongo.Extensions;
+using Dot.Net.Mongo.Migrate;
+using Dot.Net.Mongo.Migrate.Operations;
+using Dot.Net.Mongo.Migrate.Options;
+using Dot.Net.Mongo.Parsers;
 using System;
 using System.Collections.Generic;
 using System.IO;
 
-namespace DotNet.Mongo
+namespace Dot.Net.Mongo
 {
     class Program
     {

@@ -1,4 +1,4 @@
-﻿namespace DotNet.Mongo.Core.Test.Helpers
+﻿namespace Dot.Net.Mongo.Core.Test.Helpers
 {
     /// <summary>
     /// Represents a test data model for a MongoDb

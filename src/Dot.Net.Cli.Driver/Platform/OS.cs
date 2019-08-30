@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace DotNet.Cli.Driver.Platform
+namespace Dot.Net.Cli.Driver.Platform
 {
     internal static class OS
     {

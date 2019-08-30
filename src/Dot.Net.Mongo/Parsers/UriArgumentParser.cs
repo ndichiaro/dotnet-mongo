@@ -1,4 +1,4 @@
-﻿using DotNet.Mongo.Migrate.Options;
+﻿using Dot.Net.Mongo.Migrate.Options;
 using System.Collections.Generic;
 
 namespace Dot.Net.Mongo.Parsers

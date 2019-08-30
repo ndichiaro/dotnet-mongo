@@ -1,7 +1,7 @@
-﻿using DotNet.Cli.Driver.Results;
-using DotNet.Cli.Driver.Tools;
+﻿using Dot.Net.Cli.Driver.Results;
+using Dot.Net.Cli.Driver.Tools;
 
-namespace DotNet.Cli.Driver
+namespace Dot.Net.Cli.Driver
 {
     /// <summary>
     /// Runs CLI commands

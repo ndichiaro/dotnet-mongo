@@ -1,10 +1,10 @@
-﻿using DotNet.Mongo.Core;
-using DotNet.Mongo.Core.Builders;
-using DotNet.Mongo.Migrate.Operations;
-using DotNet.Mongo.Migrate.Options;
+﻿using Dot.Net.Mongo.Core;
+using Dot.Net.Mongo.Core.Builders;
+using Dot.Net.Mongo.Migrate.Operations;
+using Dot.Net.Mongo.Migrate.Options;
 using System;
 
-namespace DotNet.Mongo.Migrate
+namespace Dot.Net.Mongo.Migrate
 {
     /// <summary>
     /// A runner class that manages executing the migration

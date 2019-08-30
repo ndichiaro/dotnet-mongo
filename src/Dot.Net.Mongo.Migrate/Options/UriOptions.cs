@@ -1,4 +1,4 @@
-﻿namespace DotNet.Mongo.Migrate.Options
+﻿namespace Dot.Net.Mongo.Migrate.Options
 {
     /// <summary>
     /// Options used for configuring the MongoDB URI

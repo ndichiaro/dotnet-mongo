@@ -1,8 +1,8 @@
-﻿using DotNet.Mongo.Core;
-using DotNet.Mongo.Migrate.Models;
+﻿using Dot.Net.Mongo.Core;
+using Dot.Net.Mongo.Migrate.Models;
 using MongoDB.Driver;
 
-namespace DotNet.Mongo.Migrate.Collections
+namespace Dot.Net.Mongo.Migrate.Collections
 {
     /// <summary>
     /// Manages the interaction for the changeLog MongoDB

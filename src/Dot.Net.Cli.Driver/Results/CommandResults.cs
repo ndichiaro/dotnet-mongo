@@ -1,4 +1,4 @@
-﻿namespace DotNet.Cli.Driver.Results
+﻿namespace Dot.Net.Cli.Driver.Results
 {
     /// <summary>
     /// The results of a command execution

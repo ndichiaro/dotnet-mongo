@@ -1,7 +1,7 @@
 ﻿using System;
 using MongoDB.Driver;
 
-namespace DotNet.Mongo.Core.Builders
+namespace Dot.Net.Mongo.Core.Builders
 {
     /// <summary>
     /// Contains functionality for creating a MongoDB database context

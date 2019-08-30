@@ -1,15 +1,15 @@
-﻿using DotNet.Cli.Driver;
-using DotNet.Mongo.Core;
-using DotNet.Mongo.Migrate.Collections;
-using DotNet.Cli.Driver.Configuration;
+﻿using Dot.Net.Cli.Driver;
+using Dot.Net.Mongo.Core;
+using Dot.Net.Mongo.Migrate.Collections;
+using Dot.Net.Cli.Driver.Configuration;
 using System.IO;
-using DotNet.Cli.Driver.Options;
+using Dot.Net.Cli.Driver.Options;
 using System;
-using DotNet.Mongo.Migrate.Models;
-using DotNet.Mongo.Migrate.Extensions;
+using Dot.Net.Mongo.Migrate.Models;
+using Dot.Net.Mongo.Migrate.Extensions;
 using System.Text;
 
-namespace DotNet.Mongo.Migrate.Operations
+namespace Dot.Net.Mongo.Migrate.Operations
 {
     /// <summary>
     /// A migration operation for upgrading a database instance

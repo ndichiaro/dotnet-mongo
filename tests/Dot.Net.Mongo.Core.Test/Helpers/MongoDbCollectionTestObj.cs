@@ -1,6 +1,6 @@
 ﻿using MongoDB.Driver;
 
-namespace DotNet.Mongo.Core.Test.Helpers
+namespace Dot.Net.Mongo.Core.Test.Helpers
 {
     /// <summary>
     /// A class used for testing the funcitonality of the 

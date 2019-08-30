@@ -1,4 +1,4 @@
-﻿namespace DotNet.Mongo.Migrate.Operations
+﻿namespace Dot.Net.Mongo.Migrate.Operations
 {
     /// <summary>
     /// Represents a migration operation to be executed for MongoDB migration

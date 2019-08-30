@@ -1,12 +1,12 @@
-﻿using DotNet.Cli.Driver.Configuration;
-using DotNet.Cli.Driver.Tools;
+﻿using Dot.Net.Cli.Driver.Configuration;
+using Dot.Net.Cli.Driver.Tools;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 
-namespace DotNet.Mongo.Migrate.Extensions
+namespace Dot.Net.Mongo.Migrate.Extensions
 {
     /// <summary>
     /// Provides additional migration functionality

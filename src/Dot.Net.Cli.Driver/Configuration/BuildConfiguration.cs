@@ -1,4 +1,4 @@
-﻿namespace DotNet.Cli.Driver.Configuration
+﻿namespace Dot.Net.Cli.Driver.Configuration
 {
     public enum BuildConfiguration
     {

@@ -1,4 +1,4 @@
-﻿namespace DotNet.Cli.Driver.Options
+﻿namespace Dot.Net.Cli.Driver.Options
 {
     /// <summary>
     /// Options for the dotnet cli

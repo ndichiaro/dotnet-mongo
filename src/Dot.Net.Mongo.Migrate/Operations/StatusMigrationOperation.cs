@@ -1,14 +1,14 @@
-﻿using DotNet.Cli.Driver;
-using DotNet.Cli.Driver.Configuration;
-using DotNet.Cli.Driver.Options;
-using DotNet.Mongo.Core;
-using DotNet.Mongo.Migrate.Collections;
-using DotNet.Mongo.Migrate.Extensions;
+﻿using Dot.Net.Cli.Driver;
+using Dot.Net.Cli.Driver.Configuration;
+using Dot.Net.Cli.Driver.Options;
+using Dot.Net.Mongo.Core;
+using Dot.Net.Mongo.Migrate.Collections;
+using Dot.Net.Mongo.Migrate.Extensions;
 using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace DotNet.Mongo.Migrate.Operations
+namespace Dot.Net.Mongo.Migrate.Operations
 {
     /// <summary>
     /// A migration operation for the status of a database

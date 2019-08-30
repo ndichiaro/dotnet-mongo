@@ -7,7 +7,7 @@
 //     the code is regenerated.
 // </auto-generated>
 // ------------------------------------------------------------------------------
-namespace DotNet.Mongo.Migrate.Templates
+namespace Dot.Net.Mongo.Migrate.Templates
 {
     using System;
     
@@ -15,7 +15,7 @@ namespace DotNet.Mongo.Migrate.Templates
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\Repositories\ndichiaro\dotnet-mongo\src\DotNet.Mongo.Migrate\Templates\MigrationTemplate.tt"
+    #line 1 "C:\Repositories\ndichiaro\dotnet-mongo\src\Dot.Net.Mongo.Migrate\Templates\MigrationTemplate.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "15.0.0.0")]
     public partial class MigrationTemplate : MigrationTemplateBase
     {
@@ -25,11 +25,11 @@ namespace DotNet.Mongo.Migrate.Templates
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write("using DotNet.Mongo.Core;\r\nusing MongoDB.Driver;\r\n\r\n/// <summary>\r\n/// This class " +
+            this.Write("using Dot.Net.Mongo.Core;\r\nusing MongoDB.Driver;\r\n\r\n/// <summary>\r\n/// This class " +
                     "was generation to create a custom MongoDB database migration\r\n/// </summary>\r\nna" +
                     "mespace Migrations\r\n{\r\n\tpublic class ");
             
-            #line 10 "C:\Repositories\ndichiaro\dotnet-mongo\src\DotNet.Mongo.Migrate\Templates\MigrationTemplate.tt"
+            #line 10 "C:\Repositories\ndichiaro\dotnet-mongo\src\Dot.Net.Mongo.Migrate\Templates\MigrationTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(_className));
             
             #line default

@@ -2,7 +2,7 @@
 using MongoDB.Bson.Serialization.Attributes;
 using System;
 
-namespace DotNet.Mongo.Migrate.Models
+namespace Dot.Net.Mongo.Migrate.Models
 {
     /// <summary>
     /// A modification to a MongoDB database

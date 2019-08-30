@@ -1,4 +1,4 @@
-﻿namespace DotNet.Cli.Driver.Commands
+﻿namespace Dot.Net.Cli.Driver.Commands
 {
     /// <summary>
     /// Represent a CLI command

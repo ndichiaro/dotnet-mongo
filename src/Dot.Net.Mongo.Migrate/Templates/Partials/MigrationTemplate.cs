@@ -1,4 +1,4 @@
-﻿namespace DotNet.Mongo.Migrate.Templates
+﻿namespace Dot.Net.Mongo.Migrate.Templates
 {
     /// <summary>
     /// Exends functionality to the Migration t4 template

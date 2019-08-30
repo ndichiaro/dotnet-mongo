@@ -1,4 +1,4 @@
-﻿namespace DotNet.Mongo.Core.Builders
+﻿namespace Dot.Net.Mongo.Core.Builders
 {
     /// <summary>
     /// Exposes functionality for building a MongoDb database context

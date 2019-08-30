@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq.Expressions;
 
-namespace DotNet.Mongo.Core
+namespace Dot.Net.Mongo.Core
 {
     /// <summary>
     /// Represents a MongoDB collection

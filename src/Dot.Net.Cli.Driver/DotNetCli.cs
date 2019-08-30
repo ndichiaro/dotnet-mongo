@@ -1,9 +1,8 @@
 ﻿using System;
-using DotNet.Cli.Driver.Commands;
-using DotNet.Cli.Driver.Configuration;
-using DotNet.Cli.Driver.Options;
+using Dot.Net.Cli.Driver.Commands;
+using Dot.Net.Cli.Driver.Options;
 
-namespace DotNet.Cli.Driver
+namespace Dot.Net.Cli.Driver
 {
     /// <summary>
     /// Represents the dotnet cli

@@ -1,6 +1,6 @@
-﻿using DotNet.Mongo.Migrate.Operations;
+﻿using Dot.Net.Mongo.Migrate.Operations;
 
-namespace DotNet.Mongo.Migrate
+namespace Dot.Net.Mongo.Migrate
 {
     /// <summary>
     /// The result of a migration

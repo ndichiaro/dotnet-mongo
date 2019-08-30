@@ -1,5 +1,5 @@
-﻿using DotNet.Mongo.Migrate.Operations;
-using DotNet.Mongo.Migrate.Options;
+﻿using Dot.Net.Mongo.Migrate.Operations;
+using Dot.Net.Mongo.Migrate.Options;
 using System;
 using System.Collections.Generic;
 
