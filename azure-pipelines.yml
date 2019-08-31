@@ -31,13 +31,15 @@ steps:
   inputs:
     command: 'pack'
     packagesToPack: '**/Tools.Net.Mongo.Core.csproj'
-    versioningScheme: 'byBuildNumber'
+    versioningScheme: 'byEnvVar'
+    versionEnvVar: 'version'
 
 - task: DotNetCoreCLI@2
   inputs:
     command: 'pack'
     packagesToPack: '**/Tools.Net.Mongo.csproj'
-    versioningScheme: 'byBuildNumber'
+    versioningScheme: 'byEnvVar'
+    versionEnvVar: 'version'
 
 - task: PublishBuildArtifacts@1
   inputs:
