@@ -15,6 +15,9 @@ variables:
   version: 1.0.1
   release: -alpha
   package: $(version)$(release)
+  core-version: 1.0.0
+  core-release: -alpha
+  core-package: $(core-version)$(core-release)
 
 steps:
 - script: dotnet build --configuration $(buildConfiguration) -p:Version=$(Build.BuildNumber)
@@ -35,7 +38,7 @@ steps:
     command: 'pack'
     packagesToPack: '**/Tools.Net.Mongo.Core.csproj'
     versioningScheme: 'byEnvVar'
-    versionEnvVar: 'package'
+    versionEnvVar: 'core-package'
 
 - task: DotNetCoreCLI@2
   inputs:
