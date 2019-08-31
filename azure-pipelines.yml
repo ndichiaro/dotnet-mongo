@@ -7,7 +7,7 @@ trigger:
 - development
 
 pool:
-  vmImage: 'ubuntu-latest'
+  vmImage: 'windows-latest'
 
 variables:
   buildConfiguration: 'Release'
@@ -15,3 +15,12 @@ variables:
 steps:
 - script: dotnet build --configuration $(buildConfiguration)
   displayName: 'dotnet build $(buildConfiguration)'
+- task: DotNetCoreCLI@2
+  inputs:
+    command: test
+    projects: '**/tests/*.Test/*.csproj'
+    arguments: '--configuration $(buildConfiguration) --logger trx --collect "Code coverage"'
+- task: PublishTestResults@2
+  inputs:
+    testRunner: VSTest
+    testResultsFiles: '**/*.trx'
