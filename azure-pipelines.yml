@@ -3,7 +3,7 @@
 # Add steps that run tests, create a NuGet package, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
 
-name: 1.0.0.$(Rev:.r)
+name: $(version)$(Rev:.r)
 trigger:
 - development
 
@@ -12,6 +12,7 @@ pool:
 
 variables:
   buildConfiguration: 'Release'
+  version: 1.0.0
 
 steps:
 - script: dotnet build --configuration $(buildConfiguration)
