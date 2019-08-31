@@ -8,8 +8,8 @@ A Global Tool for the dotnet CLI to manage MongoDB databases in .NET.
 
 |                  | Latest |
 | :--:             |  :--:  |
-|  .NET Mongo  |![Nuget (with prereleases)](https://img.shields.io/nuget/vpre/Tools.Net.Mongo)|
-|  .NET Mongo Core |![Nuget (with prereleases)](https://img.shields.io/nuget/vpre/Tools.Net.Mongo.Core)|
+|  .NET Mongo  |[![Nuget (with prereleases)](https://img.shields.io/nuget/vpre/Tools.Net.Mongo)](https://www.nuget.org/packages/Tools.Net.Mongo)|
+|  .NET Mongo Core |[![Nuget (with prereleases)](https://img.shields.io/nuget/vpre/Tools.Net.Mongo.Core)](https://www.nuget.org/packages/Tools.Net.Mongo.Core)|
 
 ## Installation
 
