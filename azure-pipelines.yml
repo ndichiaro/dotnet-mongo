@@ -29,13 +29,13 @@ steps:
   inputs:
     command: 'pack'
     packagesToPack: '**/Tools.Net.Mongo.Core.csproj'
-    versioningScheme: 'off'
+    versioningScheme: 'byBuildNumber'
 
 - task: DotNetCoreCLI@2
   inputs:
     command: 'pack'
     packagesToPack: '**/Tools.Net.Mongo.csproj'
-    versioningScheme: 'off'
+    versioningScheme: 'byBuildNumber'
 
 - task: PublishBuildArtifacts@1
   inputs:
