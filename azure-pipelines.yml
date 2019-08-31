@@ -3,7 +3,7 @@
 # Add steps that run tests, create a NuGet package, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
 
-name: $(version)$(Rev:.r)$(release)
+name: $(buildNumber)
 trigger:
 - development
 
@@ -12,11 +12,12 @@ pool:
 
 variables:
   buildConfiguration: 'Release'
+  buildNumber: $(version)$(Rev:.r)$(release)
   version: 1.0.0
   release: -alpha
 
 steps:
-- script: dotnet build --configuration $(buildConfiguration) -p:Version=$(Build.BuildNumber)
+- script: dotnet build --configuration $(buildConfiguration) -p:Version=$(buildNumber)
   displayName: 'dotnet build $(buildConfiguration)'
 - task: DotNetCoreCLI@2
   inputs:
@@ -33,13 +34,15 @@ steps:
   inputs:
     command: 'pack'
     packagesToPack: '**/Tools.Net.Mongo.Core.csproj'
-    versioningScheme: 'byBuildNumber'
+    versioningScheme: 'byEnvVar'
+    versionEnvVar: 'buildNumber'
 
 - task: DotNetCoreCLI@2
   inputs:
     command: 'pack'
     packagesToPack: '**/Tools.Net.Mongo.csproj'
-    versioningScheme: 'byBuildNumber'
+    versioningScheme: 'byEnvVar'
+    versionEnvVar: 'buildNumber'
 
 - task: PublishBuildArtifacts@1
   inputs:
