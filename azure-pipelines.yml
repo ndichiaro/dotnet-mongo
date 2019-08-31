@@ -25,3 +25,8 @@ steps:
   inputs:
     testRunner: VSTest
     testResultsFiles: '**/*.trx'
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'pack'
+    packagesToPack: '**/Tools.Net.Mongo.Core.csproj'
+    versioningScheme: 'off'
