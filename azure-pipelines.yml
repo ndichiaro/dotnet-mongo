@@ -20,11 +20,7 @@ steps:
     command: test
     projects: '**/tests/*.Test/*.csproj'
     arguments: '--configuration $(buildConfiguration) --logger trx --collect "Code coverage"'
-- task: NuGetCommand@2
-  inputs:
-    command: 'pack'
-    packagesToPack: '**/Tools.Net.Mongo.Core.csproj'
-    versioningScheme: 'off'
+
 - task: PublishTestResults@2
   inputs:
     testRunner: VSTest
