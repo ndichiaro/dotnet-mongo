@@ -9,13 +9,9 @@
     <PackageReference Include="System.CodeDom" Version="4.5.0" />
     <PackageReference Include="System.Runtime.Loader" Version="4.3.0" />
   </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Dot.Net.Mongo.Core" Version="1.0.0-alpha" Condition="'$(Configuration)'=='Release'" />  
-  </ItemGroup>
   
   <ItemGroup>
-    <ProjectReference Include="..\Tools.Net.Mongo.Core\Tools.Net.Mongo.Core.csproj" Condition="'$(Configuration)'=='Debug'" />
+    <ProjectReference Include="..\Tools.Net.Mongo.Core\Tools.Net.Mongo.Core.csproj" />
     <ProjectReference Include="..\Tools.Net.Cli.Driver\Tools.Net.Cli.Driver.csproj" />
   </ItemGroup>
 

@@ -19,7 +19,10 @@ namespace Tools.Net.Mongo.Migrate
         public static MigrationResult Run(MigrationOptions options, IMongoDbContextBuilder contextBuilder)
         {
             IMigrationOperation migrationOperation;
-            IMongoDbContext dbContext = contextBuilder.Build(options.Uri.ConnectionString);
+            IMongoDbContext dbContext = null;
+
+            if(options.Uri != null)
+                dbContext = contextBuilder.Build(options.Uri.ConnectionString);
 
             switch (options.Operation)
             {
