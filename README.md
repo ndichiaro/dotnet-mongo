@@ -4,7 +4,12 @@
 
 A Global Tool for the dotnet CLI to manage MongoDB databases in .NET.
 
-[![Build Status](https://dev.azure.com/councildevelopment/Dot%20Net%20Mongo/_apis/build/status/ndichiaro.dotnet-mongo?branchName=master)](https://dev.azure.com/councildevelopment/Dot%20Net%20Mongo/_build/latest?definitionId=5&branchName=master) ![Nuget (with prereleases)](https://img.shields.io/nuget/vpre/Tools.Net.Mongo)
+[![Build Status](https://dev.azure.com/councildevelopment/Dot%20Net%20Mongo/_apis/build/status/ndichiaro.dotnet-mongo?branchName=master)](https://dev.azure.com/councildevelopment/Dot%20Net%20Mongo/_build/latest?definitionId=5&branchName=master) 
+
+|                  | Latest |
+| :--:             |  :--:  |
+|  .NET Mongo  |![Nuget (with prereleases)](https://img.shields.io/nuget/vpre/Tools.Net.Mongo)|
+|  .NET Mongo Core |![Nuget (with prereleases)](https://img.shields.io/nuget/vpre/Tools.Net.Mongo.Core)|
 
 ## Installation
 
