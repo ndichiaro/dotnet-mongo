@@ -8,6 +8,7 @@ namespace Tools.Net.Mongo.Core.Builders
     /// </summary>
     public class MongoDbContextBuilder : IMongoDbContextBuilder
     {
+        #region Public Methods
         /// <summary>
         /// Creates a MongoDb database context
         /// </summary>
@@ -22,5 +23,6 @@ namespace Tools.Net.Mongo.Core.Builders
             var mongoClient = new MongoClient(mongoUrl);
             return new MongoDbContext(mongoClient, mongoUrl.DatabaseName);
         }
+        #endregion
     }
 }
