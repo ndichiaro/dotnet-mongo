@@ -112,7 +112,8 @@ public bool Down(IMongoDatabase database)
 To upgrate a database, run the `dotnet mongo --migrate up --url <connectionString>` command. The `up` command will run all migrations that have not been applied to a given database instance. *Note: This command must be executed in the project directory where the Migrations folder lives.*
 
 ```
-PS C:\Repositories\demo\Tools.Mongo.Demo> dotnet mongo --migrate up --uri mongodb://localhost:27017/twdDb                              Migrated: M201908311227533_MigrationDemo
+PS C:\Repositories\demo\Tools.Mongo.Demo> dotnet mongo --migrate up --uri mongodb://localhost:27017/twdDb
+Migrated: M201908311227533_MigrationDemo
 ```
 
 #### Downgrading a Database
@@ -120,7 +121,8 @@ PS C:\Repositories\demo\Tools.Mongo.Demo> dotnet mongo --migrate up --uri mongod
 To downgrade a database, run the `dotnet mongo --migrate down --url <connectionString>` command. The `down` command will undo the latest migration from a given database. *Note: This command must be executed in the project directory where the Migrations folder lives.*
 
 ```
-PS C:\Repositories\demo\Tools.Mongo.Demo> dotnet mongo --migrate down --uri mongodb://localhost:27017/twdDb                            Downgraded: M201908311227533_MigrationDemo
+PS C:\Repositories\demo\Tools.Mongo.Demo> dotnet mongo --migrate down --uri mongodb://localhost:27017/twdDb
+Downgraded: M201908311227533_MigrationDemo
 ```
 
 #### Checking the Migration Status
@@ -128,7 +130,8 @@ PS C:\Repositories\demo\Tools.Mongo.Demo> dotnet mongo --migrate down --uri mong
 To see the status of a database instance, run the `dotnet mongo --migrate status --url <connectionString>` command. *Note: This command must be executed in the project directory where the Migrations folder lives.*
 
 ```
-PS C:\Repositories\demo\Tools.Mongo.Demo> dotnet mongo --migrate status --uri mongodb://localhost:27017/twdDb                          +--------------------------------+------------+
+PS C:\Repositories\demo\Tools.Mongo.Demo> dotnet mongo --migrate status --uri mongodb://localhost:27017/twdDb
++--------------------------------+------------+
 | Migration                      | Applied At |
 +--------------------------------+------------+
 | M201908311227533_MigrationDemo | PENDING    |
