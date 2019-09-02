@@ -1,5 +1,6 @@
 ﻿using System;
 using Tools.Net.Cli.Driver.Commands;
+using Tools.Net.Cli.Driver.Configuration;
 using Tools.Net.Cli.Driver.Options;
 
 namespace Tools.Net.Cli.Driver
@@ -33,11 +34,11 @@ namespace Tools.Net.Cli.Driver
         /// </summary>
         /// <param name="configuration">Defines the build configuration {Debug|Release}</param>
         /// <returns>a dotnet build command</returns>
-        public BuildCommand Build(Func<object, BuildCommandOptions> options)
+        public BuildCommand Build(Func<BuildCommandOptions, BuildConfiguration> options)
         {
-            var commandOptions = options(new BuildCommandOptions());
+            var buildConfiguration = options(new BuildCommandOptions());
 
-            return new BuildCommand(commandOptions.BuildConfiguration, _workingDirectory, Command);
+            return new BuildCommand(buildConfiguration, _workingDirectory, Command);
         }
     }
 }

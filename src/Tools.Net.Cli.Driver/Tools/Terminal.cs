@@ -5,8 +5,14 @@ using System.Text;
 
 namespace Tools.Net.Cli.Driver.Tools
 {
+    /// <summary>
+    /// Represents a systems terminal application
+    /// </summary>
     internal static class Terminal
     {
+        /// <summary>
+        /// The terminal file based on the system
+        /// </summary>
         private static string File
         {
             get
@@ -16,6 +22,11 @@ namespace Tools.Net.Cli.Driver.Tools
             }
         }
 
+        /// <summary>
+        /// Formats the command to be executed in the terminal
+        /// </summary>
+        /// <param name="command">The command to be executed</param>
+        /// <returns></returns>
         private static string FormatCommand(string command)
         {
             if (OS.Current == OSPlatform.Windows)
@@ -24,6 +35,12 @@ namespace Tools.Net.Cli.Driver.Tools
             return $"-c \"{command}\"";
         }
 
+        /// <summary>
+        /// Executes the command from the terminal
+        /// </summary>
+        /// <param name="workingDirectory">The executing directory</param>
+        /// <param name="command">The command to be executed</param>
+        /// <returns></returns>
         internal static CommandResponse Execute(string workingDirectory, string command)
         {
             var result = new CommandResponse();

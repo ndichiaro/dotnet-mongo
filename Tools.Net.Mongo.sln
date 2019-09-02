@@ -17,6 +17,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tools.Net.Mongo.Migrate", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tools.Net.Mongo.Core.Test", "tests\Tools.Net.Mongo.Core.Test\Tools.Net.Mongo.Core.Test.csproj", "{0607F346-C85F-43A3-A6F1-FD8E56063301}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tool.Net.Cli.Driver.Test", "tests\Tool.Net.Cli.Driver.Test\Tool.Net.Cli.Driver.Test.csproj", "{7665F48D-A7D4-4FB8-B689-2F0034E2D48A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -87,6 +89,18 @@ Global
 		{0607F346-C85F-43A3-A6F1-FD8E56063301}.Release|x64.Build.0 = Release|Any CPU
 		{0607F346-C85F-43A3-A6F1-FD8E56063301}.Release|x86.ActiveCfg = Release|Any CPU
 		{0607F346-C85F-43A3-A6F1-FD8E56063301}.Release|x86.Build.0 = Release|Any CPU
+		{7665F48D-A7D4-4FB8-B689-2F0034E2D48A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7665F48D-A7D4-4FB8-B689-2F0034E2D48A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7665F48D-A7D4-4FB8-B689-2F0034E2D48A}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{7665F48D-A7D4-4FB8-B689-2F0034E2D48A}.Debug|x64.Build.0 = Debug|Any CPU
+		{7665F48D-A7D4-4FB8-B689-2F0034E2D48A}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{7665F48D-A7D4-4FB8-B689-2F0034E2D48A}.Debug|x86.Build.0 = Debug|Any CPU
+		{7665F48D-A7D4-4FB8-B689-2F0034E2D48A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7665F48D-A7D4-4FB8-B689-2F0034E2D48A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7665F48D-A7D4-4FB8-B689-2F0034E2D48A}.Release|x64.ActiveCfg = Release|Any CPU
+		{7665F48D-A7D4-4FB8-B689-2F0034E2D48A}.Release|x64.Build.0 = Release|Any CPU
+		{7665F48D-A7D4-4FB8-B689-2F0034E2D48A}.Release|x86.ActiveCfg = Release|Any CPU
+		{7665F48D-A7D4-4FB8-B689-2F0034E2D48A}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -97,6 +111,7 @@ Global
 		{F907B6E4-07FC-4417-B2C6-883F44140722} = {F34A058E-AA44-47B1-B3CD-E576442F1710}
 		{76126762-3892-4FB0-A901-0B66C1ED52DB} = {F34A058E-AA44-47B1-B3CD-E576442F1710}
 		{0607F346-C85F-43A3-A6F1-FD8E56063301} = {406327C4-8D8D-450D-8ECC-95FDDA4C8BB5}
+		{7665F48D-A7D4-4FB8-B689-2F0034E2D48A} = {406327C4-8D8D-450D-8ECC-95FDDA4C8BB5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FA94093C-46B8-4BAA-BF4B-61B8939037AF}

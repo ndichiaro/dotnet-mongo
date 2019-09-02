@@ -50,10 +50,7 @@ namespace Tools.Net.Mongo.Migrate.Operations
 
             // create build command for project where migrations are created
             var runner = CLI.DotNet(x => x.WorkingDirectory = workingDirectory)
-                               .Build(x => new BuildCommandOptions
-                               {
-                                   BuildConfiguration = BuildConfiguration.Debug
-                               })
+                               .Build(x => x.BuildConfiguration = BuildConfiguration.Debug)
                                .Create();
             // run command
             var results = runner.Run();
