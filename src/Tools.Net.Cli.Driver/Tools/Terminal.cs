@@ -1,7 +1,7 @@
-﻿using Tools.Net.Cli.Driver.Platform;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Text;
+using Tools.Net.Cli.Driver.Platform;
 
 namespace Tools.Net.Cli.Driver.Tools
 {

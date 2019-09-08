@@ -1,5 +1,5 @@
-﻿using Tools.Net.Cli.Driver.Results;
-using System.Xml;
+﻿using System.Xml;
+using Tools.Net.Cli.Driver.Results;
 
 namespace Tools.Net.Cli.Driver.Tools
 {

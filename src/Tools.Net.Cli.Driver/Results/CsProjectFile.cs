@@ -4,7 +4,7 @@
     /// Respresents a C# project file
     /// </summary>
     public class CsProjectFile
-    {     
+    {
         /// <summary>
         /// The support .NET frameworks
         /// </summary>

@@ -1,7 +1,6 @@
-﻿using Tools.Net.Mongo.Migrate.Collections;
-using Tools.Net.Mongo.Migrate.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using Tools.Net.Mongo.Migrate.Models;
 
 namespace Tools.Net.Mongo.Migrate.Extensions
 {

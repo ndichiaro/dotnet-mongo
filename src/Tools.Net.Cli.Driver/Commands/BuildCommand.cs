@@ -1,5 +1,5 @@
-﻿using Tools.Net.Cli.Driver.Configuration;
-using System;
+﻿using System;
+using Tools.Net.Cli.Driver.Configuration;
 
 namespace Tools.Net.Cli.Driver.Commands
 {
@@ -19,7 +19,7 @@ namespace Tools.Net.Cli.Driver.Commands
         /// <param name="configuration">Defines the build configuration</param>
         /// <param name="workingDirectory">The directory to run the command</param>
         /// <param name="baseCommand">The command to run before `build`</param>
-        public BuildCommand(BuildConfiguration configuration, string workingDirectory, string baseCommand) 
+        public BuildCommand(BuildConfiguration configuration, string workingDirectory, string baseCommand)
             : base(workingDirectory, baseCommand)
         {
             _configuration = configuration;

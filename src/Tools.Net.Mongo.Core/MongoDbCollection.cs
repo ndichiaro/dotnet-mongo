@@ -21,7 +21,7 @@ namespace Tools.Net.Mongo.Core
             _context = context;
         }
         #endregion
-        
+
         #region Properties
         /// <summary>
         /// The name of the MongoDB collection. By default, this is based on

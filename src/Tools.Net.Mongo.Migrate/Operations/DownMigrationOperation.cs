@@ -1,11 +1,10 @@
-﻿using Tools.Net.Cli.Driver;
+﻿using System;
+using System.IO;
+using Tools.Net.Cli.Driver;
 using Tools.Net.Cli.Driver.Configuration;
-using Tools.Net.Cli.Driver.Options;
 using Tools.Net.Mongo.Core;
 using Tools.Net.Mongo.Migrate.Collections;
 using Tools.Net.Mongo.Migrate.Extensions;
-using System;
-using System.IO;
 
 namespace Tools.Net.Mongo.Migrate.Operations
 {
@@ -36,7 +35,7 @@ namespace Tools.Net.Mongo.Migrate.Operations
         public string Execute()
         {
             var fileInfo = new FileInfo(_projectFile);
-            
+
             // check changelog for the latest migration run
             var changeLogCollection = new ChangeLogCollection(_mongoDbContext);
 
@@ -69,7 +68,7 @@ namespace Tools.Net.Mongo.Migrate.Operations
 
             var deleteResult = changeLogCollection.Delete(latestChange);
 
-            if (deleteResult == 0) return $"Error: {migration.Name} was not downgraded"; 
+            if (deleteResult == 0) return $"Error: {migration.Name} was not downgraded";
             return $"Downgraded: {migration.Name}";
         }
     }

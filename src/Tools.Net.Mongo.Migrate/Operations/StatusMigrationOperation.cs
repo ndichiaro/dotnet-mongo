@@ -1,12 +1,11 @@
-﻿using Tools.Net.Cli.Driver;
+﻿using System.IO;
+using System.Linq;
+using System.Text;
+using Tools.Net.Cli.Driver;
 using Tools.Net.Cli.Driver.Configuration;
-using Tools.Net.Cli.Driver.Options;
 using Tools.Net.Mongo.Core;
 using Tools.Net.Mongo.Migrate.Collections;
 using Tools.Net.Mongo.Migrate.Extensions;
-using System.IO;
-using System.Linq;
-using System.Text;
 
 namespace Tools.Net.Mongo.Migrate.Operations
 {

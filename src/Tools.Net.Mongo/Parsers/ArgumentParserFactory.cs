@@ -16,7 +16,7 @@ namespace Tools.Net.Mongo.Parsers
         public static IArgumentParser<T> GetInstance<T>()
         {
             Type type = typeof(T);
-            if(type == typeof(MigrationOptions))
+            if (type == typeof(MigrationOptions))
                 return (IArgumentParser<T>)new MigrateArgumentParser();
 
             if (type == typeof(UriOptions))

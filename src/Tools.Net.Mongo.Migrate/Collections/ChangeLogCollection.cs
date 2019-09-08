@@ -1,6 +1,6 @@
-﻿using Tools.Net.Mongo.Core;
+﻿using MongoDB.Driver;
+using Tools.Net.Mongo.Core;
 using Tools.Net.Mongo.Migrate.Models;
-using MongoDB.Driver;
 
 namespace Tools.Net.Mongo.Migrate.Collections
 {
