@@ -1,5 +1,5 @@
-﻿using Tools.Net.Cli.Driver.Results;
-using System.Xml;
+﻿using System.Xml;
+using Tools.Net.Cli.Driver.Results;
 
 namespace Tools.Net.Cli.Driver.Tools
 {
@@ -11,13 +11,13 @@ namespace Tools.Net.Cli.Driver.Tools
         /// <summary>
         /// Reads a C# project file
         /// </summary>
-        /// <param name="file">The absolute path to the C# project file</param>
+        /// <param name="filePath">The absolute path to the C# project file</param>
         /// <returns>The C# project file</returns>
-        public static CsProjectFile Read(string file)
+        public static CsProjectFile Read(string filePath)
         {
             var projectFile = new CsProjectFile();
             var xmldoc = new XmlDocument();
-            xmldoc.Load(file);
+            xmldoc.Load(filePath);
 
             // map all propery groups to file
             foreach (XmlNode propertyGroup in xmldoc.SelectNodes("//PropertyGroup"))

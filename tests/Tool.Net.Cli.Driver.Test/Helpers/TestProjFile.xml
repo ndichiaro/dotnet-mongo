@@ -1,0 +1,9 @@
+﻿<!-- 
+  This XML file represents the structure of a csproj file.
+  This file is used for unit testing.
+-->
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+</Project>

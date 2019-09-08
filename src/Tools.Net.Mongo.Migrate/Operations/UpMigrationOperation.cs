@@ -1,13 +1,12 @@
-﻿using Tools.Net.Cli.Driver;
+﻿using System;
+using System.IO;
+using System.Text;
+using Tools.Net.Cli.Driver;
+using Tools.Net.Cli.Driver.Configuration;
 using Tools.Net.Mongo.Core;
 using Tools.Net.Mongo.Migrate.Collections;
-using Tools.Net.Cli.Driver.Configuration;
-using System.IO;
-using Tools.Net.Cli.Driver.Options;
-using System;
-using Tools.Net.Mongo.Migrate.Models;
 using Tools.Net.Mongo.Migrate.Extensions;
-using System.Text;
+using Tools.Net.Mongo.Migrate.Models;
 
 namespace Tools.Net.Mongo.Migrate.Operations
 {
@@ -38,7 +37,7 @@ namespace Tools.Net.Mongo.Migrate.Operations
         public string Execute()
         {
             var fileInfo = new FileInfo(_projectFile);
-            
+
             // check changelog for the latest migration run
             var changeLogCollection = new ChangeLogCollection(_mongoDbContext);
 
@@ -50,10 +49,7 @@ namespace Tools.Net.Mongo.Migrate.Operations
 
             // create build command for project where migrations are created
             var runner = CLI.DotNet(x => x.WorkingDirectory = workingDirectory)
-                               .Build(x => new BuildCommandOptions
-                               {
-                                   BuildConfiguration = BuildConfiguration.Debug
-                               })
+                               .Build(x => x.BuildConfiguration = BuildConfiguration.Debug)
                                .Create();
             // run command
             var results = runner.Run();
@@ -66,11 +62,11 @@ namespace Tools.Net.Mongo.Migrate.Operations
             var remainingMigrations = migrations.GetRange(0, migrations.Count);
 
             // grab the latest changes if any migrations were previously executed
-            if(latestChange != null)
+            if (latestChange != null)
                 remainingMigrations = migrations.GetRemainingMigrations(latestChange.FileName);
 
             if (remainingMigrations.Count == 0) return "The database is already up to date";
-            
+
             // string build result for multiple migrations
             var migrationResult = new StringBuilder();
             foreach (var migration in remainingMigrations)

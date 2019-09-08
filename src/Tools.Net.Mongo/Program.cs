@@ -1,13 +1,13 @@
 ﻿using ConsoleTables;
+using System;
+using System.Collections.Generic;
+using System.IO;
 using Tools.Net.Mongo.Core.Builders;
 using Tools.Net.Mongo.Extensions;
 using Tools.Net.Mongo.Migrate;
 using Tools.Net.Mongo.Migrate.Operations;
 using Tools.Net.Mongo.Migrate.Options;
 using Tools.Net.Mongo.Parsers;
-using System;
-using System.Collections.Generic;
-using System.IO;
 
 namespace Tools.Net.Mongo
 {
@@ -24,7 +24,7 @@ namespace Tools.Net.Mongo
             var projectFile = Directory.GetFiles(executingLocation, "*.csproj");
 
             if (projectFile.Length == 0) throw new FileNotFoundException("Project file not found in current directory.");
-            
+
             // queue up args 
             var argList = new Queue<string>(args);
 
@@ -47,8 +47,8 @@ namespace Tools.Net.Mongo
                         options.ProjectFile = projectFile[0];
 
                         var migrationResult = MigrationRunner.Run(options, contextBuilder);
-                        
-                        if(migrationResult.Operation == MigrationOperation.Status)
+
+                        if (migrationResult.Operation == MigrationOperation.Status)
                         {
                             var table = migrationResult.Result.BuildConsoleTable();
                             table.Write(Format.Alternative);
@@ -65,10 +65,10 @@ namespace Tools.Net.Mongo
             }
             while (argList.Count != 0);
 
-        #if DEBUG
+#if DEBUG
             Console.WriteLine("Press any key to continue...");
             Console.ReadLine();
-        #endif
+#endif
         }
     }
 }

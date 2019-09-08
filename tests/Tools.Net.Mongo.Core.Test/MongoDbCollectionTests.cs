@@ -1,6 +1,6 @@
-﻿using Tools.Net.Mongo.Core.Test.Helpers;
-using MongoDB.Driver;
+﻿using MongoDB.Driver;
 using NSubstitute;
+using Tools.Net.Mongo.Core.Test.Helpers;
 using Xunit;
 
 namespace Tools.Net.Mongo.Core.Test

@@ -1,8 +1,8 @@
-﻿using Tools.Net.Mongo.Core;
+﻿using System;
+using Tools.Net.Mongo.Core;
 using Tools.Net.Mongo.Core.Builders;
 using Tools.Net.Mongo.Migrate.Operations;
 using Tools.Net.Mongo.Migrate.Options;
-using System;
 
 namespace Tools.Net.Mongo.Migrate
 {
@@ -21,7 +21,7 @@ namespace Tools.Net.Mongo.Migrate
             IMigrationOperation migrationOperation;
             IMongoDbContext dbContext = null;
 
-            if(options.Uri != null)
+            if (options.Uri != null)
                 dbContext = contextBuilder.Build(options.Uri.ConnectionString);
 
             switch (options.Operation)
@@ -49,7 +49,7 @@ namespace Tools.Net.Mongo.Migrate
             {
                 Operation = options.Operation,
                 Result = result
-        };
+            };
         }
     }
 }

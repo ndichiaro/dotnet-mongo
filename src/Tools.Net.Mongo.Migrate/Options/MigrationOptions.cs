@@ -11,12 +11,12 @@ namespace Tools.Net.Mongo.Migrate.Options
         /// The MongoDB database uri option
         /// </summary>
         public UriOptions Uri { get; set; }
-        
+
         /// <summary>
         /// The migration operation, e.g. up, down, create, status
         /// </summary>
         public MigrationOperation Operation { get; set; }
-        
+
         /// <summary>
         /// The name of the migration. This is used for creating a migration
         /// </summary>

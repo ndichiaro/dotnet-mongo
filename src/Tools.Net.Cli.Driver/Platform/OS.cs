@@ -3,8 +3,14 @@ using System.Runtime.InteropServices;
 
 namespace Tools.Net.Cli.Driver.Platform
 {
+    /// <summary>
+    /// Represents an operating system platform
+    /// </summary>
     internal static class OS
     {
+        /// <summary>
+        /// The current Operating System
+        /// </summary>
         internal static OSPlatform Current
         {
             get

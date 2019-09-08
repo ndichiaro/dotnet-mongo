@@ -1,6 +1,6 @@
-﻿using Tools.Net.Mongo.Migrate.Templates;
-using System;
+﻿using System;
 using System.IO;
+using Tools.Net.Mongo.Migrate.Templates;
 
 namespace Tools.Net.Mongo.Migrate.Operations
 {

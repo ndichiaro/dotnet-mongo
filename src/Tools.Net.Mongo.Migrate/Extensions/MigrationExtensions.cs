@@ -1,10 +1,10 @@
-﻿using Tools.Net.Cli.Driver.Configuration;
-using Tools.Net.Cli.Driver.Tools;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using Tools.Net.Cli.Driver.Configuration;
+using Tools.Net.Cli.Driver.Tools;
 
 namespace Tools.Net.Mongo.Migrate.Extensions
 {

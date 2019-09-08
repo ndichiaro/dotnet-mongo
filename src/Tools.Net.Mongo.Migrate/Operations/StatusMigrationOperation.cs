@@ -1,12 +1,11 @@
-﻿using Tools.Net.Cli.Driver;
+﻿using System.IO;
+using System.Linq;
+using System.Text;
+using Tools.Net.Cli.Driver;
 using Tools.Net.Cli.Driver.Configuration;
-using Tools.Net.Cli.Driver.Options;
 using Tools.Net.Mongo.Core;
 using Tools.Net.Mongo.Migrate.Collections;
 using Tools.Net.Mongo.Migrate.Extensions;
-using System.IO;
-using System.Linq;
-using System.Text;
 
 namespace Tools.Net.Mongo.Migrate.Operations
 {
@@ -48,10 +47,7 @@ namespace Tools.Net.Mongo.Migrate.Operations
 
             // create build command for project where migrations are created
             var runner = CLI.DotNet(x => x.WorkingDirectory = workingDirectory)
-                               .Build(x => new BuildCommandOptions
-                               {
-                                   BuildConfiguration = BuildConfiguration.Debug
-                               })
+                               .Build(x => x.BuildConfiguration = BuildConfiguration.Debug)
                                .Create();
             // run command
             var results = runner.Run();

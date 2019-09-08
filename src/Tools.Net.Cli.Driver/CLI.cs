@@ -1,5 +1,4 @@
 ﻿using System;
-using Tools.Net.Cli.Driver.Commands;
 using Tools.Net.Cli.Driver.Options;
 
 namespace Tools.Net.Cli.Driver
