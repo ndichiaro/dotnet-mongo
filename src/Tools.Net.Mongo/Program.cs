@@ -28,42 +28,49 @@ namespace Tools.Net.Mongo
             // queue up args 
             var argList = new Queue<string>(args);
 
-            do
+            try
             {
-                var arg = argList.Dequeue();
-
-                switch (arg)
+                do
                 {
-                    case "-m":
-                    case "--migrate":
-                        var parser = ArgumentParserFactory.GetInstance<MigrationOptions>();
+                    var arg = argList.Dequeue();
 
-                        // pull out arg as we pass the remaining arguments down the list
-                        var options = parser.Parse(argList);
+                    switch (arg)
+                    {
+                        case "-m":
+                        case "--migrate":
+                            var parser = ArgumentParserFactory.GetInstance<MigrationOptions>();
 
-                        var isValid = options.Validate();
-                        if (!isValid) Console.WriteLine("Run dotnet mongo --help for usage information.");
+                            // pull out arg as we pass the remaining arguments down the list
+                            var options = parser.Parse(argList);
 
-                        options.ProjectFile = projectFile[0];
+                            var isValid = options.Validate();
+                            if (!isValid) Console.WriteLine("Run dotnet mongo --help for usage information.");
 
-                        var migrationResult = MigrationRunner.Run(options, contextBuilder);
+                            options.ProjectFile = projectFile[0];
 
-                        if (migrationResult.Operation == MigrationOperation.Status)
-                        {
-                            var table = migrationResult.Result.BuildConsoleTable();
-                            table.Write(Format.Alternative);
-                        }
-                        else
-                        {
-                            Console.WriteLine(migrationResult.Result);
-                        }
-                        break;
-                    default:
-                        Console.WriteLine($"{arg} is an invalid argument. Run dotnet mongo --help for usage information.");
-                        break;
+                            var migrationResult = MigrationRunner.Run(options, contextBuilder);
+
+                            if (migrationResult.Operation == MigrationOperation.Status)
+                            {
+                                var table = migrationResult.Result.BuildConsoleTable();
+                                table.Write(Format.Alternative);
+                            }
+                            else
+                            {
+                                Console.WriteLine(migrationResult.Result);
+                            }
+                            break;
+                        default:
+                            Console.WriteLine($"{arg} is an invalid argument. Run dotnet mongo --help for usage information.");
+                            break;
+                    }
                 }
+                while (argList.Count != 0);
             }
-            while (argList.Count != 0);
+            catch(Exception)
+            {
+                Console.WriteLine("Error: An unexpected error occurred.");
+            }
 
 #if DEBUG
             Console.WriteLine("Press any key to continue...");
