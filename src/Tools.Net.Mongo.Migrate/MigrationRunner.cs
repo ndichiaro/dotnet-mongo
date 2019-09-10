@@ -26,8 +26,6 @@ namespace Tools.Net.Mongo.Migrate
 
             switch (options.Operation)
             {
-                case MigrationOperation.None:
-                    throw new NotSupportedException($"{options.Operation} is not a supported operation.");
                 case MigrationOperation.Up:
                     migrationOperation = new UpMigrationOperation(dbContext, options.ProjectFile);
                     break;
@@ -40,8 +38,13 @@ namespace Tools.Net.Mongo.Migrate
                 case MigrationOperation.Create:
                     migrationOperation = new CreateMigrationOperation(options.MigrationName);
                     break;
+                case MigrationOperation.None:
                 default:
-                    throw new NotSupportedException($"{options.Operation} is not a supported operation.");
+                    return new MigrationResult
+                    {
+                        Operation = options.Operation,
+                        Result = $"{options.Operation} is not a supported operation."
+                    };
             }
 
             var result = migrationOperation.Execute();
