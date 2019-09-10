@@ -22,7 +22,9 @@ namespace Tools.Net.Mongo.Migrate
             IMongoDbContext dbContext = null;
 
             if (options.Uri != null)
+            {
                 dbContext = contextBuilder.Build(options.Uri.ConnectionString);
+            }
 
             switch (options.Operation)
             {

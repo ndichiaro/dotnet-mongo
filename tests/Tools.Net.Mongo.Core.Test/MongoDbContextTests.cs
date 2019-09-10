@@ -10,8 +10,8 @@ namespace Tools.Net.Mongo.Core.Test
     /// </summary>
     public class MongoDbContextTests
     {
-        private IMongoClient _mongoClient;
-        private IMongoDatabase _mongoDatabase;
+        private readonly IMongoClient _mongoClient;
+        private readonly IMongoDatabase _mongoDatabase;
 
         /// <summary>
         /// Provides test setup

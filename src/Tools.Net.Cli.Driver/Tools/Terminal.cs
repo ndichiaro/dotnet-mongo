@@ -17,7 +17,11 @@ namespace Tools.Net.Cli.Driver.Tools
         {
             get
             {
-                if (OS.Current == OSPlatform.Windows) return "cmd.exe";
+                if (OS.Current == OSPlatform.Windows)
+                {
+                    return "cmd.exe";
+                }
+
                 return "/bin/bash";
             }
         }
@@ -30,7 +34,9 @@ namespace Tools.Net.Cli.Driver.Tools
         private static string FormatCommand(string command)
         {
             if (OS.Current == OSPlatform.Windows)
+            {
                 return $"/c \"{command}\"";
+            }
 
             return $"-c \"{command}\"";
         }

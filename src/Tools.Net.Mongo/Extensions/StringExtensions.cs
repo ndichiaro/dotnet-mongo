@@ -16,7 +16,10 @@ namespace Tools.Net.Mongo.Extensions
         /// <returns></returns>
         public static ConsoleTable BuildConsoleTable(this string csv)
         {
-            if (string.IsNullOrEmpty(csv)) throw new ArgumentNullException("csv");
+            if (string.IsNullOrEmpty(csv))
+            {
+                throw new ArgumentNullException("csv");
+            }
 
             var rows = csv.Split(
                 new[] { Environment.NewLine },
@@ -24,7 +27,10 @@ namespace Tools.Net.Mongo.Extensions
             ).ToList();
 
             // return an empty console table if no rows exist
-            if (rows.Count == 0) return new ConsoleTable();
+            if (rows.Count == 0)
+            {
+                return new ConsoleTable();
+            }
 
             // grab title row from csv
             var titleRowItems = rows[0].Split(',');

@@ -54,18 +54,29 @@ namespace Tools.Net.Mongo.Migrate.Operations
             // run command
             var results = runner.Run();
 
-            if (!results.IsSuccessful) return $"Error: {fileInfo.Name} failed to build with the following errors: {results.Message}";
+            if (!results.IsSuccessful)
+            {
+                return $"Error: {fileInfo.Name} failed to build with the following errors: {results.Message}";
+            }
 
             var migrations = MigrationExtensions.GetMigrationTypes(fileInfo);
-            if (migrations.Count == 0) return "Error: No migration files found in project";
+            if (migrations.Count == 0)
+            {
+                return "Error: No migration files found in project";
+            }
 
             var remainingMigrations = migrations.GetRange(0, migrations.Count);
 
             // grab the latest changes if any migrations were previously executed
             if (latestChange != null)
+            {
                 remainingMigrations = migrations.GetRemainingMigrations(latestChange.FileName);
+            }
 
-            if (remainingMigrations.Count == 0) return "The database is already up to date";
+            if (remainingMigrations.Count == 0)
+            {
+                return "The database is already up to date";
+            }
 
             // string build result for multiple migrations
             var migrationResult = new StringBuilder();
@@ -76,7 +87,9 @@ namespace Tools.Net.Mongo.Migrate.Operations
                                         .Invoke(instance, new[] { _mongoDbContext.Db });
 
                 if (!isMigrated)
+                {
                     return $"Error: {migration.Name} was not migrated successfully";
+                }
 
                 changeLogCollection.Insert(new ChangeLog
                 {
@@ -86,7 +99,10 @@ namespace Tools.Net.Mongo.Migrate.Operations
                 migrationResult.AppendLine($"Migrated: {migration.Name}");
             }
 
-            if (migrationResult.Length > 0) return migrationResult.ToString();
+            if (migrationResult.Length > 0)
+            {
+                return migrationResult.ToString();
+            }
 
             return "Error: Unable to location migrations to be executed. Verify that a Migrations directory exists in your project";
         }

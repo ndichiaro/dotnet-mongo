@@ -17,7 +17,10 @@ namespace Tools.Net.Mongo.Core.Builders
         ///<exception cref="ArgumentNullException">A connection string is required</exception>
         public virtual IMongoDbContext Build(string connectionString)
         {
-            if (string.IsNullOrEmpty(connectionString)) throw new ArgumentNullException("connectionString");
+            if (string.IsNullOrEmpty(connectionString))
+            {
+                throw new ArgumentNullException("connectionString");
+            }
 
             var mongoUrl = new MongoUrl(connectionString);
             var mongoClient = new MongoClient(mongoUrl);

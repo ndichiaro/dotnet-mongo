@@ -52,16 +52,24 @@ namespace Tools.Net.Mongo.Migrate.Operations
             // run command
             var results = runner.Run();
 
-            if (!results.IsSuccessful) return $"Error: {fileInfo.Name} failed to build with the following errors: {results.Message}";
+            if (!results.IsSuccessful)
+            {
+                return $"Error: {fileInfo.Name} failed to build with the following errors: {results.Message}";
+            }
 
             var migrations = MigrationExtensions.GetMigrationTypes(fileInfo);
-            if (migrations.Count == 0) return "Error: No migration files found in project";
+            if (migrations.Count == 0)
+            {
+                return "Error: No migration files found in project";
+            }
 
             var remainingMigrations = migrations.GetRange(0, migrations.Count);
 
             // grab the latest changes if any migrations were previously executed
             if (latestChange != null)
+            {
                 remainingMigrations = migrations.GetRemainingMigrations(latestChange.FileName);
+            }
 
             var migrationStatus = new StringBuilder();
             // add headers to migration status
@@ -73,7 +81,10 @@ namespace Tools.Net.Mongo.Migrate.Operations
             }
 
             // return status if there are no remaining migrations
-            if (remainingMigrations == null) return migrationStatus.ToString();
+            if (remainingMigrations == null)
+            {
+                return migrationStatus.ToString();
+            }
 
             // loop through all pending migrations
             foreach (var migration in remainingMigrations)
