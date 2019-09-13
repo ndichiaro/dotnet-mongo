@@ -63,7 +63,10 @@ namespace Tools.Net.Mongo.Migrate.Extensions
         {
             var latestChangeType = migrations.FirstOrDefault(x => x.Name == latestChange);
             // latestChange migration file was not found
-            if (latestChangeType == null) return new List<Type>();
+            if (latestChangeType == null)
+            {
+                return new List<Type>();
+            }
 
             var index = migrations.IndexOf(latestChangeType);
 

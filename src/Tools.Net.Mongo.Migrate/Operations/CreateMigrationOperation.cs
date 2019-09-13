@@ -36,7 +36,9 @@ namespace Tools.Net.Mongo.Migrate.Operations
             File.WriteAllText(classFile.FullName, classContent);
 
             if (File.Exists(filePath))
+            {
                 return $"Created: {filePath}";
+            }
 
             return $"Error: {filePath} was not created sucessfully";
         }

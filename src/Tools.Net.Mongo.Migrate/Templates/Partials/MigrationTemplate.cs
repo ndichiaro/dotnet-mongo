@@ -5,7 +5,7 @@
     /// </summary>
     public partial class MigrationTemplate
     {
-        private string _className;
+        private readonly string _className;
 
         public MigrationTemplate(string className)
         {

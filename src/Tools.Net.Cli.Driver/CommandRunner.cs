@@ -35,8 +35,14 @@ namespace Tools.Net.Cli.Driver
             var isSuccessful = terminalResults.Code == 0;
             results.IsSuccessful = isSuccessful;
 
-            if (isSuccessful) results.Message = terminalResults.StdOut;
-            else results.Message = terminalResults.StdErr;
+            if (isSuccessful)
+            {
+                results.Message = terminalResults.StdOut;
+            }
+            else
+            {
+                results.Message = terminalResults.StdErr;
+            }
 
             return results;
         }

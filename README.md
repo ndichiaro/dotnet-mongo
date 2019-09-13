@@ -31,18 +31,22 @@ dotnet tool install --global Tools.Net.Mongo --version 1.0.0
 ```
 Tools:
   
-  --migrate <COMMAND>      Manages MongoDB migrations
-  
+  migrate [tool-options] <command>        Manages MongoDB migrations
+
+Tool Options:
+
+  -h|--help                               Prints usage information
+
 Commands:
 
-  create <NAME>           Creates a new migration file. NAME is required to create a migration
-  up [OPTIONS]           Runs all migrations that have not been applied   
-  down [OPTIONS]         Downgrades the database by undoing the last applied migration
-  status [OPTIONS]       Prints the changelog of the database
+  create <name>                           Creates a new migration file. NAME is required to create a migration
+  up [command-options]                    Runs all migrations that have not been applied   
+  down [command-options]                  Downgrades the database by undoing the last applied migration
+  status [command-options]                Prints the changelog of the database
   
-Options:
+Command Options:
   
-  -i|--uri                The MongoDB connection string
+  -i|--uri                                The MongoDB connection string
   
 ```
 
@@ -57,10 +61,10 @@ Next, install the [Tools.Net.Mongo.Core](https://www.nuget.org/packages/Tools.Ne
 .NET Mongo Migrations provides functionality to manage the state of a MongoDB instance using the `dotnet mongo migrate` command.
 
 #### Creating a New Migration
-To create a new migration use the `dotnet mongo --migrate create <NAME>` command. A migration file will be created in the Migrations directory of the project.
+To create a new migration use the `dotnet mongo migrate create <NAME>` command. A migration file will be created in the Migrations directory of the project.
 
 ```
-PS C:\Repositories\demo\Tools.Mongo.Demo> dotnet mongo --migrate create MigrationDemo
+PS C:\Repositories\demo\Tools.Mongo.Demo> dotnet mongo migrate create MigrationDemo
 Created: Migrations/M201908311227533_MigrationDemo.cs
 ```
 
@@ -109,28 +113,28 @@ public bool Down(IMongoDatabase database)
 
 #### Upgrading a Database
 
-To upgrate a database, run the `dotnet mongo --migrate up --url <connectionString>` command. The `up` command will run all migrations that have not been applied to a given database instance. *Note: This command must be executed in the project directory where the Migrations folder lives.*
+To upgrate a database, run the `dotnet mongo migrate up --url <connectionString>` command. The `up` command will run all migrations that have not been applied to a given database instance. *Note: This command must be executed in the project directory where the Migrations folder lives.*
 
 ```
-PS C:\Repositories\demo\Tools.Mongo.Demo> dotnet mongo --migrate up --uri mongodb://localhost:27017/twdDb
+PS C:\Repositories\demo\Tools.Mongo.Demo> dotnet mongo migrate up --uri mongodb://localhost:27017/twdDb
 Migrated: M201908311227533_MigrationDemo
 ```
 
 #### Downgrading a Database
 
-To downgrade a database, run the `dotnet mongo --migrate down --url <connectionString>` command. The `down` command will undo the latest migration from a given database. *Note: This command must be executed in the project directory where the Migrations folder lives.*
+To downgrade a database, run the `dotnet mongo migrate down --url <connectionString>` command. The `down` command will undo the latest migration from a given database. *Note: This command must be executed in the project directory where the Migrations folder lives.*
 
 ```
-PS C:\Repositories\demo\Tools.Mongo.Demo> dotnet mongo --migrate down --uri mongodb://localhost:27017/twdDb
+PS C:\Repositories\demo\Tools.Mongo.Demo> dotnet mongo migrate down --uri mongodb://localhost:27017/twdDb
 Downgraded: M201908311227533_MigrationDemo
 ```
 
 #### Checking the Migration Status
 
-To see the status of a database instance, run the `dotnet mongo --migrate status --url <connectionString>` command. *Note: This command must be executed in the project directory where the Migrations folder lives.*
+To see the status of a database instance, run the `dotnet mongo migrate status --url <connectionString>` command. *Note: This command must be executed in the project directory where the Migrations folder lives.*
 
 ```
-PS C:\Repositories\demo\Tools.Mongo.Demo> dotnet mongo --migrate status --uri mongodb://localhost:27017/twdDb
+PS C:\Repositories\demo\Tools.Mongo.Demo> dotnet mongo migrate status --uri mongodb://localhost:27017/twdDb
 +--------------------------------+------------+
 | Migration                      | Applied At |
 +--------------------------------+------------+

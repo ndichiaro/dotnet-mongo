@@ -1,13 +1,6 @@
-﻿using ConsoleTables;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using Tools.Net.Mongo.Core.Builders;
-using Tools.Net.Mongo.Extensions;
-using Tools.Net.Mongo.Migrate;
-using Tools.Net.Mongo.Migrate.Operations;
-using Tools.Net.Mongo.Migrate.Options;
-using Tools.Net.Mongo.Parsers;
+using Tools.Net.Mongo.Handlers;
 
 namespace Tools.Net.Mongo
 {
@@ -15,15 +8,13 @@ namespace Tools.Net.Mongo
     {
         static void Main(string[] args)
         {
-            var contextBuilder = new MongoDbContextBuilder();
+            IToolHandler optionHandler = null;
 
             // to do print out usage
-            if (args.Length == 0) Console.WriteLine("Run dotnet mongo --help for usage information.");
-
-            var executingLocation = Directory.GetCurrentDirectory();
-            var projectFile = Directory.GetFiles(executingLocation, "*.csproj");
-
-            if (projectFile.Length == 0) throw new FileNotFoundException("Project file not found in current directory.");
+            if (args.Length == 0)
+            {
+                Console.WriteLine("Run dotnet mongo --help for usage information.");
+            }
 
             // queue up args 
             var argList = new Queue<string>(args);
@@ -36,38 +27,23 @@ namespace Tools.Net.Mongo
 
                     switch (arg)
                     {
-                        case "-m":
-                        case "--migrate":
-                            var parser = ArgumentParserFactory.GetInstance<MigrationOptions>();
-
-                            // pull out arg as we pass the remaining arguments down the list
-                            var options = parser.Parse(argList);
-
-                            var isValid = options.Validate();
-                            if (!isValid) Console.WriteLine("Run dotnet mongo --help for usage information.");
-
-                            options.ProjectFile = projectFile[0];
-
-                            var migrationResult = MigrationRunner.Run(options, contextBuilder);
-
-                            if (migrationResult.Operation == MigrationOperation.Status)
-                            {
-                                var table = migrationResult.Result.BuildConsoleTable();
-                                table.Write(Format.Alternative);
-                            }
-                            else
-                            {
-                                Console.WriteLine(migrationResult.Result);
-                            }
+                        case "migrate":
+                            optionHandler = new MigrateToolHandler();
+                            break;
+                        case "-h":
+                        case "--help":
+                            optionHandler = new HelpToolHandler();
                             break;
                         default:
                             Console.WriteLine($"{arg} is an invalid argument. Run dotnet mongo --help for usage information.");
+                            argList.Clear();
                             break;
                     }
+                    optionHandler?.Run(argList);
                 }
                 while (argList.Count != 0);
             }
-            catch(Exception)
+            catch (Exception)
             {
                 Console.WriteLine("Error: An unexpected error occurred.");
             }

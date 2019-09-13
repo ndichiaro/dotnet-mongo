@@ -33,14 +33,23 @@ namespace Tools.Net.Mongo.Migrate.Options
         /// <returns>A bool indicate whether the options are valid</returns>
         public bool Validate()
         {
-            if (Operation == MigrationOperation.None) return false;
+            if (Operation == MigrationOperation.None)
+            {
+                return false;
+            }
 
             if (Operation == MigrationOperation.Create
-                && string.IsNullOrEmpty(MigrationName)) return false;
+                && string.IsNullOrEmpty(MigrationName))
+            {
+                return false;
+            }
 
             if (Operation != MigrationOperation.Create
                 && Operation != MigrationOperation.Status
-                && Uri == null) return false;
+                && Uri == null)
+            {
+                return false;
+            }
 
             return true;
         }

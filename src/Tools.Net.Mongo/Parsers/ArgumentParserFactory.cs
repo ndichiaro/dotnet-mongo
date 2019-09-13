@@ -17,10 +17,14 @@ namespace Tools.Net.Mongo.Parsers
         {
             Type type = typeof(T);
             if (type == typeof(MigrationOptions))
+            {
                 return (IArgumentParser<T>)new MigrateArgumentParser();
+            }
 
             if (type == typeof(UriOptions))
+            {
                 return (IArgumentParser<T>)new UriArgumentParser();
+            }
 
             throw new NotSupportedException($"{type.Name} is an invalid parser type.");
         }

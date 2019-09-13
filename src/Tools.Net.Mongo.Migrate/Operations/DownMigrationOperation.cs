@@ -42,7 +42,10 @@ namespace Tools.Net.Mongo.Migrate.Operations
             var changeLog = changeLogCollection.All();
             var latestChange = changeLog.GetLatestChange();
 
-            if (latestChange == null) return "No changes to downgrade";
+            if (latestChange == null)
+            {
+                return "No changes to downgrade";
+            }
 
             // get all classes in a namespace from project assembly
             var workingDirectory = fileInfo.Directory.FullName;
@@ -54,21 +57,33 @@ namespace Tools.Net.Mongo.Migrate.Operations
             // run cli command
             var results = runner.Run();
 
-            if (!results.IsSuccessful) return $"Error: {fileInfo.Name} failed to build with the following errors: {results.Message}";
+            if (!results.IsSuccessful)
+            {
+                return $"Error: {fileInfo.Name} failed to build with the following errors: {results.Message}";
+            }
 
             var migration = MigrationExtensions.GetMigration(latestChange.FileName, fileInfo);
-            if (migration == null) return $"Error: Unable to locate migration {latestChange.FileName}";
+            if (migration == null)
+            {
+                return $"Error: Unable to locate migration {latestChange.FileName}";
+            }
 
             var instance = Activator.CreateInstance(migration);
             var isMigrated = (bool)migration.GetMethod("Down")
                                     .Invoke(instance, new[] { _mongoDbContext.Db });
 
             if (!isMigrated)
+            {
                 return $"Error: {migration.Name} was not migrated successfully";
+            }
 
             var deleteResult = changeLogCollection.Delete(latestChange);
 
-            if (deleteResult == 0) return $"Error: {migration.Name} was not downgraded";
+            if (deleteResult == 0)
+            {
+                return $"Error: {migration.Name} was not downgraded";
+            }
+
             return $"Downgraded: {migration.Name}";
         }
     }

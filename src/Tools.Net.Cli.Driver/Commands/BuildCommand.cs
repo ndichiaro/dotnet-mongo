@@ -33,7 +33,11 @@ namespace Tools.Net.Cli.Driver.Commands
         /// <exception cref="ArgumentNullException" />
         public override CommandRunner Create()
         {
-            if (string.IsNullOrEmpty(BaseCommand)) throw new ArgumentNullException("A base command must be provided to use the build command");
+            if (string.IsNullOrEmpty(BaseCommand))
+            {
+                throw new ArgumentNullException("A base command must be provided to use the build command");
+            }
+
             return new CommandRunner(WorkingDirectory, $"{BaseCommand} build");
         }
         #endregion
