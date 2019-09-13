@@ -12,12 +12,12 @@ using Tools.Net.Mongo.Parsers;
 namespace Tools.Net.Mongo.Handlers
 {
     /// <summary>
-    /// Handles the 'migrate' option
+    /// Handles the 'migrate' tool
     /// </summary>
-    public class MigrateOptionHandler : IOptionHandler
+    public class MigrateToolHandler : IToolHandler
     {
         /// <summary>
-        /// Runs the migrate option
+        /// Runs the migrate tool
         /// </summary>
         /// <param name = "args" > program arguements</param>
         public void Run(Queue<string> args)

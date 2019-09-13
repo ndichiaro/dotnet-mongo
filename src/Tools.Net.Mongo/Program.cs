@@ -8,7 +8,7 @@ namespace Tools.Net.Mongo
     {
         static void Main(string[] args)
         {
-            IOptionHandler optionHandler = null;
+            IToolHandler optionHandler = null;
 
             // to do print out usage
             if (args.Length == 0)
@@ -27,9 +27,12 @@ namespace Tools.Net.Mongo
 
                     switch (arg)
                     {
-                        case "-m":
-                        case "--migrate":
-                            optionHandler = new MigrateOptionHandler();
+                        case "migrate":
+                            optionHandler = new MigrateToolHandler();
+                            break;
+                        case "-h":
+                        case "--help":
+                            optionHandler = new HelpToolHandler();
                             break;
                         default:
                             Console.WriteLine($"{arg} is an invalid argument. Run dotnet mongo --help for usage information.");
