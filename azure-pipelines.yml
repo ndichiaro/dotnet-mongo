@@ -12,7 +12,7 @@ pool:
 
 variables:
   buildConfiguration: 'Release'
-  version: 1.0.0
+  version: 1.0.1
   release: 
   package: $(version)$(release)
   core-version: 1.0.0
