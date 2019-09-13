@@ -12,11 +12,11 @@ pool:
 
 variables:
   buildConfiguration: 'Release'
-  version: 1.0.1
-  release: -alpha
+  version: 1.0.0
+  release: 
   package: $(version)$(release)
   core-version: 1.0.0
-  core-release: -alpha
+  core-release: 
   core-package: $(core-version)$(core-release)
 
 steps:
