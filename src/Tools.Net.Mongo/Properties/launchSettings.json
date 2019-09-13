@@ -2,7 +2,7 @@
   "profiles": {
     "Tools.Net.Mongo": {
       "commandName": "Project",
-      "commandLineArgs": "--help",
+      "commandLineArgs": "--version",
       "workingDirectory": "C:\\Repositories\\ndichiaro\\dotnet-mongo\\src\\Tools.Net.Mongo.Migrate"
     }
   }
