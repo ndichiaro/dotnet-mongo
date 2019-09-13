@@ -7,7 +7,7 @@ namespace Tools.Net.Mongo.Migrate.Extensions
     /// <summary>
     /// Provides additional change log functionality
     /// </summary>
-    internal static class ChangelogExtension
+    public static class ChangelogExtension
     {
         /// <summary>
         /// Gets the latest change
