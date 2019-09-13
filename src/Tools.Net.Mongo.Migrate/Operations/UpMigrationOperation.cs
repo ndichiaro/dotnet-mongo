@@ -39,7 +39,7 @@ namespace Tools.Net.Mongo.Migrate.Operations
             var fileInfo = new FileInfo(_projectFile);
 
             // check changelog for the latest migration run
-            var changeLogCollection = new ChangeLogCollection(_mongoDbContext);
+            var changeLogCollection = new ChangelogCollection(_mongoDbContext);
 
             var changeLog = changeLogCollection.All();
             var latestChange = changeLog.GetLatestChange();
@@ -91,7 +91,7 @@ namespace Tools.Net.Mongo.Migrate.Operations
                     return $"Error: {migration.Name} was not migrated successfully";
                 }
 
-                changeLogCollection.Insert(new ChangeLog
+                changeLogCollection.Insert(new Changelog
                 {
                     AppliedAt = DateTime.Now,
                     FileName = migration.Name
