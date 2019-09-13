@@ -36,6 +36,7 @@ Tools:
 Tool Options:
 
   -h|--help                               Prints usage information
+  -v|--version                            Prints version information
 
 Commands:
 

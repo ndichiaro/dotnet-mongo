@@ -34,6 +34,10 @@ namespace Tools.Net.Mongo
                         case "--help":
                             optionHandler = new HelpToolHandler();
                             break;
+                        case "-v":
+                        case "--version":
+                            optionHandler = new VersionToolHandler();
+                            break;
                         default:
                             Console.WriteLine($"{arg} is an invalid argument. Run dotnet mongo --help for usage information.");
                             argList.Clear();
