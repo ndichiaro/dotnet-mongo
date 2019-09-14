@@ -15,7 +15,7 @@ namespace Tools.Net.Mongo.Handlers
         /// <param name="args"></param>
         public void Run(Queue<string> args)
         {
-            // reselt the console window
+            // reset the console window
             Console.SetWindowPosition(0, 0);
 
             var helpText = new StringBuilder();

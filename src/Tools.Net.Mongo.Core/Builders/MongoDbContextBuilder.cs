@@ -14,7 +14,8 @@ namespace Tools.Net.Mongo.Core.Builders
         /// </summary>
         /// <param name="connectionString">The connection string to the database</param>
         /// <returns>An instance of IMongoDbContext</returns>
-        ///<exception cref="ArgumentNullException">A connection string is required</exception>
+        /// <exception cref="ArgumentNullException">A connection string is required</exception>
+        /// <exception cref="MongoConfigurationException">An invalid MongoDB connection string</exception>
         public virtual IMongoDbContext Build(string connectionString)
         {
             if (string.IsNullOrEmpty(connectionString))
