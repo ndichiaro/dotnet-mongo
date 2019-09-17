@@ -26,18 +26,23 @@ namespace Tools.Net.Mongo.Migrate
 
             try
             {
-                if (options.Uri == null && (options.Operation != MigrationOperation.Create
-                    || options.Operation != MigrationOperation.None))
+                if (options.Uri != null)
                 {
-                    return new MigrationResult
-                    {
-                        Operation = options.Operation,
-                        Result = "A vaild MongoDB URI is required. Run --help for more information.",
-                        IsSuccessful = false
-                    };
+                    dbContext = contextBuilder.Build(options.Uri.ConnectionString);
                 }
-
-                dbContext = contextBuilder.Build(options.Uri.ConnectionString);
+                else
+                {
+                    if (options.Operation != MigrationOperation.Create
+                        && options.Operation != MigrationOperation.None)
+                    {
+                        return new MigrationResult
+                        {
+                            Operation = options.Operation,
+                            Result = "A vaild MongoDB URI is required. Run --help for more information.",
+                            IsSuccessful = false
+                        };
+                    }
+                }
 
                 switch (options.Operation)
                 {
