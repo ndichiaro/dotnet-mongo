@@ -19,7 +19,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tools.Net.Mongo.Core.Test",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tool.Net.Cli.Driver.Test", "tests\Tool.Net.Cli.Driver.Test\Tool.Net.Cli.Driver.Test.csproj", "{7665F48D-A7D4-4FB8-B689-2F0034E2D48A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tools.Net.Mongo.Migrate.Test", "test\Tools.Net.Mongo.Migrate.Test\Tools.Net.Mongo.Migrate.Test.csproj", "{5CCA4AD1-1FBA-4AEB-8BEC-57AE1DEB5293}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tools.Net.Mongo.Migrate.Test", "tests\Tools.Net.Mongo.Migrate.Test\Tools.Net.Mongo.Migrate.Test.csproj", "{5CCA4AD1-1FBA-4AEB-8BEC-57AE1DEB5293}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
