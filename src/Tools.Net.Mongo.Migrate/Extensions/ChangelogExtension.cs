@@ -7,14 +7,14 @@ namespace Tools.Net.Mongo.Migrate.Extensions
     /// <summary>
     /// Provides additional change log functionality
     /// </summary>
-    internal static class ChangeLogExtension
+    public static class ChangelogExtension
     {
         /// <summary>
         /// Gets the latest change
         /// </summary>
         /// <param name="dbContext"></param>
         /// <returns>The latest migration executed</returns>
-        public static ChangeLog GetLatestChange(this IEnumerable<ChangeLog> changeLog)
+        public static Changelog GetLatestChange(this IEnumerable<Changelog> changeLog)
         {
             return changeLog.OrderByDescending(x => x.AppliedAt).FirstOrDefault();
         }

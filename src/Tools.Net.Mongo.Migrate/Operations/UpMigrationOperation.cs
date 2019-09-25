@@ -6,6 +6,7 @@ using Tools.Net.Cli.Driver.Configuration;
 using Tools.Net.Mongo.Core;
 using Tools.Net.Mongo.Migrate.Collections;
 using Tools.Net.Mongo.Migrate.Extensions;
+using Tools.Net.Mongo.Migrate.Logging;
 using Tools.Net.Mongo.Migrate.Models;
 
 namespace Tools.Net.Mongo.Migrate.Operations
@@ -17,6 +18,7 @@ namespace Tools.Net.Mongo.Migrate.Operations
     {
         private readonly IMongoDbContext _mongoDbContext;
         private readonly string _projectFile;
+        private readonly MigrationLogger _logger;
 
         /// <summary>
         /// Creates an UpMigrationOperation instance.
@@ -27,6 +29,7 @@ namespace Tools.Net.Mongo.Migrate.Operations
         {
             _mongoDbContext = mongoDbContext;
             _projectFile = projectFile;
+            _logger = MigrationLogger.Instance;
         }
 
         /// <summary>
@@ -39,7 +42,7 @@ namespace Tools.Net.Mongo.Migrate.Operations
             var fileInfo = new FileInfo(_projectFile);
 
             // check changelog for the latest migration run
-            var changeLogCollection = new ChangeLogCollection(_mongoDbContext);
+            var changeLogCollection = new ChangelogCollection(_mongoDbContext);
 
             var changeLog = changeLogCollection.All();
             var latestChange = changeLog.GetLatestChange();
@@ -82,16 +85,26 @@ namespace Tools.Net.Mongo.Migrate.Operations
             var migrationResult = new StringBuilder();
             foreach (var migration in remainingMigrations)
             {
-                var instance = Activator.CreateInstance(migration);
-                var isMigrated = (bool)migration.GetMethod("Up")
-                                        .Invoke(instance, new[] { _mongoDbContext.Db });
+                var isMigrated = false;
+                string logPath = string.Empty;
+
+                try
+                {
+                    var instance = Activator.CreateInstance(migration);
+                    isMigrated = (bool)migration.GetMethod("Up")
+                                            .Invoke(instance, new[] { _mongoDbContext.Db });
+                }
+                catch(Exception e)
+                {
+                    logPath = _logger.Log(migration.Name, e.ToString());
+                }
 
                 if (!isMigrated)
                 {
-                    return $"Error: {migration.Name} was not migrated successfully";
+                    return $"Error: {migration.Name} was not migrated successfully. See {logPath} for more details.";
                 }
 
-                changeLogCollection.Insert(new ChangeLog
+                changeLogCollection.Insert(new Changelog
                 {
                     AppliedAt = DateTime.Now,
                     FileName = migration.Name

@@ -7,7 +7,7 @@ namespace Tools.Net.Mongo.Migrate.Models
     /// <summary>
     /// A modification to a MongoDB database
     /// </summary>
-    internal class ChangeLog
+    public class Changelog
     {
         /// <summary>
         /// A unique identifier for the log entry

@@ -46,7 +46,7 @@ namespace Tools.Net.Mongo.Handlers
 
             var migrationResult = MigrationRunner.Run(options, contextBuilder);
 
-            if (migrationResult.Operation == MigrationOperation.Status)
+            if (migrationResult.Operation == MigrationOperation.Status && migrationResult.IsSuccessful)
             {
                 var table = migrationResult.Result.BuildConsoleTable();
                 table.Write(Format.Alternative);

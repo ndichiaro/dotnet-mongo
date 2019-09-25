@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MongoDB.Driver;
+using System;
 using Tools.Net.Mongo.Core;
 using Tools.Net.Mongo.Core.Builders;
 using Tools.Net.Mongo.Migrate.Operations;
@@ -20,40 +21,65 @@ namespace Tools.Net.Mongo.Migrate
         {
             IMigrationOperation migrationOperation;
             IMongoDbContext dbContext = null;
+            string result;
+            var isSuccessful = true;
 
-            if (options.Uri != null)
+            try
             {
-                dbContext = contextBuilder.Build(options.Uri.ConnectionString);
-            }
-
-            switch (options.Operation)
-            {
-                case MigrationOperation.Up:
-                    migrationOperation = new UpMigrationOperation(dbContext, options.ProjectFile);
-                    break;
-                case MigrationOperation.Down:
-                    migrationOperation = new DownMigrationOperation(dbContext, options.ProjectFile);
-                    break;
-                case MigrationOperation.Status:
-                    migrationOperation = new StatusMigrationOperation(dbContext, options.ProjectFile); ;
-                    break;
-                case MigrationOperation.Create:
-                    migrationOperation = new CreateMigrationOperation(options.MigrationName);
-                    break;
-                case MigrationOperation.None:
-                default:
-                    return new MigrationResult
+                if (options.Uri != null)
+                {
+                    dbContext = contextBuilder.Build(options.Uri.ConnectionString);
+                }
+                else
+                {
+                    if (options.Operation != MigrationOperation.Create
+                        && options.Operation != MigrationOperation.None)
                     {
-                        Operation = options.Operation,
-                        Result = $"{options.Operation} is not a supported operation."
-                    };
+                        return new MigrationResult
+                        {
+                            Operation = options.Operation,
+                            Result = "A vaild MongoDB URI is required. Run --help for more information.",
+                            IsSuccessful = false
+                        };
+                    }
+                }
+
+                switch (options.Operation)
+                {
+                    case MigrationOperation.Up:
+                        migrationOperation = new UpMigrationOperation(dbContext, options.ProjectFile);
+                        break;
+                    case MigrationOperation.Down:
+                        migrationOperation = new DownMigrationOperation(dbContext, options.ProjectFile);
+                        break;
+                    case MigrationOperation.Status:
+                        migrationOperation = new StatusMigrationOperation(dbContext, options.ProjectFile); ;
+                        break;
+                    case MigrationOperation.Create:
+                        migrationOperation = new CreateMigrationOperation(options.MigrationName);
+                        break;
+                    case MigrationOperation.None:
+                    default:
+                        return new MigrationResult
+                        {
+                            Operation = options.Operation,
+                            Result = $"{options.Operation} is not a supported operation.",
+                            IsSuccessful = false
+                        };
+                }
+                result = migrationOperation.Execute();
+            }
+            catch(MongoConfigurationException e)
+            {
+                result = e.Message;
+                isSuccessful = false;
             }
 
-            var result = migrationOperation.Execute();
             return new MigrationResult
             {
                 Operation = options.Operation,
-                Result = result
+                Result = result,
+                IsSuccessful = isSuccessful
             };
         }
     }

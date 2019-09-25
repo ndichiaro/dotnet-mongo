@@ -5,6 +5,7 @@ using Tools.Net.Cli.Driver.Configuration;
 using Tools.Net.Mongo.Core;
 using Tools.Net.Mongo.Migrate.Collections;
 using Tools.Net.Mongo.Migrate.Extensions;
+using Tools.Net.Mongo.Migrate.Logging;
 
 namespace Tools.Net.Mongo.Migrate.Operations
 {
@@ -15,6 +16,7 @@ namespace Tools.Net.Mongo.Migrate.Operations
     {
         private readonly string _projectFile;
         private readonly IMongoDbContext _mongoDbContext;
+        private readonly MigrationLogger _logger;
 
         /// <summary>
         /// Creates an DownMigrationOperation instance.
@@ -25,6 +27,7 @@ namespace Tools.Net.Mongo.Migrate.Operations
         {
             _mongoDbContext = mongoDbContext;
             _projectFile = projectFile;
+            _logger = MigrationLogger.Instance;
         }
 
         /// <summary>
@@ -35,9 +38,11 @@ namespace Tools.Net.Mongo.Migrate.Operations
         public string Execute()
         {
             var fileInfo = new FileInfo(_projectFile);
+            var isMigrated = false;
+            string logPath = string.Empty;
 
             // check changelog for the latest migration run
-            var changeLogCollection = new ChangeLogCollection(_mongoDbContext);
+            var changeLogCollection = new ChangelogCollection(_mongoDbContext);
 
             var changeLog = changeLogCollection.All();
             var latestChange = changeLog.GetLatestChange();
@@ -68,13 +73,20 @@ namespace Tools.Net.Mongo.Migrate.Operations
                 return $"Error: Unable to locate migration {latestChange.FileName}";
             }
 
-            var instance = Activator.CreateInstance(migration);
-            var isMigrated = (bool)migration.GetMethod("Down")
-                                    .Invoke(instance, new[] { _mongoDbContext.Db });
+            try
+            {
+                var instance = Activator.CreateInstance(migration);
+                isMigrated = (bool)migration.GetMethod("Down")
+                                        .Invoke(instance, new[] { _mongoDbContext.Db });
+            }
+            catch (Exception e)
+            {
+                logPath = _logger.Log(migration.Name, e.ToString());
+            }
 
             if (!isMigrated)
             {
-                return $"Error: {migration.Name} was not migrated successfully";
+                return $"Error: {migration.Name} was not migrated successfully. See {logPath} for more details.";
             }
 
             var deleteResult = changeLogCollection.Delete(latestChange);

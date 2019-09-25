@@ -2,7 +2,7 @@
   "profiles": {
     "Tools.Net.Mongo": {
       "commandName": "Project",
-      "commandLineArgs": "--version",
+      "commandLineArgs": "migrate down -i mongodb://localhost:27017/twdDb",
       "workingDirectory": "C:\\Repositories\\ndichiaro\\dotnet-mongo\\src\\Tools.Net.Mongo.Migrate"
     }
   }
