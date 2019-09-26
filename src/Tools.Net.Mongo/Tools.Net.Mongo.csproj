@@ -12,7 +12,6 @@
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/ndichiaro/dotnet-mongo</PackageProjectUrl>
     <RepositoryUrl>https://github.com/ndichiaro/dotnet-mongo</RepositoryUrl>
-    <PackageReleaseNotes>A .NET Global Tool for manage MongoDB databases in .NET</PackageReleaseNotes>
     <Authors>Nick DiChiaro</Authors>
     <Description>A Global Tool for the dotnet CLI to manage MongoDB databases in .NET.</Description>
     <Version>1.0.0</Version>
