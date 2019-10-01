@@ -23,16 +23,6 @@ steps:
 - task: Assembly-Info-NetCore@2
   inputs:
     Path: '$(Build.SourcesDirectory)'
-    FileNames: '**/Tools.Net.Mongo.csproj'
-    InsertAttributes: false
-    FileEncoding: 'auto'
-    WriteBOM: false
-    VersionNumber: '1.1.0'
-    FileVersionNumber: '1.1.0'
-
-- task: Assembly-Info-NetCore@2
-  inputs:
-    Path: '$(Build.SourcesDirectory)'
     FileNames: '**/Tools.Net.Mongo.Core.csproj'
     InsertAttributes: false
     FileEncoding: 'auto'
