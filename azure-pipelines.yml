@@ -40,8 +40,11 @@ steps:
     VersionNumber: '${core-package}'
     FileVersionNumber: '${core-package}'
 
-- script: dotnet build --configuration $(buildConfiguration) -p:Version=$(Build.BuildNumber)
-  displayName: 'dotnet build $(buildConfiguration)'
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'build'
+    arguments: '--configuration $(buildConfiguration) -p:Version=$(Build.BuildNumber)'
+  
 - task: DotNetCoreCLI@2
   inputs:
     command: test
