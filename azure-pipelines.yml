@@ -20,6 +20,26 @@ variables:
   core-package: $(core-version)$(core-release)
 
 steps:
+- task: Assembly-Info-NetCore@2
+  inputs:
+    Path: '$(Build.SourcesDirectory)'
+    FileNames: '**/Tools.Net.Mongo.csproj'
+    InsertAttributes: false
+    FileEncoding: 'auto'
+    WriteBOM: false
+    VersionNumber: '${package}'
+    FileVersionNumber: '${package}'
+
+- task: Assembly-Info-NetCore@2
+  inputs:
+    Path: '$(Build.SourcesDirectory)'
+    FileNames: '**/Tools.Net.Mongo.Core.csproj'
+    InsertAttributes: false
+    FileEncoding: 'auto'
+    WriteBOM: false
+    VersionNumber: '${core-package}'
+    FileVersionNumber: '${core-package}'
+
 - script: dotnet build --configuration $(buildConfiguration) -p:Version=$(Build.BuildNumber)
   displayName: 'dotnet build $(buildConfiguration)'
 - task: DotNetCoreCLI@2
