@@ -27,8 +27,8 @@ steps:
     InsertAttributes: false
     FileEncoding: 'auto'
     WriteBOM: false
-    VersionNumber: '${package}'
-    FileVersionNumber: '${package}'
+    VersionNumber: '1.1.0'
+    FileVersionNumber: '1.1.0'
 
 - task: Assembly-Info-NetCore@2
   inputs:
@@ -37,8 +37,8 @@ steps:
     InsertAttributes: false
     FileEncoding: 'auto'
     WriteBOM: false
-    VersionNumber: '${core-package}'
-    FileVersionNumber: '${core-package}'
+    VersionNumber: '1.0.0'
+    FileVersionNumber: '1.0.0'
 
 - task: DotNetCoreCLI@2
   inputs:
