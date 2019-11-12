@@ -85,6 +85,26 @@ namespace Tools.Net.Mongo.Core.Test
             // test that the actual updated count matched the expected deleted count
             Assert.Equal(expectedDeleteCount, actualResult);
         }
+
+        /// <summary>
+        /// Tests that a single document can be inserted into a collection
+        /// </summary>
+        [Fact]
+        public void CanInsertDocument()
+        {
+            var testEntity = new TestEntity
+            {
+                FirstProperty = "Test"
+            };
+
+            var result = _testCollection.Insert(testEntity);
+
+            // ensure the InsertOne method is called with the entity parameter
+            _mongoCollection.Received().InsertOne(testEntity);
+
+            // validate the inserted entity is returned
+            Assert.Equal(testEntity, result);
+        }
         #endregion
     }
 }

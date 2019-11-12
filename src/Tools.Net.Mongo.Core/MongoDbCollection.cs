@@ -39,6 +39,20 @@ namespace Tools.Net.Mongo.Core
         #endregion
 
         #region Public Methods
+        /// <summary>
+        /// Finds all documents in a collection
+        /// </summary>
+        /// <returns>All documents in a collection</returns>
+        public virtual IEnumerable<TEntityType> All()
+        {
+            return Collection.AsQueryable();
+        }
+
+        /// <summary>
+        /// Deletes a document
+        /// </summary>
+        /// <param name="filterDefinition">The filter used to delete a document</param>
+        /// <returns>The number of documents deleted</returns>
         public virtual long Delete(FilterDefinition<TEntityType> filterDefinition)
         {
             var result = Collection.DeleteOne(filterDefinition);
@@ -58,25 +72,17 @@ namespace Tools.Net.Mongo.Core
         }
 
         /// <summary>
-        /// Inserts a document to a collection
+        /// Finds all documents in a collection based on the filter definition
         /// </summary>
-        /// <param name="entity">The document to be inserted</param>
-        public virtual void Insert(TEntityType entity)
+        /// <param name="filterDefinition">The query filter</param>
+        /// <returns>All documents that match the query</returns>
+        public virtual IEnumerable<TEntityType> Find(FilterDefinition<TEntityType> filterDefinition)
         {
-            Collection.InsertOne(entity);
+            return Collection.Find(filterDefinition).ToEnumerable();
         }
 
         /// <summary>
-        /// Finds all documents in a collection
-        /// </summary>
-        /// <returns>All documents in a collection</returns>
-        public virtual IEnumerable<TEntityType> All()
-        {
-            return Collection.AsQueryable();
-        }
-
-        /// <summary>
-        /// Finds all documents in a collection based on the expression
+        /// Finds all documents in a collection based on the filter expression
         /// </summary>
         /// <param name="expression">The collection query</param>
         /// <returns>All documents that match the query</returns>
@@ -84,6 +90,18 @@ namespace Tools.Net.Mongo.Core
         {
             return Collection.Find(expression).ToEnumerable();
         }
+
+        /// <summary>
+        /// Inserts a document to a collection
+        /// </summary>
+        /// <param name="entity">The document to be inserted</param>
+        /// <returns>The created document</returns>
+        public virtual TEntityType Insert(TEntityType entity)
+        {
+            Collection.InsertOne(entity);
+            return entity;
+        }
+                  
         #endregion
     }
 }
