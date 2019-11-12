@@ -25,8 +25,7 @@ namespace Tools.Net.Mongo.Migrate.Collections
         /// <returns></returns>
         public long Delete(Changelog changelog)
         {
-            var filterDefinition = Builders<Changelog>.Filter.Eq(x => x.Id, changelog.Id);
-            return Delete(filterDefinition);
+            return Delete(x => x.Id, changelog.Id);
         }
     }
 }

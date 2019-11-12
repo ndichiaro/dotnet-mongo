@@ -1,5 +1,8 @@
 ﻿using MongoDB.Driver;
 using NSubstitute;
+using System;
+using System.Linq.Expressions;
+using Tools.Net.Mongo.Core.Extensions;
 using Tools.Net.Mongo.Core.Test.Helpers;
 using Xunit;
 
@@ -25,6 +28,9 @@ namespace Tools.Net.Mongo.Core.Test
             _mongoDatabase = Substitute.For<IMongoDatabase>();
             _mongoCollection = Substitute.For<IMongoCollection<TestEntity>>();
             _testCollection = new MongoDbCollectionTestObj(_context);
+
+            _context.Db.Returns(_mongoDatabase);
+            _mongoDatabase.GetCollection<TestEntity>(Arg.Is<string>("testEntity")).Returns(_mongoCollection);
         }
         #endregion
 
@@ -50,12 +56,34 @@ namespace Tools.Net.Mongo.Core.Test
         [Fact]
         public void CanGetCollection()
         {
-            _context.Db.Returns(_mongoDatabase);
-            _mongoDatabase.GetCollection<TestEntity>(Arg.Is<string>("testEntity")).Returns(_mongoCollection);
-
             var collection = _testCollection.GetMongoCollection();
 
             Assert.Equal(_mongoCollection, collection);
+        }
+
+        /// <summary>
+        /// Tests that a single document can be deleted using an expression
+        /// </summary>
+        [Fact]
+        public void CanDeleteCollectionUsingExpression()
+        {
+            Expression<Func<TestEntity, string>> expression = x => x.FirstProperty;
+            const string value = "hi";
+            const int expectedDeleteCount = 1;
+            var expectedResult = Substitute.For<DeleteResult>();
+            var expectedFilter = Builders<TestEntity>.Filter.Eq(expression, value);
+
+            expectedResult.DeletedCount.Returns(expectedDeleteCount);
+
+            // mock the delete call with the expected filter to return th expected result
+            _mongoCollection.DeleteOne(Arg.Is<FilterDefinition<TestEntity>>(x => 
+                x.ToJson().Equals(expectedFilter.ToJson()))).Returns(expectedResult);
+
+            // call the delete function with the expression and value
+            var actualResult = _testCollection.Delete(expression, value);
+
+            // test that the actual updated count matched the expected deleted count
+            Assert.Equal(expectedDeleteCount, actualResult);
         }
         #endregion
     }

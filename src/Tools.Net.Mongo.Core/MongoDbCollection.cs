@@ -46,6 +46,18 @@ namespace Tools.Net.Mongo.Core
         }
 
         /// <summary>
+        /// Deletes a document by a property value
+        /// </summary>
+        /// <param name="expression">An expression indicating which document property to use</param>
+        /// <param name="value">The value of the property to be deleted</param>
+        /// <returns>The number of documents deleted</returns>
+        public virtual long Delete(Expression<Func<TEntityType, string>> expression, string value)
+        {
+            var filterDefinition = Builders<TEntityType>.Filter.Eq(expression, value);
+            return Delete(filterDefinition);
+        }
+
+        /// <summary>
         /// Inserts a document to a collection
         /// </summary>
         /// <param name="entity">The document to be inserted</param>
