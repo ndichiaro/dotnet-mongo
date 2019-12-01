@@ -62,10 +62,11 @@ namespace Tools.Net.Mongo.Core
         /// <summary>
         /// Deletes a document by a property value
         /// </summary>
+        /// <typeparam name="TValueType">The data type for the MongoDB value</typeparam>
         /// <param name="expression">An expression indicating which document property to use</param>
         /// <param name="value">The value of the property to be deleted</param>
         /// <returns>The number of documents deleted</returns>
-        public virtual long Delete(Expression<Func<TEntityType, string>> expression, string value)
+        public virtual long Delete<TValueType>(Expression<Func<TEntityType, TValueType>> expression, TValueType value)
         {
             var filterDefinition = Builders<TEntityType>.Filter.Eq(expression, value);
             return Delete(filterDefinition);
