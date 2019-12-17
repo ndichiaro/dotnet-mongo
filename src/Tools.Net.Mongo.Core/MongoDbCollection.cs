@@ -102,7 +102,17 @@ namespace Tools.Net.Mongo.Core
             Collection.InsertOne(entity);
             return entity;
         }
-                  
+
+        /// <summary>
+        /// Inserts a set of documents into a collection
+        /// </summary>
+        /// <param name="entities">A set of entities to be inserted</param>
+        /// <returns>The set of entities inserted into the collection </returns>
+        public virtual IEnumerable<TEntityType> Insert(IEnumerable<TEntityType> entities)
+        {
+            Collection.InsertMany(entities);
+            return entities;
+        }
         #endregion
     }
 }

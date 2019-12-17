@@ -122,6 +122,9 @@ namespace Tools.Net.Mongo.Core.Test
             _mongoCollection.Received().Find(expectedFilter);
         }
 
+        /// <summary>
+        /// Test that a document can be found by an expression
+        /// </summary>
         [Fact]
         public void CanFindDocumentWithExpression()
         {
@@ -132,6 +135,28 @@ namespace Tools.Net.Mongo.Core.Test
             // validate the collection find is called with the expected expression
             _mongoCollection.Received().Find(expectedExpression);
 
+        }
+
+        /// <summary>
+        /// Tests that a set of documents can be inserted into a collection
+        /// </summary>
+        [Fact]
+        public void CanInsertManyDocuments()
+        {
+            var testEntity = new TestEntity
+            {
+                FirstProperty = "Test"
+            };
+
+            var entities = new List<TestEntity> { testEntity };
+
+            var result = _testCollection.Insert(entities);
+
+            // ensure the InsertMany method is called with the entity parameter
+            _mongoCollection.Received().InsertMany(entities);
+
+            // validate the inserted entity is returned
+            Assert.Equal(entities, result);
         }
         #endregion
     }
