@@ -1,6 +1,8 @@
 ﻿using MongoDB.Driver;
 using NSubstitute;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq.Expressions;
 using Tools.Net.Mongo.Core.Extensions;
 using Tools.Net.Mongo.Core.Test.Helpers;
@@ -65,7 +67,7 @@ namespace Tools.Net.Mongo.Core.Test
         /// Tests that a single document can be deleted using an expression
         /// </summary>
         [Fact]
-        public void CanDeleteCollectionUsingExpression()
+        public void CanDeleteDocumentUsingExpression()
         {
             Expression<Func<TestEntity, string>> expression = x => x.FirstProperty;
             const string value = "hi";
@@ -104,6 +106,32 @@ namespace Tools.Net.Mongo.Core.Test
 
             // validate the inserted entity is returned
             Assert.Equal(testEntity, result);
+        }
+
+        /// <summary>
+        /// Tests that documents can be found in a collection
+        /// </summary>
+        [Fact]
+        public void CanFindDocument()
+        {
+            var expectedFilter = Builders<TestEntity>.Filter.Eq(x => x.FirstProperty, "hi");
+
+            var actualResult = _testCollection.Find(expectedFilter);
+
+            // validate the collection find is called with the expected expression
+            _mongoCollection.Received().Find(expectedFilter);
+        }
+
+        [Fact]
+        public void CanFindDocumentWithExpression()
+        {
+            Expression<Func<TestEntity, bool>> expectedExpression = x => x.FirstProperty == "hi";
+
+            var actualResult = _testCollection.Find(expectedExpression);
+
+            // validate the collection find is called with the expected expression
+            _mongoCollection.Received().Find(expectedExpression);
+
         }
         #endregion
     }
