@@ -49,18 +49,18 @@ namespace Tools.Net.Mongo.Core
         }
 
         /// <summary>
-        /// Deletes a document
+        /// Deletes one or more documents that match the given filter
         /// </summary>
-        /// <param name="filterDefinition">The filter used to delete a document</param>
+        /// <param name="filterDefinition">The filter used to delete documents</param>
         /// <returns>The number of documents deleted</returns>
         public virtual long Delete(FilterDefinition<TEntityType> filterDefinition)
         {
-            var result = Collection.DeleteOne(filterDefinition);
+            var result = Collection.DeleteMany(filterDefinition);
             return result.DeletedCount;
         }
 
         /// <summary>
-        /// Deletes a document by a property value
+        /// Deletes one or more documents that match the given expression and value
         /// </summary>
         /// <typeparam name="TValueType">The data type for the MongoDB value</typeparam>
         /// <param name="expression">An expression indicating which document property to use</param>
@@ -125,6 +125,12 @@ namespace Tools.Net.Mongo.Core
         {
             var filterDefinition = Builders<TEntityType>.Filter.Eq(expression, value);
             var result = Collection.ReplaceOne(filterDefinition, entity);
+            return result.ModifiedCount;
+        }
+
+        public virtual long Update<TValueType>(FilterDefinition<TEntityType> filterDefinition, UpdateDefinition<TEntityType> updateDefinition)
+        {
+            var result = Collection.UpdateOne(filterDefinition, updateDefinition);
             return result.ModifiedCount;
         }
         #endregion

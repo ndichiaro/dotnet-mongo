@@ -78,7 +78,7 @@ namespace Tools.Net.Mongo.Core.Test
             expectedResult.DeletedCount.Returns(expectedDeleteCount);
 
             // mock the delete call with the expected filter to return th expected result
-            _mongoCollection.DeleteOne(Arg.Is<FilterDefinition<TestEntity>>(x => 
+            _mongoCollection.DeleteMany(Arg.Is<FilterDefinition<TestEntity>>(x => 
                 x.ToJson().Equals(expectedFilter.ToJson()))).Returns(expectedResult);
 
             // call the delete function with the expression and value
