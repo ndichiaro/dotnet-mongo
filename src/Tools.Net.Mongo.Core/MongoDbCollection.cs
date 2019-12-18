@@ -113,6 +113,20 @@ namespace Tools.Net.Mongo.Core
             Collection.InsertMany(entities);
             return entities;
         }
+
+        /// <summary>
+        /// Replaces an entire document in a collection
+        /// </summary>
+        /// <param name="expression">The find expression for the document to be replaced.</param>
+        /// <param name="expression"></param>
+        /// <param name="entity">The entity to replace the document with.</param>
+        /// <returns>The number of documents replaced</returns>
+        public virtual long Replace<TValueType>(Expression<Func<TEntityType, TValueType>> expression, TValueType value, TEntityType entity)
+        {
+            var filterDefinition = Builders<TEntityType>.Filter.Eq(expression, value);
+            var result = Collection.ReplaceOne(filterDefinition, entity);
+            return result.ModifiedCount;
+        }
         #endregion
     }
 }

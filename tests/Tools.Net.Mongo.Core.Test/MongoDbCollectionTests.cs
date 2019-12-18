@@ -158,6 +158,37 @@ namespace Tools.Net.Mongo.Core.Test
             // validate the inserted entity is returned
             Assert.Equal(entities, result);
         }
+
+
+        /// <summary>
+        /// Tests that an entire document can be replaced
+        /// </summary>
+        [Fact]
+        public void CanReplaceDocumentByExpression()
+        {
+            var testEntity = new TestEntity
+            {
+                FirstProperty = "Test"
+            };
+            const int expectedReplaceCount = 1;
+            var expectedResult = Substitute.For<ReplaceOneResult>();
+
+            expectedResult.ModifiedCount.Returns(expectedReplaceCount);
+
+            Expression<Func<TestEntity, string>> expression = x => x.FirstProperty;
+            const string value = "Old";
+
+            var expectedFilter = Builders<TestEntity>.Filter.Eq(expression, value);
+
+            // mock the replace one function to return the expected result
+            _mongoCollection.ReplaceOne(Arg.Is<FilterDefinition<TestEntity>>(x =>
+                x.ToJson().Equals(expectedFilter.ToJson())), testEntity).Returns(expectedResult);
+
+            var result = _testCollection.Replace(expression, value, testEntity);
+
+            // validate the inserted entity is returned
+            Assert.Equal(expectedReplaceCount, result);
+        }
         #endregion
     }
 }
