@@ -51,7 +51,7 @@ namespace Tools.Net.Mongo.Core
         /// <summary>
         /// Deletes one or more documents that match the given filter
         /// </summary>
-        /// <param name="filterDefinition">The filter used to delete documents</param>
+        /// <param name="filterDefinition">The filter used to identify the documents to be deleted</param>
         /// <returns>The number of documents deleted</returns>
         public virtual long Delete(FilterDefinition<TEntityType> filterDefinition)
         {
@@ -128,9 +128,15 @@ namespace Tools.Net.Mongo.Core
             return result.ModifiedCount;
         }
 
-        public virtual long Update<TValueType>(FilterDefinition<TEntityType> filterDefinition, UpdateDefinition<TEntityType> updateDefinition)
+        /// <summary>
+        /// Updates one or more documents that match the given filter
+        /// </summary>
+        /// <param name="filterDefinition">The filter used to identify the documents to be deleted</param>
+        /// <param name="updateDefinition">The definition to identify the update</param>
+        /// <returns></returns>
+        public virtual long Update(FilterDefinition<TEntityType> filterDefinition, UpdateDefinition<TEntityType> updateDefinition)
         {
-            var result = Collection.UpdateOne(filterDefinition, updateDefinition);
+            var result = Collection.UpdateMany(filterDefinition, updateDefinition);
             return result.ModifiedCount;
         }
         #endregion

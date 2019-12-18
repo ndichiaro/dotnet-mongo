@@ -189,6 +189,36 @@ namespace Tools.Net.Mongo.Core.Test
             // validate the inserted entity is returned
             Assert.Equal(expectedReplaceCount, result);
         }
+
+        /// <summary>
+        /// Test that documents can be updated by the expected filter
+        /// and update definitions
+        /// </summary>
+        [Fact]
+        public void CanUpdateDocuments()
+        {
+            const string value = "hi";
+            const int expectedUpdateCount = 1;
+            var expectedResult = Substitute.For<UpdateResult>();
+            var expectedFindFilter = Builders<TestEntity>.Filter.Eq(x => x.FirstProperty, value);
+            var expectedUpdateFilter = Builders<TestEntity>.Update.Set(x => x.FirstProperty, "bye");
+
+            expectedResult.ModifiedCount.Returns(expectedUpdateCount);
+
+            // mock the delete call with the expected filter to return th expected result
+            _mongoCollection.UpdateMany(
+                Arg.Is<FilterDefinition<TestEntity>>(x =>
+                    x.ToJson().Equals(expectedFindFilter.ToJson())),
+                Arg.Is<UpdateDefinition<TestEntity>>(x => 
+                    x.ToJson().Equals(expectedUpdateFilter.ToJson())))
+                .Returns(expectedResult);
+
+            // call the update function with the expression and value
+            var actualResult = _testCollection.Update(expectedFindFilter, expectedUpdateFilter);
+
+            // test that the actual updated count matched the expected updated count
+            Assert.Equal(expectedUpdateCount, actualResult);
+        }
         #endregion
     }
 }
