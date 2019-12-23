@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using Tools.Net.Mongo.Core.Builders;
 using Tools.Net.Mongo.Extensions;
 using Tools.Net.Mongo.Migrate;
 using Tools.Net.Mongo.Migrate.Operations;
@@ -22,7 +21,6 @@ namespace Tools.Net.Mongo.Handlers
         /// <param name = "args" > program arguements</param>
         public void Run(Queue<string> args)
         {
-            var contextBuilder = new MongoDbContextBuilder();
             var executingLocation = Directory.GetCurrentDirectory();
             var projectFile = Directory.GetFiles(executingLocation, "*.csproj");
 
@@ -44,7 +42,7 @@ namespace Tools.Net.Mongo.Handlers
 
             options.ProjectFile = projectFile[0];
 
-            var migrationResult = MigrationRunner.Run(options, contextBuilder);
+            var migrationResult = MigrationRunner.Run(options);
 
             if (migrationResult.Operation == MigrationOperation.Status && migrationResult.IsSuccessful)
             {

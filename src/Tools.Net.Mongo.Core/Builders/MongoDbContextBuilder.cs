@@ -6,7 +6,7 @@ namespace Tools.Net.Mongo.Core.Builders
     /// <summary>
     /// Contains functionality for creating a MongoDB database context
     /// </summary>
-    public class MongoDbContextBuilder : IMongoDbContextBuilder
+    public static class MongoDbContextBuilder
     {
         #region Public Methods
         /// <summary>
@@ -16,7 +16,7 @@ namespace Tools.Net.Mongo.Core.Builders
         /// <returns>An instance of IMongoDbContext</returns>
         /// <exception cref="ArgumentNullException">A connection string is required</exception>
         /// <exception cref="MongoConfigurationException">An invalid MongoDB connection string</exception>
-        public virtual IMongoDbContext Build(string connectionString)
+        public static IMongoDbContext Build(string connectionString)
         {
             if (string.IsNullOrEmpty(connectionString))
             {

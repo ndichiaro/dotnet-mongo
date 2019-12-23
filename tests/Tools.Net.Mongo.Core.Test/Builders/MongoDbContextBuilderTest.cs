@@ -10,17 +10,6 @@ namespace Tools.Net.Mongo.Core.Test.Builders
     /// </summary>
     public class MongoDbContextBuilderTest
     {
-        #region Variables
-        private readonly IMongoDbContextBuilder _mongoDbContextBuilder;
-        #endregion
-
-        #region Constructors
-        public MongoDbContextBuilderTest()
-        {
-            _mongoDbContextBuilder = new MongoDbContextBuilder();
-        }
-        #endregion
-
         #region Test Methods
         /// <summary>
         /// Tests that when a null or empty string is passed and a parameter to 
@@ -32,7 +21,7 @@ namespace Tools.Net.Mongo.Core.Test.Builders
         [InlineData(null)]
         public void HandleNullOrEmptyConnectionString(string connectionString)
         {
-            Assert.Throws<ArgumentNullException>(() => _mongoDbContextBuilder.Build(connectionString));
+            Assert.Throws<ArgumentNullException>(() => MongoDbContextBuilder.Build(connectionString));
         }
 
         /// <summary>
@@ -43,7 +32,7 @@ namespace Tools.Net.Mongo.Core.Test.Builders
         {
             const string connectionString = "mongodb://localhost:27017/testDb";
 
-            var result = _mongoDbContextBuilder.Build(connectionString);
+            var result = MongoDbContextBuilder.Build(connectionString);
 
             Assert.IsType<MongoDbContext>(result);
         }
