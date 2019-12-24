@@ -5,12 +5,16 @@
 
     <PackageOutputPath>./nupkg</PackageOutputPath>
 
+    <Description>A core library for managing MongoDB databases from a .NET application.</Description>
+    <Title>.NET Mongo Core Library</Title>
+    <AssemblyName>Tools.Net.Mongo.Core</AssemblyName>
+    <Authors>Nick DiChiaro</Authors>
     <Copyright>2019</Copyright>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/ndichiaro/dotnet-mongo</PackageProjectUrl>
     <RepositoryUrl>https://github.com/ndichiaro/dotnet-mongo</RepositoryUrl>
-    <PackageReleaseNotes>A library for MongoDB databases in .NET</PackageReleaseNotes>
-    <Authors>Nick DiChiaro</Authors>
+    <PackageReleaseNotes>https://github.com/ndichiaro/dotnet-mongo/releases</PackageReleaseNotes>
+    
   </PropertyGroup>
 
   <ItemGroup>

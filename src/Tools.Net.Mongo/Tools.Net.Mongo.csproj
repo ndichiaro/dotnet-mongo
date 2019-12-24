@@ -7,13 +7,17 @@
     <PackAsTool>true</PackAsTool>
     <ToolCommandName>dotnet-mongo</ToolCommandName>
     <PackageOutputPath>./nupkg</PackageOutputPath>
-    
+
+    <Description>A Global Tool for the dotnet CLI to manage MongoDB databases in .NET.</Description>
+    <Title>.NET Mongo Tool</Title>
+    <AssemblyName>Tools.Net.Mongo</AssemblyName>
+    <Authors>Nick DiChiaro</Authors>
     <Copyright>2019</Copyright>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/ndichiaro/dotnet-mongo</PackageProjectUrl>
     <RepositoryUrl>https://github.com/ndichiaro/dotnet-mongo</RepositoryUrl>
-    <Authors>Nick DiChiaro</Authors>
-    <Description>A Global Tool for the dotnet CLI to manage MongoDB databases in .NET.</Description>
+    <PackageReleaseNotes>https://github.com/ndichiaro/dotnet-mongo/releases</PackageReleaseNotes>
+    
   </PropertyGroup>
 
   <ItemGroup>
