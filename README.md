@@ -17,7 +17,7 @@ dotnet tool install --global Tools.Net.Mongo
 To specify the specific version, use the `--version` tag.
 
 ```
-dotnet tool install --global Tools.Net.Mongo --version 1.0.0
+dotnet tool install --global Tools.Net.Mongo
 ```
 
 
