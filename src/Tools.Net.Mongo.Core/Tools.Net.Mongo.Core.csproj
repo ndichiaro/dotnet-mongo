@@ -25,4 +25,7 @@
     <PackageReference Include="MongoDB.Driver" Version="2.9.1" />
   </ItemGroup>
 
+  <PropertyGroup>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
 </Project>
