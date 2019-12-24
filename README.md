@@ -14,13 +14,6 @@ This package contains a .NET Core Global Tool you can call from the shell/comman
 dotnet tool install --global Tools.Net.Mongo
 ```
 
-To specify the specific version, use the `--version` tag.
-
-```
-dotnet tool install --global Tools.Net.Mongo
-```
-
-
 ## CLI Usage
 
 ```
