@@ -17,7 +17,7 @@ namespace Tools.Net.Mongo.Migrate
         /// </summary>
         /// <param name="options">Migration options</param>
         /// <exception cref="NotSupportedException">Unsupported Migration Options</exception>
-        public static MigrationResult Run(MigrationOptions options, IMongoDbContextBuilder contextBuilder)
+        public static MigrationResult Run(MigrationOptions options)
         {
             IMigrationOperation migrationOperation;
             IMongoDbContext dbContext = null;
@@ -28,7 +28,7 @@ namespace Tools.Net.Mongo.Migrate
             {
                 if (options.Uri != null)
                 {
-                    dbContext = contextBuilder.Build(options.Uri.ConnectionString);
+                    dbContext = MongoDbContextBuilder.Build(options.Uri.ConnectionString);
                 }
                 else
                 {

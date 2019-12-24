@@ -1,15 +1,10 @@
-# .NET Mongo
+# Tools.NET Mongo
 
 ## Overview
 
 A Global Tool for the dotnet CLI to manage MongoDB databases in .NET.
 
-[![Build Status](https://dev.azure.com/councildevelopment/Dot%20Net%20Mongo/_apis/build/status/ndichiaro.dotnet-mongo?branchName=master)](https://dev.azure.com/councildevelopment/Dot%20Net%20Mongo/_build/latest?definitionId=5&branchName=master) 
-
-|                  | Latest |
-| :--:             |  :--:  |
-|  .NET Mongo  |[![Nuget (with prereleases)](https://img.shields.io/nuget/vpre/Tools.Net.Mongo)](https://www.nuget.org/packages/Tools.Net.Mongo)|
-|  .NET Mongo Core |[![Nuget (with prereleases)](https://img.shields.io/nuget/vpre/Tools.Net.Mongo.Core)](https://www.nuget.org/packages/Tools.Net.Mongo.Core)|
+[![Build Status](https://dev.azure.com/councildevelopment/Dot%20Net%20Mongo/_apis/build/status/ndichiaro.dotnet-mongo?branchName=master)](https://dev.azure.com/councildevelopment/Dot%20Net%20Mongo/_build/latest?definitionId=5&branchName=master) [![Nuget (with prereleases)](https://img.shields.io/nuget/vpre/Tools.Net.Mongo)](https://www.nuget.org/packages/Tools.Net.Mongo)
 
 ## Installation
 
@@ -55,7 +50,7 @@ Command Options:
 
 Start by creating a .NET Core or .NET Standard project. Once the project in created, change your shell/command line directory to the directory of the project file.
 
-Next, install the [Tools.Net.Mongo.Core](https://www.nuget.org/packages/Tools.Net.Mongo.Core) package in your project. *Note: The dotnet Mongo tool uses the Mongo Core package for its migrations. If you're receiving build errors after creating a migration, verify the MOngo Core package is installed properly.
+Next, install the [Tools.Net.Mongo.Core](https://github.com/ndichiaro/dotnet-mongo/blob/master/src/Tools.Net.Mongo.Core) package in your project. *Note: The dotnet Mongo tool uses the Mongo Core package for its migrations. If you're receiving build errors after creating a migration, verify the MOngo Core package is installed properly.
 
 ### Migrations
 
