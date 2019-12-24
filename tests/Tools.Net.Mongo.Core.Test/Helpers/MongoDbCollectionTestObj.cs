@@ -9,6 +9,11 @@ namespace Tools.Net.Mongo.Core.Test.Helpers
     public class MongoDbCollectionTestObj : MongoDbCollection<TestEntity>
     {
         /// <summary>
+        /// Exposes the protected collection name for testing purposes
+        /// </summary>
+        public string CollectionNameTestProperty => CollectionName;
+
+        /// <summary>
         /// Creates a MongoDbCollectionTestObj instance
         /// </summary>
         /// <param name="context"></param>

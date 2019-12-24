@@ -46,7 +46,7 @@ namespace Tools.Net.Mongo.Core.Test
         {
             const string expectedName = "testEntity";
 
-            var collectionName = _testCollection.CollectionName;
+            var collectionName = _testCollection.CollectionNameTestProperty;
 
             Assert.Equal(expectedName, collectionName);
         }

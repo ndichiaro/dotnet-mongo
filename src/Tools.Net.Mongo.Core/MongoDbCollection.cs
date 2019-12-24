@@ -27,7 +27,7 @@ namespace Tools.Net.Mongo.Core
         /// The name of the MongoDB collection. By default, this is based on
         /// name of TEntityType in camelcase formatting.
         /// </summary>
-        public virtual string CollectionName
+        protected virtual string CollectionName
         {
             get
             {
