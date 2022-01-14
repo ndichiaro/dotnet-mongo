@@ -20,6 +20,12 @@ variables:
   core-package: $(core-version)$(core-release)
 
 steps:
+- task: UseDotNet@2
+  displayName: Install .NET 6.0
+  inputs:
+    packageType: 'sdk'
+    version: '6.0.x'
+    
 - task: Assembly-Info-NetCore@2
   inputs:
     Path: '$(Build.SourcesDirectory)'
