@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using System.Text;
 
 namespace Tools.Net.Mongo.Handlers
@@ -15,8 +16,11 @@ namespace Tools.Net.Mongo.Handlers
         /// <param name="args"></param>
         public void Run(Queue<string> args)
         {
-            // reset the console window
-            Console.SetWindowPosition(0, 0);
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            {
+                // reset the console window
+                Console.SetWindowPosition(0, 0);
+            }
 
             var helpText = new StringBuilder();
 
