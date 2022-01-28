@@ -16,6 +16,7 @@ namespace Tools.Net.Mongo.Core.Builders
         /// <returns>An instance of IMongoDbContext</returns>
         /// <exception cref="ArgumentNullException">A connection string is required</exception>
         /// <exception cref="MongoConfigurationException">An invalid MongoDB connection string</exception>
+        [Obsolete("Create a context by inheriting from MongoDbContext and calling the connection sring constructor")]
         public static IMongoDbContext Build(string connectionString)
         {
             if (string.IsNullOrEmpty(connectionString))

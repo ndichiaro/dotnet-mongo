@@ -28,7 +28,7 @@ namespace Tools.Net.Mongo.Migrate
             {
                 if (options.Uri != null)
                 {
-                    dbContext = MongoDbContextBuilder.Build(options.Uri.ConnectionString);
+                    dbContext = new MigrationContext(options.Uri.ConnectionString);
                 }
                 else
                 {

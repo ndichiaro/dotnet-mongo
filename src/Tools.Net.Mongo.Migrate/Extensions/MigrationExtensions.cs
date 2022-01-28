@@ -49,9 +49,9 @@ namespace Tools.Net.Mongo.Migrate.Extensions
             );
 
             return Assembly.LoadFrom(projectDll).GetTypes()
-                            .Where(x => x.IsClass && x.Namespace == "Migrations")
-                            .OrderBy(x => x.Name)
-                            .ToList();
+                        .Where(x => x.IsClass && x.Namespace == "Migrations")
+                        .OrderBy(x => x.Name)
+                        .ToList();
         }
 
         /// <summary>
