@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.Loader;
 using Tools.Net.Cli.Driver.Configuration;
 using Tools.Net.Cli.Driver.Tools;
 
@@ -13,6 +14,8 @@ namespace Tools.Net.Mongo.Migrate.Extensions
     /// </summary>
     internal static class MigrationExtensions
     {
+        public static string AppBasePath { get; set; }
+
         /// <summary>
         /// Gets a migration type from a compiled project assembly
         /// </summary>
@@ -31,27 +34,39 @@ namespace Tools.Net.Mongo.Migrate.Extensions
         /// <returns>A list of migration types</returns>
         public static List<Type> GetMigrationTypes(FileInfo fileInfo)
         {
+            var context = new AssemblyLoadContext("migrationContext", true);
+            context.Resolving += Context_Resolving;
+
             // get project framework
             var csProjectFile = CsProjectFileReader.Read(fileInfo.FullName);
             var targetFramework = csProjectFile.TargetFramework;
             // there can be multiple target frameworks. split and pick first
             var framework = targetFramework.Split(';')[0];
 
-            var projectDll = Path.Combine(
+            AppBasePath = Path.Combine(
                 new[]
                 {
                         fileInfo.DirectoryName,
                         "bin",
                         BuildConfiguration.Debug.ToString(),
-                        framework,
+                        framework
+                }
+            );
+
+            var projectDll = Path.Combine(
+                new[]
+                {
+                        AppBasePath,
                         fileInfo.Name.Replace(fileInfo.Extension, ".dll")
                 }
             );
 
-            return Assembly.LoadFrom(projectDll).GetTypes()
-                            .Where(x => x.IsClass && x.Namespace == "Migrations")
-                            .OrderBy(x => x.Name)
-                            .ToList();
+            var implementationTypes = context.LoadFromAssemblyPath(projectDll).GetTypes()
+                        .Where(x => x.IsClass && x.Namespace == "Migrations")
+                        .OrderBy(x => x.Name)
+                        .ToList();
+
+            return implementationTypes;
         }
 
         /// <summary>
@@ -73,6 +88,12 @@ namespace Tools.Net.Mongo.Migrate.Extensions
             // get the remaining migrations
             var position = index + 1;
             return migrations.GetRange(position, migrations.Count - position);
+        }
+
+        private static Assembly Context_Resolving(AssemblyLoadContext context, AssemblyName assemblyName)
+        {
+            var expectedPath = Path.Combine(AppBasePath, assemblyName.Name + ".dll");
+            return context.LoadFromAssemblyPath(expectedPath);
         }
     }
 }
