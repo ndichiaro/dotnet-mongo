@@ -8,10 +8,14 @@
 
   <ItemGroup>
     <None Remove="Helpers\TestProjFile.xml" />
+    <None Remove="Helpers\TestProjFile_TargetFrameworks.xml" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Include="Helpers\TestProjFile.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Helpers\TestProjFile_TargetFrameworks.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

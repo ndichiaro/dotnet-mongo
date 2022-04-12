@@ -2,7 +2,6 @@
 using System.IO;
 using Tools.Net.Cli.Driver;
 using Tools.Net.Cli.Driver.Configuration;
-using Tools.Net.Mongo.Core;
 using Tools.Net.Mongo.Migrate.Collections;
 using Tools.Net.Mongo.Migrate.Extensions;
 using Tools.Net.Mongo.Migrate.Logging;
@@ -15,17 +14,17 @@ namespace Tools.Net.Mongo.Migrate.Operations
     internal class DownMigrationOperation : IMigrationOperation
     {
         private readonly string _projectFile;
-        private readonly IMongoDbContext _mongoDbContext;
+        private readonly MigrationContext _migrationContext;
         private readonly MigrationLogger _logger;
 
         /// <summary>
         /// Creates an DownMigrationOperation instance.
         /// </summary>
-        /// <param name="mongoDbContext">The MongoDB database connection</param>
+        /// <param name="migrationContext">The MongoDB database connection</param>
         /// <param name="projectFile">The absolute path the the project file that migrations are stored</param>
-        public DownMigrationOperation(IMongoDbContext mongoDbContext, string projectFile)
+        public DownMigrationOperation(MigrationContext migrationContext, string projectFile)
         {
-            _mongoDbContext = mongoDbContext;
+            _migrationContext = migrationContext;
             _projectFile = projectFile;
             _logger = MigrationLogger.Instance;
         }
@@ -42,7 +41,7 @@ namespace Tools.Net.Mongo.Migrate.Operations
             string logPath = string.Empty;
 
             // check changelog for the latest migration run
-            var changeLogCollection = new ChangelogCollection(_mongoDbContext);
+            var changeLogCollection = new ChangelogCollection(_migrationContext);
 
             var changeLog = changeLogCollection.All();
             var latestChange = changeLog.GetLatestChange();
@@ -77,7 +76,7 @@ namespace Tools.Net.Mongo.Migrate.Operations
             {
                 var instance = Activator.CreateInstance(migration);
                 isMigrated = (bool)migration.GetMethod("Down")
-                                        .Invoke(instance, new[] { _mongoDbContext.Db });
+                                        .Invoke(instance, new[] { _migrationContext.Db });
             }
             catch (Exception e)
             {
