@@ -2,7 +2,7 @@
 using System.IO;
 using Tools.Net.Cli.Driver;
 using Tools.Net.Cli.Driver.Configuration;
-using Tools.Net.Mongo.Migrate.Collections;
+using Tools.Net.Mongo.Migrate.Respositories;
 using Tools.Net.Mongo.Migrate.Extensions;
 using Tools.Net.Mongo.Migrate.Logging;
 
@@ -41,7 +41,7 @@ namespace Tools.Net.Mongo.Migrate.Operations
             string logPath = string.Empty;
 
             // check changelog for the latest migration run
-            var changeLogCollection = new ChangelogCollection(_migrationContext);
+            var changeLogCollection = new ChangelogRepository(_migrationContext);
 
             var changeLog = changeLogCollection.All();
             var latestChange = changeLog.GetLatestChange();

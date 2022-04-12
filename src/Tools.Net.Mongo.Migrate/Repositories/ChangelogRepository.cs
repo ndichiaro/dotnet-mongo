@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using Tools.Net.Mongo.Migrate.Models;
 
-namespace Tools.Net.Mongo.Migrate.Collections
+namespace Tools.Net.Mongo.Migrate.Respositories
 {
-    internal interface IChangelogCollection
+    internal interface IChangelogRepository
     {
         List<Changelog> All();
         long Delete(Changelog changelog);
@@ -15,14 +15,14 @@ namespace Tools.Net.Mongo.Migrate.Collections
     /// Manages the interaction for the changelog MongoDB
     /// collection
     /// </summary>
-    internal class ChangelogCollection : IChangelogCollection
+    internal class ChangelogRepository : IChangelogRepository
     {
         private readonly MigrationContext _context;
         /// <summary>
         /// Creates an instance of ChangeLogCollection
         /// </summary>
         /// <param name="context">MongoDB database context</param>
-        public ChangelogCollection(MigrationContext context)
+        public ChangelogRepository(MigrationContext context)
         {
             _context = context;
         }
