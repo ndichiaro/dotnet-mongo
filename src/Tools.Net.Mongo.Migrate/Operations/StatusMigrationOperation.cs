@@ -4,7 +4,7 @@ using System.Text;
 using Tools.Net.Cli.Driver;
 using Tools.Net.Cli.Driver.Configuration;
 using Tools.Net.Mongo.Core;
-using Tools.Net.Mongo.Migrate.Collections;
+using Tools.Net.Mongo.Migrate.Respositories;
 using Tools.Net.Mongo.Migrate.Extensions;
 
 namespace Tools.Net.Mongo.Migrate.Operations
@@ -14,17 +14,17 @@ namespace Tools.Net.Mongo.Migrate.Operations
     /// </summary>
     public class StatusMigrationOperation : IMigrationOperation
     {
-        private readonly IMongoDbContext _mongoDbContext;
+        private readonly MigrationContext _migrationContext;
         private readonly string _projectFile;
 
         /// <summary>
         /// Creates an StatusMigrationOperation instance.
         /// </summary>
-        /// <param name="mongoDbContext">The MongoDB database connection</param>
+        /// <param name="migrationContext">The MongoDB database connection</param>
         /// <param name="projectFile">The absolute path the the project file that migrations are stored</param>
-        public StatusMigrationOperation(IMongoDbContext mongoDbContext, string projectFile)
+        public StatusMigrationOperation(MigrationContext migrationContext, string projectFile)
         {
-            _mongoDbContext = mongoDbContext;
+            _migrationContext = migrationContext;
             _projectFile = projectFile;
         }
 
@@ -37,7 +37,7 @@ namespace Tools.Net.Mongo.Migrate.Operations
             var fileInfo = new FileInfo(_projectFile);
 
             // check changelog for the latest migration run
-            var changeLogCollection = new ChangelogCollection(_mongoDbContext);
+            var changeLogCollection = new ChangelogRepository(_migrationContext);
 
             var changeLog = changeLogCollection.All();
             var latestChange = changeLog.GetLatestChange();

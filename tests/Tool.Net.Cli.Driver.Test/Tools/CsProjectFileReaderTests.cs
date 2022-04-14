@@ -48,5 +48,20 @@ namespace Tool.Net.Cli.Driver.Test.Tools
             // expects 'netstandard2.0' based on the test xml file
             Assert.Equal("netstandard2.0", result.TargetFramework);
         }
+
+        /// <summary>
+        /// Tests that a CsProjectFile is created with the specified 
+        /// Target Framework 
+        /// </summary>
+        [Fact]
+        public void CanCreateCsProjectFileWithTargetFrameworks()
+        {
+            const string filePath = @"Helpers\TestProjFile_TargetFrameworks.xml";
+
+            var result = CsProjectFileReader.Read(filePath);
+
+            // expects 'netcoreapp3.1;net5.0;net6.0' based on the test xml file
+            Assert.Equal("netcoreapp3.1;net5.0;net6.0", result.TargetFrameworks);
+        }
     }
 }

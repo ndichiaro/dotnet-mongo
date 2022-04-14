@@ -33,9 +33,7 @@ namespace Tools.Net.Mongo.Migrate.Extensions
         {
             // get project framework
             var csProjectFile = CsProjectFileReader.Read(fileInfo.FullName);
-            var targetFramework = csProjectFile.TargetFramework;
-            // there can be multiple target frameworks. split and pick first
-            var framework = targetFramework.Split(';')[0];
+            var framework = csProjectFile.GetLatestTargetFramework();
 
             var projectDll = Path.Combine(
                 new[]
@@ -49,9 +47,9 @@ namespace Tools.Net.Mongo.Migrate.Extensions
             );
 
             return Assembly.LoadFrom(projectDll).GetTypes()
-                            .Where(x => x.IsClass && x.Namespace == "Migrations")
-                            .OrderBy(x => x.Name)
-                            .ToList();
+                        .Where(x => x.IsClass && x.Namespace == "Migrations")
+                        .OrderBy(x => x.Name)
+                        .ToList();
         }
 
         /// <summary>

@@ -1,7 +1,6 @@
 ﻿using MongoDB.Driver;
 using System;
 using Tools.Net.Mongo.Core;
-using Tools.Net.Mongo.Core.Builders;
 using Tools.Net.Mongo.Migrate.Operations;
 using Tools.Net.Mongo.Migrate.Options;
 
@@ -20,7 +19,7 @@ namespace Tools.Net.Mongo.Migrate
         public static MigrationResult Run(MigrationOptions options)
         {
             IMigrationOperation migrationOperation;
-            IMongoDbContext dbContext = null;
+            MigrationContext dbContext = null;
             string result;
             var isSuccessful = true;
 
@@ -28,7 +27,7 @@ namespace Tools.Net.Mongo.Migrate
             {
                 if (options.Uri != null)
                 {
-                    dbContext = MongoDbContextBuilder.Build(options.Uri.ConnectionString);
+                    dbContext = new MigrationContext(options.Uri.ConnectionString);
                 }
                 else
                 {

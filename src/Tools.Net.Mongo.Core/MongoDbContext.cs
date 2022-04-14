@@ -1,35 +1,50 @@
 ﻿using MongoDB.Driver;
+using System;
 
 namespace Tools.Net.Mongo.Core
 {
     /// <summary>
     /// A MongoDB database connection
     /// </summary>
-    public class MongoDbContext : IMongoDbContext
+    public abstract class MongoDbContext
     {
-        #region Private Variables
         private readonly IMongoClient _client;
         private readonly string _databaseName;
-        #endregion
 
-        #region Properties
         /// <summary>
         /// A MongoDB database instance
         /// </summary>
         public IMongoDatabase Db => _client.GetDatabase(_databaseName);
-        #endregion
 
-        #region Constructors
+
         /// <summary>
-        /// Creates an instance of MongoDbContext
+        /// Creates an instance of MongoDbContext using a valid <see href="https://docs.mongodb.com/upcoming/reference/connection-string/">MongoDB connection string</see>
         /// </summary>
-        /// <param name="client">An instance of a mongo client</param>
-        /// <param name="databaseName">The name of the database to connection to</param>
-        public MongoDbContext(IMongoClient client, string databaseName)
+        /// <param name="connectionString">A valid MongoDB connection string 
+        /// </param>
+        protected MongoDbContext(string connectionString)
         {
-            _client = client;
-            _databaseName = databaseName;
+            if (string.IsNullOrEmpty(connectionString))
+            {
+                throw new ArgumentNullException(nameof(connectionString));
+            }
+
+            var mongoUrl = new MongoUrl(connectionString);
+            _client = new MongoClient(mongoUrl);
+            _databaseName = mongoUrl.DatabaseName;
+
+            this.Initialize(Db);
+
+            OnModelCreating();
         }
-        #endregion
+
+        /// <summary>
+        /// By default this method does nothing but it can be overridden to apply
+        /// specific configuration to the collection models
+        /// </summary>
+        protected virtual void OnModelCreating()
+        {
+
+        }
     }
 }

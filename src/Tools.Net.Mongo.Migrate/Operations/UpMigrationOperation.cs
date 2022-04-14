@@ -3,8 +3,7 @@ using System.IO;
 using System.Text;
 using Tools.Net.Cli.Driver;
 using Tools.Net.Cli.Driver.Configuration;
-using Tools.Net.Mongo.Core;
-using Tools.Net.Mongo.Migrate.Collections;
+using Tools.Net.Mongo.Migrate.Respositories;
 using Tools.Net.Mongo.Migrate.Extensions;
 using Tools.Net.Mongo.Migrate.Logging;
 using Tools.Net.Mongo.Migrate.Models;
@@ -16,18 +15,18 @@ namespace Tools.Net.Mongo.Migrate.Operations
     /// </summary>
     internal class UpMigrationOperation : IMigrationOperation
     {
-        private readonly IMongoDbContext _mongoDbContext;
+        private readonly MigrationContext _migrationContext;
         private readonly string _projectFile;
         private readonly MigrationLogger _logger;
 
         /// <summary>
         /// Creates an UpMigrationOperation instance.
         /// </summary>
-        /// <param name="mongoDbContext">The MongoDB database connection</param>
+        /// <param name="migrationContext">The MongoDB database connection</param>
         /// <param name="projectFile">The absolute path the the project file that migrations are stored</param>
-        public UpMigrationOperation(IMongoDbContext mongoDbContext, string projectFile)
+        public UpMigrationOperation(MigrationContext migrationContext, string projectFile)
         {
-            _mongoDbContext = mongoDbContext;
+            _migrationContext = migrationContext;
             _projectFile = projectFile;
             _logger = MigrationLogger.Instance;
         }
@@ -42,7 +41,7 @@ namespace Tools.Net.Mongo.Migrate.Operations
             var fileInfo = new FileInfo(_projectFile);
 
             // check changelog for the latest migration run
-            var changeLogCollection = new ChangelogCollection(_mongoDbContext);
+            var changeLogCollection = new ChangelogRepository(_migrationContext);
 
             var changeLog = changeLogCollection.All();
             var latestChange = changeLog.GetLatestChange();
@@ -92,7 +91,7 @@ namespace Tools.Net.Mongo.Migrate.Operations
                 {
                     var instance = Activator.CreateInstance(migration);
                     isMigrated = (bool)migration.GetMethod("Up")
-                                            .Invoke(instance, new[] { _mongoDbContext.Db });
+                                            .Invoke(instance, new[] { _migrationContext.Db });
                 }
                 catch(Exception e)
                 {
