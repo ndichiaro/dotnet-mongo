@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Tools.Net.Cli.Driver.Configuration;
 using Tools.Net.Cli.Driver.Tools;
 
@@ -47,7 +48,7 @@ namespace Tools.Net.Mongo.Migrate.Extensions
             );
 
             return Assembly.LoadFrom(projectDll).GetTypes()
-                        .Where(x => x.IsClass && x.Namespace == "Migrations")
+                        .Where(x => x.IsClass && x.Namespace == "Migrations" && x.IsPublic)
                         .OrderBy(x => x.Name)
                         .ToList();
         }

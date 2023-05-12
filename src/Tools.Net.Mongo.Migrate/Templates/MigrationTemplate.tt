@@ -14,7 +14,7 @@ using MongoDB.Driver;
 
 namespace Migrations
 {
-	public class <#= _className #>s
+	public class <#= _className #>
     {
 		/// <summary>
         /// Downgrades a MongoDB database
