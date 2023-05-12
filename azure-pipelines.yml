@@ -12,20 +12,20 @@ pool:
 
 variables:
   buildConfiguration: 'Release'
-  version: 1.4.0
+  version: 1.5.0
   release: 
   package: $(version)$(release)
-  core-version: 3.1.0
+  core-version: 3.2.0
   core-release: 
   core-package: $(core-version)$(core-release)
 
 steps:
 - task: UseDotNet@2
-  displayName: Install .NET 6.0
+  displayName: Install .NET 7.0
   inputs:
     packageType: 'sdk'
-    version: '6.0.x'
-    
+    version: '7.0.x'
+
 - task: Assembly-Info-NetCore@2
   inputs:
     Path: '$(Build.SourcesDirectory)'
