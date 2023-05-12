@@ -29,7 +29,7 @@ namespace Tool.Net.Cli.Driver.Test.Tools
         [Fact]
         public void HandleNoProjectFileDirectory()
         {
-            const string filePath = @"test\test.xml";
+            var filePath = Path.Combine("test", "test.xml");
 
             Assert.Throws<DirectoryNotFoundException>(() => CsProjectFileReader.Read(filePath));
         }
@@ -41,7 +41,7 @@ namespace Tool.Net.Cli.Driver.Test.Tools
         [Fact]
         public void CanCreateCsProjectFileWithTargetFramework()
         {
-            const string filePath = @"Helpers\TestProjFile.xml";
+            var filePath = Path.Combine("Helpers", "TestProjFile.xml");
 
             var result = CsProjectFileReader.Read(filePath);
 
@@ -56,7 +56,7 @@ namespace Tool.Net.Cli.Driver.Test.Tools
         [Fact]
         public void CanCreateCsProjectFileWithTargetFrameworks()
         {
-            const string filePath = @"Helpers\TestProjFile_TargetFrameworks.xml";
+            var filePath = Path.Combine("Helpers", "TestProjFile_TargetFrameworks.xml");
 
             var result = CsProjectFileReader.Read(filePath);
 
