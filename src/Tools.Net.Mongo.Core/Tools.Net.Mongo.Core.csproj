@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.1;net5.0;net6.0;net7.0</TargetFrameworks>
-
+    <Version>3.2.0</Version>
     <PackageOutputPath>./nupkg</PackageOutputPath>
 
     <Description>A core library for managing MongoDB databases from a .NET application.</Description>
