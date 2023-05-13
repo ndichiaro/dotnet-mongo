@@ -3,7 +3,7 @@
 
 name: Publish Tool .NET Mongo
 
-on: workflow_dispatch:
+on: workflow_dispatch
 
 jobs:
   publish:
