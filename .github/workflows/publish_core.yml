@@ -3,11 +3,7 @@
 
 name: Publish Tool .NET Mongo Core
 
-on:
-  push:
-    branches: [ "main" ]
-    paths: 
-       - './src/Tools.Net.Mongo.Core/**'
+on: workflow_dispatch:
 
 jobs:
   publish:
