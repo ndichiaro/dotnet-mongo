@@ -16,12 +16,14 @@
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/ndichiaro/dotnet-mongo</PackageProjectUrl>
     <RepositoryUrl>https://github.com/ndichiaro/dotnet-mongo</RepositoryUrl>
-    <PackageReleaseNotes>https://github.com/ndichiaro/dotnet-mongo/releases</PackageReleaseNotes>
+    <PackageReleaseNotes>https://github.com/ndichiaro/dotnet-mongo/releases/tag/v1.5.0</PackageReleaseNotes>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
     
   </PropertyGroup>
 
   <ItemGroup>
     <None Include="LICENSE" Pack="true" PackagePath="" />
+    <None Include="..\..\README.md" Pack="true" PackagePath="" />
   </ItemGroup>
   
   <ItemGroup>

@@ -1,15 +1,18 @@
 # This workflow will build a .NET project
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
 
-name: Publish
+name: Publish Tool .NET Mongo Core
 
 on:
   push:
     branches: [ "main" ]
+    paths: 
+       - './src/Tools.Net.Mongo.Core/**'
 
 jobs:
   publish:
 
+    name: Publish Core
     runs-on: ubuntu-latest
 
     steps:
@@ -32,18 +35,10 @@ jobs:
     - name: Test
       run: dotnet test --no-build --verbosity normal --configuration Release
   
-    - name: Pack Tool
+    - name: Pack
       run: dotnet pack
-      working-directory: ./src/Tools.Net.Mongo
-      
-    - name: Publish Tool
+      working-directory: './src/Tools.Net.Mongo.Core'
+
+    - name: Publish
       run: nuget push *.nupkg -Source 'https://api.nuget.org/v3/index.json' -ApiKey ${{secrets.NUGET_API_KEY}}
-      working-directory: ./src/Tools.Net.Mongo/nupkg
-      
-    - name: Pack Core
-      run: dotnet pack
-      working-directory: ./src/Tools.Net.Mongo.Core
-      
-    - name: Publish Core
-      run: nuget push *.nupkg -Source 'https://api.nuget.org/v3/index.json' -ApiKey ${{secrets.NUGET_API_KEY}}
-      working-directory: ./src/Tools.Net.Mongo.Core/nupkg
+      working-directory: './src/Tools.Net.Mongo.Core/nupkg'
