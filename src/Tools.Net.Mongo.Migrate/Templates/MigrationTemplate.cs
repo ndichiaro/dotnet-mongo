@@ -27,7 +27,6 @@ namespace Tools.Net.Mongo.Migrate.Templates {
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using Tools.Net.Mongo.Core;
 using MongoDB.Driver;
 
 namespace Migrations
