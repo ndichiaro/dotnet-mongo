@@ -8,10 +8,10 @@
     <PackageReference Include="Microsoft.CodeAnalysis" Version="3.2.1" />
     <PackageReference Include="System.CodeDom" Version="4.5.0" />
     <PackageReference Include="System.Runtime.Loader" Version="4.3.0" />
+    <PackageReference Include="Tools.Net.Mongo.Core" Version="3.3.0" />
   </ItemGroup>
   
   <ItemGroup>
-    <ProjectReference Include="..\Tools.Net.Mongo.Core\Tools.Net.Mongo.Core.csproj" />
     <ProjectReference Include="..\Tools.Net.Cli.Driver\Tools.Net.Cli.Driver.csproj" />
   </ItemGroup>
 

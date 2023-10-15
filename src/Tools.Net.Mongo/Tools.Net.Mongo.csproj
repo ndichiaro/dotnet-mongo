@@ -3,7 +3,7 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFrameworks>net6.0;net7.0</TargetFrameworks>
-    <Version>1.6.0</Version>
+    <Version>1.6.1</Version>
     <PackAsTool>true</PackAsTool>
     <ToolCommandName>dotnet-mongo</ToolCommandName>
     <PackageOutputPath>./nupkg</PackageOutputPath>
@@ -16,7 +16,7 @@
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/ndichiaro/dotnet-mongo</PackageProjectUrl>
     <RepositoryUrl>https://github.com/ndichiaro/dotnet-mongo</RepositoryUrl>
-    <PackageReleaseNotes>https://github.com/ndichiaro/dotnet-mongo/releases/tag/v1.6.0</PackageReleaseNotes>
+    <PackageReleaseNotes>https://github.com/ndichiaro/dotnet-mongo/releases/tag/1.6.1</PackageReleaseNotes>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     
   </PropertyGroup>
