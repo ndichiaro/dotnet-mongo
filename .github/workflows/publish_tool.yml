@@ -19,9 +19,6 @@ jobs:
       with:
         dotnet-version: 9.0.x
         
-    - name: Setup NuGet
-      uses: NuGet/setup-nuget@v2.0.0
-    
     - name: Restore dependencies
       run: dotnet restore
     
@@ -36,6 +33,6 @@ jobs:
       working-directory: './src/Tools.Net.Mongo'
       
     - name: Publish
-      run: nuget push *.nupkg -Source 'https://api.nuget.org/v3/index.json' -ApiKey ${{secrets.NUGET_API_KEY}}
+      run: dotnet nuget push *.nupkg -Source 'https://api.nuget.org/v3/index.json' -ApiKey ${{secrets.NUGET_API_KEY}}
       working-directory: './src/Tools.Net.Mongo/nupkg'
       
