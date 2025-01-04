@@ -20,7 +20,7 @@ jobs:
         dotnet-version: 9.0.x
         
     - name: Setup NuGet
-      uses: NuGet/setup-nuget@v1.2.0
+      uses: NuGet/setup-nuget@v2.0.0
     
     - name: Restore dependencies
       run: dotnet restore
