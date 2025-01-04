@@ -4,7 +4,7 @@
 
 A core library for managing MongoDB databases from a .NET application
 
-[![Build Status](https://dev.azure.com/councildevelopment/Dot%20Net%20Mongo/_apis/build/status/ndichiaro.dotnet-mongo?branchName=main)](https://dev.azure.com/councildevelopment/Dot%20Net%20Mongo/_build/latest?definitionId=5&branchName=main) [![Nuget (with prereleases)](https://img.shields.io/nuget/vpre/Tools.Net.Mongo.Core)](https://www.nuget.org/packages/Tools.Net.Mongo.Core)
+[![Nuget (with prereleases)](https://img.shields.io/nuget/vpre/Tools.Net.Mongo.Core)](https://www.nuget.org/packages/Tools.Net.Mongo.Core)
 
 ## Getting Started
 

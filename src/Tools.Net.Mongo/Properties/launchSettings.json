@@ -2,8 +2,8 @@
   "profiles": {
     "Tools.Net.Mongo": {
       "commandName": "Project",
-      "commandLineArgs": "migrate down -i mongodb://localhost:27017/twdDb",
-      "workingDirectory": "../Tools.Net.Mongo.Migrate"
+      "commandLineArgs": "migrate up -i mongodb://localhost:27017/twdDb",
+      "workingDirectory": "../tests/Demo.App"
     }
   }
 }

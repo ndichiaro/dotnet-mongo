@@ -5,14 +5,27 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": ".NET Core Launch (console)",
+      "name": ".NET Core Launch (net9)",
       "type": "coreclr",
       "request": "launch",
       "preLaunchTask": "build",
       // If you have changed target frameworks, make sure to update the program path.
-      "program": "${workspaceFolder}/src/Tools.Net.Mongo/bin/Debug/net7.0/Tools.Net.Mongo.dll",
-      "args": [],
-      "cwd": "${workspaceFolder}/src/Tools.Net.Mongo",
+      "program": "${workspaceFolder}/src/Tools.Net.Mongo/bin/Debug/net9.0/Tools.Net.Mongo.dll",
+      "args": ["migrate", "up", "-i", "mongodb://localhost:27017/demoDb"],
+      "cwd": "${workspaceFolder}/tests/Demo.App",
+      // For more information about the 'console' field, see https://aka.ms/VSCode-CS-LaunchJson-Console
+      "console": "internalConsole",
+      "stopAtEntry": false
+    },
+    {
+      "name": ".NET Core Launch (net8)",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build",
+      // If you have changed target frameworks, make sure to update the program path.
+      "program": "${workspaceFolder}/src/Tools.Net.Mongo/bin/Debug/net8.0/Tools.Net.Mongo.dll",
+      "args": ["migrate", "up", "-i", "mongodb://localhost:27017/demoDb"],
+      "cwd": "${workspaceFolder}/tests/Demo.App",
       // For more information about the 'console' field, see https://aka.ms/VSCode-CS-LaunchJson-Console
       "console": "internalConsole",
       "stopAtEntry": false

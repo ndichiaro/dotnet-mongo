@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFrameworks>net6.0;net7.0</TargetFrameworks>
-    <Version>1.6.1</Version>
+    <TargetFrameworks>net8.0;net9.0</TargetFrameworks>
+    <Version>1.7.0</Version>
     <PackAsTool>true</PackAsTool>
     <ToolCommandName>dotnet-mongo</ToolCommandName>
     <PackageOutputPath>./nupkg</PackageOutputPath>
@@ -12,7 +12,7 @@
     <Title>.NET Mongo Tool</Title>
     <AssemblyName>Tools.Net.Mongo</AssemblyName>
     <Authors>Nick DiChiaro</Authors>
-    <Copyright>2023</Copyright>
+    <Copyright>2025</Copyright>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/ndichiaro/dotnet-mongo</PackageProjectUrl>
     <RepositoryUrl>https://github.com/ndichiaro/dotnet-mongo</RepositoryUrl>
