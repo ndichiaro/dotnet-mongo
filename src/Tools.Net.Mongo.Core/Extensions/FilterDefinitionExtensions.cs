@@ -31,7 +31,9 @@ namespace Tools.Net.Mongo.Core.Extensions
         {
             var serializerRegistry = BsonSerializer.SerializerRegistry;
             var documentSerializer = serializerRegistry.GetSerializer<T>();
-            return filter.Render(documentSerializer, serializerRegistry);
+
+            var renderArgs = new RenderArgs<T>(documentSerializer, serializerRegistry);
+            return filter.Render(renderArgs);
         }
     }
 }
