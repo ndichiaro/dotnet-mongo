@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFrameworks>net8.0;net9.0</TargetFrameworks>
-    <Version>3.4.0</Version>
+    <Version>3.5.0</Version>
     <PackageOutputPath>./nupkg</PackageOutputPath>
 
     <Description>A core library for managing MongoDB databases from a .NET application.</Description>
@@ -13,7 +13,7 @@
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/ndichiaro/dotnet-mongo</PackageProjectUrl>
     <RepositoryUrl>https://github.com/ndichiaro/dotnet-mongo</RepositoryUrl>
-    <PackageReleaseNotes>https://github.com/ndichiaro/dotnet-mongo/releases/tag/v3.3.0</PackageReleaseNotes>
+    <PackageReleaseNotes>https://github.com/ndichiaro/dotnet-mongo/releases/tag/v3.4.0</PackageReleaseNotes>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     
   </PropertyGroup>
@@ -24,7 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="MongoDB.Driver" Version="2.21.0" />
+    <PackageReference Include="MongoDB.Driver" Version="3.5.0" />
   </ItemGroup>
 
   <PropertyGroup>
