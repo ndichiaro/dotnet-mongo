@@ -3,10 +3,10 @@ using System.IO;
 using System.Text;
 using Tools.Net.Cli.Driver;
 using Tools.Net.Cli.Driver.Configuration;
-using Tools.Net.Mongo.Migrate.Respositories;
 using Tools.Net.Mongo.Migrate.Extensions;
 using Tools.Net.Mongo.Migrate.Logging;
 using Tools.Net.Mongo.Migrate.Models;
+using Tools.Net.Mongo.Migrate.Repositories;
 
 namespace Tools.Net.Mongo.Migrate.Operations
 {
