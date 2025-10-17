@@ -262,5 +262,8 @@ __pycache__/
 
 Migrations/
 
+# Allow test data migrations to be tracked
+!tests/Tools.Net.Mongo.E2E.Test/TestData/**/Migrations/
+
 # MAC
 .DS_Store

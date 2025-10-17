@@ -130,3 +130,12 @@ PS C:\Repositories\demo\Tools.Mongo.Demo> dotnet mongo migrate status --uri mong
 | M201908311227533_MigrationDemo | PENDING    |
 +--------------------------------+------------+
 ```
+
+## Development & Testing
+
+For information about running tests and contributing to this project, see:
+
+- **[End-to-End Testing Guide](docs/E2E-TESTING.md)** - Comprehensive guide for running E2E tests in Docker containers
+- **[Tests Directory](tests/)** - Unit tests and integration tests for all components
+
+The project includes a full Docker-based E2E testing suite that validates the migration tool in containerized environments with real MongoDB instances.
