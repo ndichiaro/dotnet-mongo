@@ -1,0 +1,63 @@
+services:
+  mongodb:
+    image: mongo:7.0
+    container_name: migration-test-mongodb
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: password123
+      MONGO_INITDB_DATABASE: testdb
+    ports:
+      - "27018:27017"
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - migration-network
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  migration-tool:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.migration-tool
+    container_name: migration-test-tool
+    environment:
+      - MONGO_CONNECTION_STRING=mongodb://root:password123@mongodb:27017/testdb?authSource=admin
+    depends_on:
+      mongodb:
+        condition: service_healthy
+    networks:
+      - migration-network
+    volumes:
+      - ../tests/Demo.App:/workspace
+    working_dir: /workspace
+    # Keep container running for testing
+    command: tail -f /dev/null
+
+  e2e-tests:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.e2e-tests
+    container_name: migration-e2e-tests
+    environment:
+      - MONGO_CONNECTION_STRING=mongodb://root:password123@mongodb:27017/testdb?authSource=admin
+    depends_on:
+      mongodb:
+        condition: service_healthy
+      migration-tool:
+        condition: service_started
+    networks:
+      - migration-network
+    volumes:
+      - ../tests:/tests
+      - ../src:/src
+    working_dir: /tests
+
+volumes:
+  mongodb_data:
+
+networks:
+  migration-network:
+    driver: bridge

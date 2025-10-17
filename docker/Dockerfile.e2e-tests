@@ -1,0 +1,46 @@
+# Dockerfile for E2E tests
+FROM mcr.microsoft.com/dotnet/sdk:9.0
+
+WORKDIR /app
+
+# Install MongoDB shell for database operations
+RUN apt-get update && apt-get install -y wget gnupg && \
+    wget -qO - https://www.mongodb.org/static/pgp/server-7.0.asc | apt-key add - && \
+    echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/7.0 multiverse" | tee /etc/apt/sources.list.d/mongodb-org-7.0.list && \
+    apt-get update && \
+    apt-get install -y mongodb-mongosh && \
+    rm -rf /var/lib/apt/lists/*
+
+# Copy solution and project files for caching
+COPY ../Tools.Net.Mongo.sln ./
+COPY ../src/Tools.Net.Mongo/Tools.Net.Mongo.csproj ./src/Tools.Net.Mongo/
+COPY ../src/Tools.Net.Mongo.Core/Tools.Net.Mongo.Core.csproj ./src/Tools.Net.Mongo.Core/
+COPY ../src/Tools.Net.Mongo.Migrate/Tools.Net.Mongo.Migrate.csproj ./src/Tools.Net.Mongo.Migrate/
+COPY ../src/Tools.Net.Cli.Driver/Tools.Net.Cli.Driver.csproj ./src/Tools.Net.Cli.Driver/
+COPY ../tests/Tools.Net.Mongo.E2E.Test/Tools.Net.Mongo.E2E.Test.csproj ./tests/Tools.Net.Mongo.E2E.Test/
+COPY ../tests/Tools.Net.Mongo.Core.Test/Tools.Net.Mongo.Core.Test.csproj ./tests/Tools.Net.Mongo.Core.Test/
+COPY ../tests/Tools.Net.Mongo.Migrate.Test/Tools.Net.Mongo.Migrate.Test.csproj ./tests/Tools.Net.Mongo.Migrate.Test/
+COPY ../tests/Tool.Net.Cli.Driver.Test/Tool.Net.Cli.Driver.Test.csproj ./tests/Tool.Net.Cli.Driver.Test/
+COPY ../tests/Demo.App/Demo.App.csproj ./tests/Demo.App/
+
+# Restore dependencies
+RUN dotnet restore
+
+# Copy source code
+COPY ../src/ ./src/
+COPY ../tests/ ./tests/
+
+# Build the solution (restore again to ensure all dependencies after copying source)
+RUN dotnet restore
+RUN dotnet build -c Release --no-restore
+
+# Copy TestData to the expected location in the build output
+RUN mkdir -p /app/tests/Tools.Net.Mongo.E2E.Test/bin/Release/net9.0/TestData/SampleProject && \
+    cp -r /app/tests/Tools.Net.Mongo.E2E.Test/TestData/SampleProject/* /app/tests/Tools.Net.Mongo.E2E.Test/bin/Release/net9.0/TestData/SampleProject/
+
+# Build and copy the migration tool to be available for tests
+RUN dotnet publish src/Tools.Net.Mongo/Tools.Net.Mongo.csproj -c Release -f net9.0 -o /app/migration-tool --no-restore && \
+    cp -r /app/migration-tool/* /app/tests/Tools.Net.Mongo.E2E.Test/bin/Release/net9.0/TestData/SampleProject/
+
+# Set the entrypoint to run tests
+ENTRYPOINT ["dotnet", "test", "/app/tests/Tools.Net.Mongo.E2E.Test/Tools.Net.Mongo.E2E.Test.csproj", "--no-build", "-c", "Release", "--logger", "console;verbosity=detailed"]
