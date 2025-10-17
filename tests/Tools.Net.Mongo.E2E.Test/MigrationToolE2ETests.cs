@@ -1,6 +1,7 @@
 using System;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using FluentAssertions;
 using MongoDB.Bson;
@@ -239,6 +240,76 @@ public class MigrationToolE2ETests(ITestOutputHelper output)
         // Assert
         result.ExitCode.Should().Be(0, "Version command should succeed");
         result.Output.Should().NotBeEmpty("Version should return information");
+    }
+
+    [Fact]
+    public async Task CanCreateNewMigration_GeneratesMigrationFile()
+    {
+        // Arrange
+        var tempDirectory = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
+        Directory.CreateDirectory(tempDirectory);
+        
+        // Copy the entire test project to temp directory to ensure all dependencies are available
+        CopyDirectory(_testDataPath, tempDirectory);
+        
+        var migrationsDir = Path.Combine(tempDirectory, "Migrations");
+        var migrationName = "TestMigration";
+
+        // Get the initial count of migration files
+        var initialFiles = Directory.Exists(migrationsDir) ? Directory.GetFiles(migrationsDir, "*.cs") : new string[0];
+
+        try
+        {
+            // Act
+            var result = await RunMigrationToolAsync(["migrate", "create", migrationName], tempDirectory);
+
+            // Assert
+            result.ExitCode.Should().Be(0, $"Create command should succeed. Output: {result.Output}, Error: {result.Error}");
+            result.Output.Should().Contain("Created:", "Should indicate migration was created");
+
+            // Verify migration file was created
+            var currentFiles = Directory.GetFiles(migrationsDir, "*.cs");
+            currentFiles.Should().HaveCount(initialFiles.Length + 1, "Exactly one new migration file should be created");
+
+            var newFiles = currentFiles.Except(initialFiles).ToArray();
+            newFiles.Should().HaveCount(1, "Should have exactly one new file");
+
+            var createdFile = newFiles.First();
+            Path.GetFileName(createdFile).Should().Contain(migrationName, "Migration file name should contain the specified name");
+
+            // Verify file content
+            var fileContent = await File.ReadAllTextAsync(createdFile);
+            fileContent.Should().Contain("public class", "Migration should contain a class definition");
+            fileContent.Should().Contain("public bool Up(", "Migration should contain Up method");
+            fileContent.Should().Contain("public bool Down(", "Migration should contain Down method");
+            fileContent.Should().Contain(migrationName, "Migration class should contain the specified name");
+        }
+        finally
+        {
+            if (Directory.Exists(tempDirectory))
+            {
+                Directory.Delete(tempDirectory, true);
+            }
+        }
+    }
+
+    private static void CopyDirectory(string sourceDir, string targetDir)
+    {
+        Directory.CreateDirectory(targetDir);
+
+        foreach (var file in Directory.GetFiles(sourceDir))
+        {
+            var fileName = Path.GetFileName(file);
+            var targetFile = Path.Combine(targetDir, fileName);
+            File.Copy(file, targetFile);
+        }
+
+        foreach (var directory in Directory.GetDirectories(sourceDir))
+        {
+            var dirName = Path.GetFileName(directory);
+            var targetSubDir = Path.Combine(targetDir, dirName);
+            CopyDirectory(directory, targetSubDir);
+        }
     }
 
     private async Task<ProcessResult> RunMigrationToolAsync(string[] args, string workingDirectory)
