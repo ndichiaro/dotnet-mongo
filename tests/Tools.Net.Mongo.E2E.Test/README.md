@@ -50,27 +50,27 @@ The E2E test suite validates the migration tool functionality in a containerized
 
 ```bash
 # Build and start the environment
-docker-compose -f docker/docker-compose.e2e.yml build
-docker-compose -f docker/docker-compose.e2e.yml up -d mongodb migration-tool
+docker compose -f docker/docker-compose.e2e.yml build
+docker compose -f docker/docker-compose.e2e.yml up -d mongodb migration-tool
 
 # Wait for MongoDB to be ready
-docker-compose -f docker/docker-compose.e2e.yml exec mongodb mongosh --eval "db.adminCommand('ping')"
+docker compose -f docker/docker-compose.e2e.yml exec mongodb mongosh --eval "db.adminCommand('ping')"
 
 # Run the tests
-docker-compose -f docker/docker-compose.e2e.yml run --rm e2e-tests
+docker compose -f docker/docker-compose.e2e.yml run --rm e2e-tests
 
 # Cleanup
-docker-compose -f docker/docker-compose.e2e.yml down -v
+docker compose -f docker/docker-compose.e2e.yml down -v
 ```
 
 ### Individual Test Execution
 
 ```bash
 # Run specific test class
-docker-compose -f docker/docker-compose.e2e.yml run --rm e2e-tests dotnet test --filter "ClassName=MigrationToolE2ETests"
+docker compose -f docker/docker-compose.e2e.yml run --rm e2e-tests dotnet test --filter "ClassName=MigrationToolE2ETests"
 
 # Run specific test method
-docker-compose -f docker/docker-compose.e2e.yml run --rm e2e-tests dotnet test --filter "MethodName=CanRunMigrationUp_WithSuccessfulResult"
+docker compose -f docker/docker-compose.e2e.yml run --rm e2e-tests dotnet test --filter "MethodName=CanRunMigrationUp_WithSuccessfulResult"
 ```
 
 ## Test Scenarios Covered
@@ -130,22 +130,22 @@ The E2E tests are designed to be easily integrated into CI/CD pipelines:
 1. **MongoDB not ready**: Increase timeout in the test runner script
 2. **Port conflicts**: Ensure port 27017 is available
 3. **Docker permissions**: Ensure Docker daemon is accessible
-4. **Test failures**: Check container logs with `docker-compose logs`
+4. **Test failures**: Check container logs with `docker compose logs`
 
 ### Debugging
 
 ```bash
 # View MongoDB logs
-docker-compose -f docker/docker-compose.e2e.yml logs mongodb
+docker compose -f docker/docker-compose.e2e.yml logs mongodb
 
 # View migration tool logs
-docker-compose -f docker/docker-compose.e2e.yml logs migration-tool
+docker compose -f docker/docker-compose.e2e.yml logs migration-tool
 
 # View test logs
-docker-compose -f docker/docker-compose.e2e.yml logs e2e-tests
+docker compose -f docker/docker-compose.e2e.yml logs e2e-tests
 
 # Connect to MongoDB shell
-docker-compose -f docker/docker-compose.e2e.yml exec mongodb mongosh -u root -p password123 --authenticationDatabase admin
+docker compose -f docker/docker-compose.e2e.yml exec mongodb mongosh -u root -p password123 --authenticationDatabase admin
 ```
 
 ## Benefits

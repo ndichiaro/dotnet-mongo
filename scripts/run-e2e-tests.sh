@@ -18,7 +18,7 @@ echo "📁 Project root: $PROJECT_ROOT"
 # Function to cleanup containers
 cleanup() {
     echo "🧹 Cleaning up containers..."
-    docker-compose -f docker/docker-compose.e2e.yml down -v --remove-orphans
+    docker compose -f docker/docker-compose.e2e.yml down -v --remove-orphans
 }
 
 # Set trap to cleanup on exit
@@ -26,16 +26,16 @@ trap cleanup EXIT
 
 # Build and start the test environment
 echo "🔨 Building test environment..."
-docker-compose -f docker/docker-compose.e2e.yml build
+docker compose -f docker/docker-compose.e2e.yml build
 
 echo "🐳 Starting MongoDB and migration tool containers..."
-docker-compose -f docker/docker-compose.e2e.yml up -d mongodb migration-tool
+docker compose -f docker/docker-compose.e2e.yml up -d mongodb migration-tool
 
 # Wait for MongoDB to be ready
 echo "⏳ Waiting for MongoDB to be ready..."
 retries=60
 while [ $retries -gt 0 ]; do
-    if docker-compose -f docker/docker-compose.e2e.yml exec mongodb mongosh -u root -p password123 --authenticationDatabase admin --eval "db.adminCommand('ping')" > /dev/null 2>&1; then
+    if docker compose -f docker/docker-compose.e2e.yml exec mongodb mongosh -u root -p password123 --authenticationDatabase admin --eval "db.adminCommand('ping')" > /dev/null 2>&1; then
         echo "✅ MongoDB is ready"
         break
     fi
@@ -51,7 +51,7 @@ fi
 
 # Run the E2E tests
 echo "🧪 Running E2E tests..."
-docker-compose -f docker/docker-compose.e2e.yml run --rm e2e-tests
+docker compose -f docker/docker-compose.e2e.yml run --rm e2e-tests
 
 # Check the exit code
 if [ $? -eq 0 ]; then

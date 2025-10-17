@@ -45,19 +45,19 @@ The E2E testing suite validates the complete migration tool workflow in a contai
 
 ```bash
 # Build the test environment
-docker-compose -f docker/docker-compose.e2e.yml build
+docker compose -f docker/docker-compose.e2e.yml build
 
 # Start MongoDB and migration tool containers
-docker-compose -f docker/docker-compose.e2e.yml up -d mongodb migration-tool
+docker compose -f docker/docker-compose.e2e.yml up -d mongodb migration-tool
 
 # Wait for MongoDB to be ready
-timeout 60 bash -c 'until docker-compose -f docker/docker-compose.e2e.yml exec mongodb mongosh --eval "db.adminCommand(\"ping\")" > /dev/null 2>&1; do sleep 1; done'
+timeout 60 bash -c 'until docker compose -f docker/docker-compose.e2e.yml exec mongodb mongosh --eval "db.adminCommand(\"ping\")" > /dev/null 2>&1; do sleep 1; done'
 
 # Run the tests
-docker-compose -f docker/docker-compose.e2e.yml run --rm e2e-tests
+docker compose -f docker/docker-compose.e2e.yml run --rm e2e-tests
 
 # Clean up
-docker-compose -f docker/docker-compose.e2e.yml down -v
+docker compose -f docker/docker-compose.e2e.yml down -v
 ```
 
 ## 🧪 Test Coverage
@@ -152,39 +152,39 @@ scripts/
 
 ```bash
 # MongoDB logs
-docker-compose -f docker/docker-compose.e2e.yml logs mongodb
+docker compose -f docker/docker-compose.e2e.yml logs mongodb
 
 # Migration tool logs
-docker-compose -f docker/docker-compose.e2e.yml logs migration-tool
+docker compose -f docker/docker-compose.e2e.yml logs migration-tool
 
 # Test execution logs
-docker-compose -f docker/docker-compose.e2e.yml logs e2e-tests
+docker compose -f docker/docker-compose.e2e.yml logs e2e-tests
 ```
 
 ### Connect to MongoDB Shell
 
 ```bash
-docker-compose -f docker/docker-compose.e2e.yml exec mongodb mongosh -u root -p password123 --authenticationDatabase admin
+docker compose -f docker/docker-compose.e2e.yml exec mongodb mongosh -u root -p password123 --authenticationDatabase admin
 ```
 
 ### Run Individual Tests
 
 ```bash
 # Run specific test class
-docker-compose -f docker/docker-compose.e2e.yml run --rm e2e-tests dotnet test --filter "ClassName=MigrationToolE2ETests"
+docker compose -f docker/docker-compose.e2e.yml run --rm e2e-tests dotnet test --filter "ClassName=MigrationToolE2ETests"
 
 # Run specific test method
-docker-compose -f docker/docker-compose.e2e.yml run --rm e2e-tests dotnet test --filter "MethodName=CanRunMigrationUp_WithSuccessfulResult"
+docker compose -f docker/docker-compose.e2e.yml run --rm e2e-tests dotnet test --filter "MethodName=CanRunMigrationUp_WithSuccessfulResult"
 ```
 
 ### Interactive Container Shell
 
 ```bash
 # Access test container shell
-docker-compose -f docker/docker-compose.e2e.yml run --rm --entrypoint /bin/bash e2e-tests
+docker compose -f docker/docker-compose.e2e.yml run --rm --entrypoint /bin/bash e2e-tests
 
 # Access migration tool container
-docker-compose -f docker/docker-compose.e2e.yml exec migration-tool /bin/bash
+docker compose -f docker/docker-compose.e2e.yml exec migration-tool /bin/bash
 ```
 
 ## 🔄 CI/CD Integration
