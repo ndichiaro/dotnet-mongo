@@ -138,4 +138,4 @@ For information about running tests and contributing to this project, see:
 - **[End-to-End Testing Guide](docs/E2E-TESTING.md)** - Comprehensive guide for running E2E tests in Docker containers
 - **[Tests Directory](tests/)** - Unit tests and integration tests for all components
 
-The project includes a full Docker-based E2E testing suite that validates the migration tool in containerized environments with real MongoDB instances.
+The project includes a full Docker-based E2E testing suite that validates the migration tool in containerized environments with real MongoDB instances. The E2E tests run the migration tool directly within the test container, providing realistic testing scenarios with simplified architecture.

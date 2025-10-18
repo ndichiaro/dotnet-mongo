@@ -18,24 +18,6 @@ services:
       timeout: 5s
       retries: 5
 
-  migration-tool:
-    build:
-      context: ..
-      dockerfile: docker/Dockerfile.migration-tool
-    container_name: migration-test-tool
-    environment:
-      - MONGO_CONNECTION_STRING=mongodb://root:password123@mongodb:27017/testdb?authSource=admin
-    depends_on:
-      mongodb:
-        condition: service_healthy
-    networks:
-      - migration-network
-    volumes:
-      - ../tests/Demo.App:/workspace
-    working_dir: /workspace
-    # Keep container running for testing
-    command: tail -f /dev/null
-
   e2e-tests:
     build:
       context: ..
@@ -46,8 +28,6 @@ services:
     depends_on:
       mongodb:
         condition: service_healthy
-      migration-tool:
-        condition: service_started
     networks:
       - migration-network
     volumes:

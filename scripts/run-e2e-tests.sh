@@ -28,8 +28,8 @@ trap cleanup EXIT
 echo "🔨 Building test environment..."
 docker compose -f docker/docker-compose.e2e.yml build
 
-echo "🐳 Starting MongoDB and migration tool containers..."
-docker compose -f docker/docker-compose.e2e.yml up -d mongodb migration-tool
+echo "🐳 Starting MongoDB container..."
+docker compose -f docker/docker-compose.e2e.yml up -d mongodb
 
 # Wait for MongoDB to be ready
 echo "⏳ Waiting for MongoDB to be ready..."
