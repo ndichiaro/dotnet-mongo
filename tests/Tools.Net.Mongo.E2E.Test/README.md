@@ -7,8 +7,9 @@ This directory contains comprehensive end-to-end tests for the MongoDB migration
 The E2E test suite validates the migration tool functionality in a containerized environment that closely mimics production deployments. It includes:
 
 - **MongoDB Container**: A MongoDB 7.0 instance with authentication
-- **Migration Tool Container**: The compiled migration tool ready for execution
-- **Test Container**: XUnit tests that exercise the migration tool against the MongoDB instance
+- **Test Container**: XUnit tests with embedded migration tool that exercise migrations against the MongoDB instance
+
+The migration tool runs directly within the test container, providing more realistic testing scenarios.
 
 ## Test Structure
 
@@ -17,6 +18,7 @@ The E2E test suite validates the migration tool functionality in a containerized
 1. **`MigrationToolE2ETests`**: Primary test suite covering:
    - Migration up/down operations
    - Status reporting
+   - Create command for new migrations
    - Error handling scenarios
    - Help and version commands
 
@@ -51,7 +53,7 @@ The E2E test suite validates the migration tool functionality in a containerized
 ```bash
 # Build and start the environment
 docker compose -f docker/docker-compose.e2e.yml build
-docker compose -f docker/docker-compose.e2e.yml up -d mongodb migration-tool
+docker compose -f docker/docker-compose.e2e.yml up -d mongodb
 
 # Wait for MongoDB to be ready
 docker compose -f docker/docker-compose.e2e.yml exec mongodb mongosh --eval "db.adminCommand('ping')"
@@ -79,6 +81,7 @@ docker compose -f docker/docker-compose.e2e.yml run --rm e2e-tests dotnet test -
 - ✅ Successful migration up
 - ✅ Successful migration down (rollback)
 - ✅ Migration status reporting
+- ✅ Create new migration files
 - ✅ Multiple migration files
 - ✅ Migration history tracking
 
@@ -91,11 +94,13 @@ docker compose -f docker/docker-compose.e2e.yml run --rm e2e-tests dotnet test -
 ### Tool Commands
 - ✅ Help command (`--help`)
 - ✅ Version command (`--version`)
+- ✅ Create command (`migrate create <name>`)
 - ✅ Invalid arguments handling
 
 ### Container Integration
 - ✅ MongoDB container connectivity
 - ✅ Data persistence across operations
+- ✅ Migration tool execution within test container
 - ✅ Container networking
 - ✅ Environment variable configuration
 
@@ -108,8 +113,7 @@ docker compose -f docker/docker-compose.e2e.yml run --rm e2e-tests dotnet test -
 ### Docker Compose Services
 
 - **`mongodb`**: MongoDB 7.0 with authentication
-- **`migration-tool`**: Migration tool container
-- **`e2e-tests`**: Test execution container
+- **`e2e-tests`**: Test execution container with embedded migration tool
 
 ## CI/CD Integration
 
@@ -137,9 +141,6 @@ The E2E tests are designed to be easily integrated into CI/CD pipelines:
 ```bash
 # View MongoDB logs
 docker compose -f docker/docker-compose.e2e.yml logs mongodb
-
-# View migration tool logs
-docker compose -f docker/docker-compose.e2e.yml logs migration-tool
 
 # View test logs
 docker compose -f docker/docker-compose.e2e.yml logs e2e-tests

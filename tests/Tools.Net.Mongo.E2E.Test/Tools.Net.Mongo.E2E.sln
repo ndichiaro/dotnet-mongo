@@ -1,0 +1,54 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tools.Net.Mongo.E2E.Test", "Tools.Net.Mongo.E2E.Test.csproj", "{E2E-TEST-GUID}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tools.Net.Mongo.Core", "..\..\src\Tools.Net.Mongo.Core\Tools.Net.Mongo.Core.csproj", "{CORE-GUID}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tools.Net.Mongo.Migrate", "..\..\src\Tools.Net.Mongo.Migrate\Tools.Net.Mongo.Migrate.csproj", "{MIGRATE-GUID}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tools.Net.Mongo", "..\..\src\Tools.Net.Mongo\Tools.Net.Mongo.csproj", "{MONGO-GUID}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tools.Net.Cli.Driver", "..\..\src\Tools.Net.Cli.Driver\Tools.Net.Cli.Driver.csproj", "{CLI-GUID}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Demo.App", "..\Demo.App\Demo.App.csproj", "{DEMO-GUID}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E2E-TEST-GUID}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E2E-TEST-GUID}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E2E-TEST-GUID}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E2E-TEST-GUID}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CORE-GUID}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CORE-GUID}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CORE-GUID}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CORE-GUID}.Release|Any CPU.Build.0 = Release|Any CPU
+		{MIGRATE-GUID}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{MIGRATE-GUID}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{MIGRATE-GUID}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{MIGRATE-GUID}.Release|Any CPU.Build.0 = Release|Any CPU
+		{MONGO-GUID}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{MONGO-GUID}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{MONGO-GUID}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{MONGO-GUID}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CLI-GUID}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CLI-GUID}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CLI-GUID}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CLI-GUID}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DEMO-GUID}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DEMO-GUID}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DEMO-GUID}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DEMO-GUID}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E2E-SOLUTION-GUID}
+	EndGlobalSection
+EndGlobal
